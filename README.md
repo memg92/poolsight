@@ -23,7 +23,7 @@ poolsight is a client-management application for business owners in the pool ser
 
 <img src="./database_schema.png"/>
 
-### Technologies being used
+### Technologies Used
 
 ---
 
