@@ -87,6 +87,15 @@ poolsight is a client-management application for business owners in the pool ser
 | PUT       | `/api/equipment/<equipment_id>` | Edit client equipment information       |
 | DELETE    | `/api/equipment/<equipment_id>` | Delete a specific equipment event       |
 
+#### Frontend Routes
+
+| Route                              | Function                                                 |
+| :--------------------------------- | :------------------------------------------------------- |
+| `/` Home/Splash (logged out users) | Splash/home page for visitors that are not authenticated |
+| `/` Dashboard (logged in users)    | Dashboard for authenticated users                        |
+| `/login`                           | Login form                                               |
+| `/signup`                          | Signup form                                              |
+
 ### Component List
 
 ---
