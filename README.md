@@ -49,7 +49,7 @@ poolsight is a client-management application for business owners in the pool ser
 | POST      | `/api/users/signup`       | user signup / log in                 |
 | GET       | `/api/users/unauthorized` | Returns unauthorized when auth fails |
 
-#### Clients API
+##### Clients API
 
 | HTTP Verb | Route                      | Function                                  |
 | :-------- | :------------------------- | :---------------------------------------- |
@@ -59,7 +59,7 @@ poolsight is a client-management application for business owners in the pool ser
 | PUT       | `/api/clients/<client_id>` | Edit a client's information               |
 | DELETE    | `/api/clients/<client_id>` | Delete a specific client                  |
 
-#### Repair API
+##### Repair API
 
 | HTTP Verb | Route                     | Function                                        |
 | :-------- | :------------------------ | :---------------------------------------------- |
@@ -69,7 +69,7 @@ poolsight is a client-management application for business owners in the pool ser
 | PUT       | `/api/repair/<repair_id>` | Edit a repair event's information               |
 | DELETE    | `/api/repair/<repair_id>` | Delete a specific repair event                  |
 
-#### Task API
+##### Task API
 
 | HTTP Verb | Route                   | Function                            |
 | :-------- | :---------------------- | :---------------------------------- |
@@ -78,7 +78,7 @@ poolsight is a client-management application for business owners in the pool ser
 | PUT       | `/api/task/<task_id>`   | Edit a task's information           |
 | DELETE    | `/api/task/<task_id>`   | Delete a specific task              |
 
-#### Equipment API
+##### Equipment API
 
 | HTTP Verb | Route                           | Function                                |
 | :-------- | :------------------------------ | :-------------------------------------- |
