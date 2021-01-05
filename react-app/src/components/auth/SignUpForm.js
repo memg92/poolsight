@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import { Redirect } from 'react-router-dom';
-import { signUp } from '../../services/auth';
+import { Redirect } from "react-router-dom";
+import { signUp } from "../../services/auth";
 
-const SignUpForm = ({authenticated, setAuthenticated}) => {
+const SignUpForm = ({ authenticated, setAuthenticated }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
 
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const user = await signUp(username, email, password);
+      const user = await signUp(username, email, role, password);
       if (!user.errors) {
         setAuthenticated(true);
       }
@@ -24,6 +25,9 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
+  };
+  const updateRole = (e) => {
+    setRole(e.target.value);
   };
 
   const updatePassword = (e) => {
@@ -41,37 +45,43 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
   return (
     <form onSubmit={onSignUp}>
       <div>
-        <label>User Name</label>
         <input
           type="text"
           name="username"
+          placeholder="Username"
           onChange={updateUsername}
           value={username}
         ></input>
       </div>
       <div>
-        <label>Email</label>
         <input
-          type="text"
+          type="email"
           name="email"
+          placeholder="Email"
           onChange={updateEmail}
           value={email}
         ></input>
       </div>
       <div>
-        <label>Password</label>
+        <select value={role} onChange={updateRole}>
+          <option value="tech">Technician</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+      <div>
         <input
           type="password"
           name="password"
+          placeholder="Password"
           onChange={updatePassword}
           value={password}
         ></input>
       </div>
       <div>
-        <label>Repeat Password</label>
         <input
           type="password"
           name="repeat_password"
+          placeholder="Confirm Password"
           onChange={updateRepeatPassword}
           value={repeatPassword}
           required={true}

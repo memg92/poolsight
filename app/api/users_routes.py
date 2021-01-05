@@ -4,7 +4,7 @@ from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
 
-auth_routes = Blueprint('auth', __name__)
+users_routes = Blueprint('users', __name__)
 
 
 def validation_errors_to_error_messages(validation_errors):
@@ -18,7 +18,7 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-@auth_routes.route('/')
+@users_routes.route('/')
 def authenticate():
     """
     Authenticates a user.
@@ -28,7 +28,7 @@ def authenticate():
     return {'errors': ['Unauthorized']}, 401
 
 
-@auth_routes.route('/login', methods=['POST'])
+@users_routes.route('/login', methods=['POST'])
 def login():
     """
     Logs a user in
@@ -46,7 +46,7 @@ def login():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-@auth_routes.route('/logout')
+@users_routes.route('/logout')
 def logout():
     """
     Logs a user out
@@ -55,7 +55,7 @@ def logout():
     return {'message': 'User logged out'}
 
 
-@auth_routes.route('/signup', methods=['POST'])
+@users_routes.route('/signup', methods=['POST'])
 def sign_up():
     """
     Creates a new user and logs them in
@@ -75,7 +75,7 @@ def sign_up():
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
-@auth_routes.route('/unauthorized')
+@users_routes.route('/unauthorized')
 def unauthorized():
     """
     Returns unauthorized JSON when flask-login authentication fails
