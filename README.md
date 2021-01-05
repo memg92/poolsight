@@ -89,12 +89,16 @@ poolsight is a client-management application for business owners in the pool ser
 
 #### Frontend Routes
 
-| Route                              | Function                                                 |
+| Route                              | Description                                              |
 | :--------------------------------- | :------------------------------------------------------- |
 | `/` Home/Splash (logged out users) | Splash/home page for visitors that are not authenticated |
 | `/` Dashboard (logged in users)    | Dashboard for authenticated users                        |
 | `/login`                           | Login form                                               |
 | `/signup`                          | Signup form                                              |
+| `/clients/:clientId`               | Client profile page                                      |
+| `/repair/:repairId`                | Renders repair details of a specific repair event        |
+| `/repair/create`                   | Create a repair event for a specific client              |
+| `/task/create`                     | Create a task event for a specific client                |
 
 ### Component List
 
