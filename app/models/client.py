@@ -13,7 +13,7 @@ class Client(db.Model):
     city = db.Column(db.String(100), nullable=False)
     state = db.Column(db.String(5), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
-    phone = db.Column(db.Integer, nullable=False)
+    phone = db.Column(db.String(40), nullable=False)
     pool_size = db.Column(db.Integer, nullable=False)
     property_type = db.Column(db.String, nullable=False, default="Residential")
     monthly_rate = db.Column(db.Integer, nullable=False)

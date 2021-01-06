@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
 import NavBar from "./components/Nav/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { authenticate } from "./store/session";
+// import Dashboard from "./components/Home/Dashboard/Dashboard";
+import HomeManager from "./components/Home/HomeManager";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,7 +26,7 @@ function App() {
       <NavBar />
       <Switch>
         <Route path="/" exact={true}>
-          <h1>My Home Page</h1>
+          {loaded && <HomeManager />}
         </Route>
         <Route path="/login" exact={true}>
           <LoginForm />
