@@ -28,7 +28,7 @@ module.exports = {
       pink: colors.pink,
       pnavy: "#1C325F",
       pblue: "#6290C8",
-      pyellow: "#F5C800",
+      pyellow: "#E0B700",
       ghost: "#F3EFF5",
     },
     spacing: {
