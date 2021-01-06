@@ -175,20 +175,12 @@ module.exports = {
     },
     fontFamily: {
       sans: [
-        "ui-sans-serif",
-        "system-ui",
+        "Circular",
         "-apple-system",
         "BlinkMacSystemFont",
-        '"Segoe UI"',
         "Roboto",
-        '"Helvetica Neue"',
-        "Arial",
-        '"Noto Sans"',
+        "Helvetica Neue",
         "sans-serif",
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-        '"Noto Color Emoji"',
       ],
       serif: [
         "ui-serif",
@@ -916,5 +908,5 @@ module.exports = {
     wordBreak: ["responsive"],
     zIndex: ["responsive", "focus-within", "focus"],
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/custom-forms")],
 };

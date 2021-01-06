@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect, useHistory, NavLink } from "react-router-dom";
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -24,6 +24,27 @@ const LoginForm = () => {
     });
   };
 
+  const logInDemo = async (e) => {
+    e.preventDefault();
+    const emailField = document.querySelector(".email");
+    const passwordField = document.querySelector(".password");
+    if (email || password) {
+      setEmail("");
+      setPassword("");
+    }
+    emailField.value = "demo@email.com";
+    passwordField.value = "password";
+
+    return dispatch(login(emailField.value, passwordField.value)).catch(
+      (res) => {
+        if (res.user && res.user.errors) {
+          return setErrors(res.user.errors);
+        }
+        return history.push("/");
+      }
+    );
+  };
+
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -33,34 +54,53 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={onLogin}>
+    <div className="flex  bg-ghost justify-center mx-auto  w-full px-4">
       <div>
         {errors.map((error) => (
           <div>{error}</div>
         ))}
       </div>
-      <div>
-        <label htmlFor="email">Email</label>
+      <form
+        onSubmit={onLogin}
+        className="flex flex-col max-w-md w-full h-auto my-20 shadow-lg justify-center bg-white"
+      >
+        <div className="flex justify-center w-full p-2 mx-0 mb-2 bg-ghost border-2 border-opacity-90">
+          <span className="pr-2">Don't have an account? </span>
+          <NavLink to="/signup" exact className="text-blue-600">
+            Sign Up!
+          </NavLink>
+        </div>
+        <div className="p-3">Log In</div>
         <input
           name="email"
           type="text"
           placeholder="Email"
+          className="form-input email mx-4 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
           value={email}
           onChange={updateEmail}
         />
-      </div>
-      <div>
-        <label htmlFor="password">Password</label>
         <input
           name="password"
           type="password"
           placeholder="Password"
+          className="form-input password mx-4 mt-4 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
           value={password}
           onChange={updatePassword}
         />
-        <button type="submit">Login</button>
-      </div>
-    </form>
+        <button
+          className="mt-3 bg-pnavy text-ghost mx-4 py-1.5 rounded hover:opacity-90"
+          type="submit"
+        >
+          Log in
+        </button>
+        <button
+          className="my-2 mb-3 bg-pnavy text-ghost mx-4 py-1.5 rounded hover:opacity-90"
+          onClick={logInDemo}
+        >
+          Log in as Demo User
+        </button>
+      </form>
+    </div>
   );
 };
 

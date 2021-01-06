@@ -11,37 +11,44 @@ const MenuButton = () => {
   if (user) {
     sessionLinks = (
       <>
-        <li className="px-2 py-1 text-pnavy transition duration-200 ease-in-out hover:bg-pnavy hover:text-ghost rounded">
-          <NavLink to="/client/create" exact={true} activeClassName="active">
-            Add Client
-          </NavLink>
-        </li>
-        <li className="px-2 py-1 text-pnavy transition duration-200 ease-in-out hover:bg-pnavy hover:text-ghost rounded">
-          <LogoutButton />
-        </li>
+        <NavLink
+          to="/client/create"
+          exact={true}
+          activeClassName="active"
+          className="px-2 py-1 text-pnavy transition duration-200 ease-in-out hover:bg-pnavy hover:text-ghost rounded"
+        >
+          Add Client
+        </NavLink>
+        <LogoutButton />
       </>
     );
   } else {
     sessionLinks = (
       <>
-        <li className="px-2 py-1 text-pnavy transition duration-200 ease-in-out hover:bg-pnavy hover:text-ghost rounded">
-          <NavLink to="/login" exact={true} activeClassName="active">
-            Login
-          </NavLink>
-        </li>
-        <li className="px-2 py-1 text-pnavy transition duration-200 ease-in-out hover:bg-pnavy hover:text-ghost rounded">
-          <NavLink to="/signup" exact={true} activeClassName="active">
-            Sign Up
-          </NavLink>
-        </li>
+        <NavLink
+          to="/login"
+          exact={true}
+          activeClassName="active"
+          className="px-2 py-1 text-pnavy transition duration-200 ease-in-out hover:bg-pnavy hover:text-ghost rounded"
+        >
+          Login
+        </NavLink>
+        <NavLink
+          to="/signup"
+          exact={true}
+          activeClassName="active"
+          className="px-2 py-1 text-pnavy transition duration-200 ease-in-out hover:bg-pnavy hover:text-ghost rounded"
+        >
+          Sign Up
+        </NavLink>
       </>
     );
   }
 
   return (
-    <ul className="flex flex-col absolute right-5 text-2xl md:text-lg bg-ghost rounded w-36 md:w-32 p-2 justify-start">
+    <div className="flex flex-col absolute right-5 text-2xl md:text-lg bg-ghost rounded w-36 md:w-32 p-2 justify-start">
       {sessionLinks}
-    </ul>
+    </div>
   );
 };
 

@@ -11,7 +11,14 @@ const LogoutButton = () => {
     return <Redirect to="/" />;
   };
 
-  return <button onClick={onLogout}>Logout</button>;
+  return (
+    <button
+      onClick={onLogout}
+      className="px-2 py-1 text-pnavy transition duration-200 ease-in-out hover:bg-pnavy hover:text-ghost rounded text-left"
+    >
+      Logout
+    </button>
+  );
 };
 
 export default LogoutButton;
