@@ -7,6 +7,7 @@ import NavBar from "./components/Nav/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { authenticate } from "./store/session";
 import HomeManager from "./components/Home/HomeManager";
+import ClientForm from "./components/ClientForm/ClientForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +34,9 @@ function App() {
         <Route path="/signup" exact={true}>
           <SignUpForm />
         </Route>
+        <ProtectedRoute path="/client/create" exact={true}>
+          <ClientForm />
+        </ProtectedRoute>
       </Switch>
     </BrowserRouter>
   );

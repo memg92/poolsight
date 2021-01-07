@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getClients } from "../../../store/clients";
+import { getPools } from "../../../store/pools";
 import DayCard from "./DayCard";
 
 export default function Dashboard() {
   const state = useSelector((state) => state);
   const user = state.session.user;
-  const clients = state.clientAPI.clients
-    ? state.clientAPI.clients.clients
-    : null;
+  const pools = state.poolAPI.pools ? state.poolAPI.pools.pools : null;
 
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState("");
   const dispatch = useDispatch();
 
-  // console.log(loaded, clients);
+  // console.log(loaded, pools);
   useEffect(() => {
-    dispatch(getClients(user.id)).then((res) => {
+    dispatch(getPools(user.id)).then((res) => {
       if (!res.error) {
         setLoaded(true);
       } else {
@@ -27,18 +25,16 @@ export default function Dashboard() {
 
   const days = ["M", "T", "W", "R", "F"];
 
-  /* <DayCard day={"M"} clients={clients} />
-  <DayCard day={"T"} clients={clients} />
-  <DayCard day={"W"} clients={clients} />
-  <DayCard day={"R"} clients={clients} />
-  <DayCard day={"F"} clients={clients} /> */
   return loaded ? (
     <>
+      <div className="p-2 mx-4 mt-6 mb-2 text-3xl text-pnavy font-bold shadow-sm">
+        My Routes
+      </div>
       {days.map((day) => {
-        return <DayCard day={day} key={day} clients={clients} />;
+        return <DayCard day={day} key={day} pools={pools} />;
       })}
     </>
   ) : (
-    <h1>Loading Clients</h1>
+    <h1>Loading pools</h1>
   );
 }

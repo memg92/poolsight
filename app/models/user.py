@@ -16,6 +16,7 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
     clients = db.relationship("Client", back_populates="user")
+    pools = db.relationship("Pool", back_populates="user")
 
     @property
     def password(self):

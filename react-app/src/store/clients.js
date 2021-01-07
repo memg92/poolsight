@@ -29,56 +29,42 @@ export const getClients = (userId) =>
     } else {
       dispatch(getAllClients(null));
     }
-    // console.log(clients);
     return clients;
   };
 
-// export const login = (email, password) =>
-//   async function (dispatch) {
-//     const res = await fetch("/api/users/login", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({
-//         email,
-//         password,
-//       }),
-//     });
+export const addClient = (clientDetails) =>
+  async function (dispatch) {
+    const [
+      firstName,
+      lastName,
+      street,
+      city,
+      state,
+      phone,
+      email,
+    ] = clientDetails;
 
-// export const logout = () =>
-//   async function (dispatch) {
-//     const res = await fetch("/api/users/logout", {
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     });
-//     await res.json();
-//     return dispatch(dropUserSession());
-//   };
-
-// export const signUp = (username, email, role, password) =>
-//   async function (dispatch) {
-//     const response = await fetch("/api/users/signup", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({
-//         username,
-//         email,
-//         role,
-//         password,
-//       }),
-//     });
-//     const user = await response.json();
-//     if (!user.errors) {
-//       dispatch(setUserSession(user));
-//     } else {
-//       dispatch(setUserSession(null));
-//     }
-//     return user;
-//   };
+    const response = await fetch("/api/clients", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        street,
+        city,
+        state,
+        phone,
+        email,
+      }),
+    });
+    const client = await response.json();
+    if (!client.errors) {
+      dispatch(getAllClients(client));
+    }
+    return client;
+  };
 
 const clientsReducer = (state = { clients: null }, action) => {
   switch (action.type) {

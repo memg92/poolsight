@@ -6,8 +6,8 @@ class Equipment(db.Model):
     __tablename__ = 'equipment'
 
     id = db.Column(db.Integer, primary_key=True)
-    client_id = db.Column(
-        db.Integer, db.ForeignKey("clients.id"), nullable=False)
+    pool_id = db.Column(
+        db.Integer, db.ForeignKey("pools.id"), nullable=False)
     equipment_type = db.Column(db.String(100), nullable=False, default="Other")
     brand = db.Column(db.String(100), nullable=False, default="Other")
     model = db.Column(db.String(100), nullable=False, default="Other")
@@ -17,8 +17,8 @@ class Equipment(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
-    client = db.relationship(
-        "Client", back_populates="equipment")
+    pool = db.relationship(
+        "Pool", back_populates="equipment")
 
     def to_dict(self):
         return {

@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, session, request
 from app.models import Client, db
+from app.forms import NewClientForm
 from flask_login import current_user, login_required
 
 clients_routes = Blueprint('clients', __name__)
@@ -35,22 +36,25 @@ def get_all_clients(user_id):
     return {"error": "Unauthorized"}, 401
 
 
-# @clients_routes.route('/signup', methods=['POST'])
-# def sign_up():
-#     """
-#     Creates a new user and logs them in
-#     """
-#     form = SignUpForm()
-#     form['csrf_token'].data = request.cookies['csrf_token']
-#     if form.validate_on_submit():
-#         user = User(
-#             username=form.data['username'],
-#             email=form.data['email'],
-#             role=form.data['role'].title(),
-#             password=form.data['password']
-#         )
-#         db.session.add(user)
-#         db.session.commit()
-#         login_user(user)
-#         return user.to_dict()
-#     return {'errors': validation_errors_to_error_messages(form.errors)}
+@clients_routes.route('/', methods=['POST'])
+@login_required
+def create_client():
+    """
+    Creates a new client
+    """
+    form = NewClientForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    user_id = data["userId"]
+
+    if form.validate_on_submit():
+        user = User(
+            username=form.data['username'],
+            email=form.data['email'],
+            role=form.data['role'].title(),
+            password=form.data['password']
+        )
+        db.session.add(user)
+        db.session.commit()
+        login_user(user)
+        return user.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}

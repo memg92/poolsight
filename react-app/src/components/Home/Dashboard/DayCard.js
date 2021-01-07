@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export default function DayCard({ day, clients }) {
+export default function DayCard({ day, pools }) {
   const [showTable, setShowTable] = useState(false);
   const weekdays = {
     M: ["Mon", "Monday"],
@@ -11,6 +11,14 @@ export default function DayCard({ day, clients }) {
   };
   const date = new Date();
   const today = date.toLocaleDateString("en-US", { weekday: "short" });
+  const dateFormatter = (filterDate) => {
+    const date = new Date(filterDate);
+    return date.toLocaleDateString("en-US", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
+  };
 
   //show client table if today matches the weekday of card
   useEffect(() => {
@@ -28,6 +36,7 @@ export default function DayCard({ day, clients }) {
     setShowTable(true);
   };
 
+  //handle change in showTable state and listen for clicks to close tbale
   useEffect(() => {
     if (!showTable) return;
 
@@ -52,44 +61,46 @@ export default function DayCard({ day, clients }) {
     };
   }, [showTable]);
 
-  const dayClients = clients.filter((client) => client.service_day === day);
+  const dayPools = pools.filter((client) => client.service_day === day);
 
   return (
     <div>
-      <div className="flex items-center justify-between bg-pblue">
-        <div
-          onClick={openTable}
-          className={"cursor-pointer text-ghost h-10 w-full"}
-        >
+      <div
+        onClick={openTable}
+        className="flex h-12 items-center justify-between cursor-pointer bg-pblue mx-4 my-0.5 shadow-lg hover:bg-opacity-80"
+      >
+        <div className={"ml-4 text-ghost text-xl w-full"}>
           {weekdays[day][1]}
         </div>
-        <button className=""> button</button>
+        <i className="fas fa-chevron-circle-down mr-4 text-pnavy"></i>
       </div>
       {showTable && (
-        <table>
-          <thead>
-            <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Street</th>
-              <th>City</th>
-              <th>Filter Changed</th>
-            </tr>
-          </thead>
-          <tbody>
-            {dayClients.map((client) => {
-              return (
-                <tr key={client.id}>
-                  <td>{client.firstname}</td>
-                  <td>{client.lastname}</td>
-                  <td>{client.street}</td>
-                  <td>{client.city}</td>
-                  <td>{client.filter_changed}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <div className="mx-4">
+          <table className="px-4 w-full table-auto my-2 text-pnavy">
+            <thead className="text-left text-ghost text-lg bg-pnavy bg-opacity-90">
+              <tr>
+                <th className="pl-4 py-1 font-normal">First Name</th>
+                <th className="font-normal">Last Name</th>
+                <th className="font-normal">Street</th>
+                <th className="font-normal">City</th>
+                <th className="font-normal">Filter Changed</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dayPools.map((pool) => {
+                return (
+                  <tr key={pool.id}>
+                    <td className="pl-4">{pool.client.firstname}</td>
+                    <td>{pool.client.lastname}</td>
+                    <td>{pool.street}</td>
+                    <td>{pool.city}</td>
+                    <td>{dateFormatter(pool.filter_changed)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

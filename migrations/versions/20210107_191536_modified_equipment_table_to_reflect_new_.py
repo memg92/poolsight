@@ -1,8 +1,8 @@
-"""added users, client, repair, task, and equipment tables
+"""modified equipment table to reflect new pool table and change in foreign keys
 
-Revision ID: cdb472f8eefe
-Revises: 
-Create Date: 2021-01-06 15:20:05.128761
+Revision ID: 756fc62c64cc
+Revises: 0d04382c5fe9
+Create Date: 2021-01-07 19:15:36.666840
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'cdb472f8eefe'
-down_revision = None
+revision = '756fc62c64cc'
+down_revision = '0d04382c5fe9'
 branch_labels = None
 depends_on = None
 
@@ -33,27 +33,39 @@ def upgrade():
     op.create_table('clients',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('fistname', sa.String(length=40), nullable=False),
+    sa.Column('firstname', sa.String(length=40), nullable=False),
     sa.Column('lastname', sa.String(length=40), nullable=False),
     sa.Column('street', sa.String(length=100), nullable=False),
     sa.Column('city', sa.String(length=100), nullable=False),
     sa.Column('state', sa.String(length=5), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
-    sa.Column('phone', sa.Integer(), nullable=False),
+    sa.Column('phone', sa.String(length=40), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('pools',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('client_id', sa.Integer(), nullable=False),
+    sa.Column('street', sa.String(length=100), nullable=False),
+    sa.Column('city', sa.String(length=100), nullable=False),
+    sa.Column('state', sa.String(length=5), nullable=False),
     sa.Column('pool_size', sa.Integer(), nullable=False),
     sa.Column('property_type', sa.String(), nullable=False),
     sa.Column('monthly_rate', sa.Integer(), nullable=False),
     sa.Column('service_day', sa.String(length=1), nullable=False),
-    sa.Column('filter_changed', sa.DateTime(), nullable=True),
+    sa.Column('filter_changed', sa.Date(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['client_id'], ['clients.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('email')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('equipment',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('client_id', sa.Integer(), nullable=False),
+    sa.Column('pool_id', sa.Integer(), nullable=False),
     sa.Column('equipment_type', sa.String(length=100), nullable=False),
     sa.Column('brand', sa.String(length=100), nullable=False),
     sa.Column('model', sa.String(length=100), nullable=False),
@@ -62,17 +74,17 @@ def upgrade():
     sa.Column('description', sa.Text(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
-    sa.ForeignKeyConstraint(['client_id'], ['clients.id'], ),
+    sa.ForeignKeyConstraint(['pool_id'], ['pools.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('repairs',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('client_id', sa.Integer(), nullable=False),
+    sa.Column('pool_id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=100), nullable=False),
     sa.Column('description', sa.Text(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
-    sa.ForeignKeyConstraint(['client_id'], ['clients.id'], ),
+    sa.ForeignKeyConstraint(['pool_id'], ['pools.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('tasks',
@@ -96,6 +108,7 @@ def downgrade():
     op.drop_table('tasks')
     op.drop_table('repairs')
     op.drop_table('equipment')
+    op.drop_table('pools')
     op.drop_table('clients')
     op.drop_table('users')
     # ### end Alembic commands ###
