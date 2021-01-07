@@ -3,14 +3,16 @@ import React, { useEffect, useState } from "react";
 export default function DayCard({ day, clients }) {
   const [showTable, setShowTable] = useState(false);
   const weekdays = {
-    M: [0, "Monday"],
-    T: [1, "Tuesday"],
-    W: [2, "Wednesday"],
-    R: [3, "Thursday"],
-    F: [4, "Friday"],
+    M: ["Mon", "Monday"],
+    T: ["Tue", "Tuesday"],
+    W: ["Wed", "Wednesday"],
+    R: ["Thu", "Thursday"],
+    F: ["Fri", "Friday"],
   };
   const date = new Date();
-  const today = date.getDay();
+  const today = date.toLocaleDateString("en-US", { weekday: "short" });
+
+  //show client table if today matches the weekday of card
   useEffect(() => {
     if (today === weekdays[day][0] && !showTable) {
       setShowTable(true);
@@ -18,21 +20,10 @@ export default function DayCard({ day, clients }) {
       setShowTable(true);
     }
   }, []);
-  // console.log(today, weekdays[])
-  const toggleTable = (e) => {
-    const current = e.currentTarget;
-    console.dir(current);
-    console.log(current.childNodes, current.childNodes.length);
-    console.log(current.classList);
-    if (current.childNodes.length > 1) {
-      current.childNodes[1].classList.remove("visible");
-      current.childNodes[1].classList.add("hidden");
-    }
-  };
 
   const openTable = () => {
     if (showTable) {
-      return setShowTable(false);
+      setShowTable(false);
     }
     setShowTable(true);
   };
@@ -44,17 +35,36 @@ export default function DayCard({ day, clients }) {
       setShowTable(false);
     };
 
+    //listen for click to close table
     document.addEventListener("click", closeTable);
 
-    return () => document.removeEventListener("click", closeTable);
+    //stop propagation at the table level
+    const table = document.querySelector("table") || null;
+    if (table) {
+      table.addEventListener("click", (e) => {
+        e.stopPropagation();
+      });
+    }
+
+    //remove listener so that card can be reopened after
+    return () => {
+      document.removeEventListener("click", closeTable);
+    };
   }, [showTable]);
 
   const dayClients = clients.filter((client) => client.service_day === day);
-  // console.log(dayClients);
-  // className={`${day} ${showTable ? "visible" : "hidden"}`}
+
   return (
-    <div onClick={openTable} className={`${day} cursor-pointer`}>
-      <div>{weekdays[day][1]}</div>
+    <div>
+      <div className="flex items-center justify-between bg-pblue">
+        <div
+          onClick={openTable}
+          className={"cursor-pointer text-ghost h-10 w-full"}
+        >
+          {weekdays[day][1]}
+        </div>
+        <button className=""> button</button>
+      </div>
       {showTable && (
         <table>
           <thead>

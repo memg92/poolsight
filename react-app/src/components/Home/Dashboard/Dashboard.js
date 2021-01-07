@@ -25,13 +25,18 @@ export default function Dashboard() {
     });
   }, [dispatch]);
 
+  const days = ["M", "T", "W", "R", "F"];
+
+  /* <DayCard day={"M"} clients={clients} />
+  <DayCard day={"T"} clients={clients} />
+  <DayCard day={"W"} clients={clients} />
+  <DayCard day={"R"} clients={clients} />
+  <DayCard day={"F"} clients={clients} /> */
   return loaded ? (
     <>
-      <DayCard day={"M"} clients={clients} />
-      <DayCard day={"T"} clients={clients} />
-      <DayCard day={"W"} clients={clients} />
-      <DayCard day={"R"} clients={clients} />
-      <DayCard day={"F"} clients={clients} />
+      {days.map((day) => {
+        return <DayCard day={day} key={day} clients={clients} />;
+      })}
     </>
   ) : (
     <h1>Loading Clients</h1>

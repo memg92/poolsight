@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request
 from app.models import Client, db
-from flask_login import current_user
+from flask_login import current_user, login_required
 
 clients_routes = Blueprint('clients', __name__)
 
@@ -17,6 +17,7 @@ def validation_errors_to_error_messages(validation_errors):
 
 
 @clients_routes.route('/<user_id>')
+@login_required
 def get_all_clients(user_id):
     """
     /api/clients/<user_id> gets all clients for an authenticated user
@@ -53,11 +54,3 @@ def get_all_clients(user_id):
 #         login_user(user)
 #         return user.to_dict()
 #     return {'errors': validation_errors_to_error_messages(form.errors)}
-
-
-@clients_routes.route('/unauthorized')
-def unauthorized():
-    """
-    Returns unauthorized JSON when flask-login authentication fails
-    """
-    return {'errors': ['Unauthorized']}, 401
