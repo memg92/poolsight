@@ -7,7 +7,7 @@ class Client(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    fistname = db.Column(db.String(40), nullable=False)
+    firstname = db.Column(db.String(40), nullable=False)
     lastname = db.Column(db.String(40), nullable=False)
     street = db.Column(db.String(100), nullable=False)
     city = db.Column(db.String(100), nullable=False)
@@ -32,7 +32,7 @@ class Client(db.Model):
         return {
             "id": self.id,
             "user_id": self.user_id,
-            "fistname": self.fistname,
+            "firstname": self.firstname,
             "lastname": self.lastname,
             "street": self.street,
             "city": self.city,

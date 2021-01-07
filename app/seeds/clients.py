@@ -10,7 +10,7 @@ def seed_clients():
     for i in range(10):
         client = Client(
             user_id=1,
-            fistname=fake.first_name(),
+            firstname=fake.first_name(),
             lastname=fake.last_name(),
             street=fake.street_address(),
             city=fake.city(),
@@ -31,7 +31,7 @@ def seed_clients():
     for i in range(10):
         client = Client(
             user_id=1,
-            fistname=fake.first_name(),
+            firstname=fake.first_name(),
             lastname=fake.last_name(),
             street=fake.street_address(),
             city=fake.city(),
@@ -52,7 +52,7 @@ def seed_clients():
     for i in range(10):
         client = Client(
             user_id=1,
-            fistname=fake.first_name(),
+            firstname=fake.first_name(),
             lastname=fake.last_name(),
             street=fake.street_address(),
             city=fake.city(),
@@ -73,7 +73,7 @@ def seed_clients():
     for i in range(10):
         client = Client(
             user_id=1,
-            fistname=fake.first_name(),
+            firstname=fake.first_name(),
             lastname=fake.last_name(),
             street=fake.street_address(),
             city=fake.city(),
@@ -94,7 +94,7 @@ def seed_clients():
     for i in range(10):
         client = Client(
             user_id=1,
-            fistname=fake.first_name(),
+            firstname=fake.first_name(),
             lastname=fake.last_name(),
             street=fake.street_address(),
             city=fake.city(),

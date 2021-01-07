@@ -1,7 +1,6 @@
 const GET_ALL_CLIENTS = "clients/get-all-clients";
 const GET_CLIENT = "clients/get-client";
 const ADD_CLIENT = "clients/add-client";
-const DELETE_CLIENT = "clients/delete-client";
 
 export const getAllClients = (clientsDetail) => {
   return {
@@ -14,12 +13,6 @@ export const getClient = (clientData) => {
   return {
     type: GET_ALL_CLIENTS,
     clients: clientData,
-  };
-};
-
-export const deleteClient = () => {
-  return {
-    type: DELETE_CLIENT,
   };
 };
 
@@ -36,7 +29,7 @@ export const getClients = (userId) =>
     } else {
       dispatch(getAllClients(null));
     }
-    console.log(clients);
+    // console.log(clients);
     return clients;
   };
 
@@ -91,8 +84,6 @@ const clientsReducer = (state = { clients: null }, action) => {
   switch (action.type) {
     case GET_ALL_CLIENTS:
       return { ...state, clients: action.clients };
-    case DELETE_CLIENT:
-      return { ...state, clients: null };
     default:
       return state;
   }

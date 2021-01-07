@@ -4,12 +4,17 @@ import { getClients } from "../../../store/clients";
 import DayCard from "./DayCard";
 
 export default function Dashboard() {
-  const user = useSelector((state) => state.session.user);
-  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+  const user = state.session.user;
+  const clients = state.clientAPI.clients
+    ? state.clientAPI.clients.clients
+    : null;
+
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState("");
-  const clients = useSelector((state) => state.clients);
+  const dispatch = useDispatch();
 
+  // console.log(loaded, clients);
   useEffect(() => {
     dispatch(getClients(user.id)).then((res) => {
       if (!res.error) {
@@ -20,7 +25,7 @@ export default function Dashboard() {
     });
   }, [dispatch]);
 
-  return (
+  return loaded ? (
     <>
       <DayCard day={"M"} clients={clients} />
       <DayCard day={"T"} clients={clients} />
@@ -28,5 +33,7 @@ export default function Dashboard() {
       <DayCard day={"R"} clients={clients} />
       <DayCard day={"F"} clients={clients} />
     </>
+  ) : (
+    <h1>Loading Clients</h1>
   );
 }
