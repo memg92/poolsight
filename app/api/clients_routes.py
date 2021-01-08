@@ -86,8 +86,11 @@ def edit_client(client_id):
     data = request.get_json()
     client = Client.query.get(client_id)
 
+    if current_user.id != client.user_id:
+        return {'error': 'Unauthorized'}, 403
+
     if client:
-        client.firstname = data['userId']
+        client.firstname = data['firstname']
         client.lastname = data['lastname']
         client.street = data['street']
         client.city = data['city']
@@ -97,3 +100,14 @@ def edit_client(client_id):
         db.session.commit()
         return client.to_dict()
     return {'error': 'Client not found'}, 400
+
+
+@clients_routes.route('/<int:client_id>', methods=["DELETE"])
+def delete_client(client_id):
+    client = Client.query.get(client_id)
+    if client is not None:
+        db.session.delete(client)
+        db.session.commit()
+        return {"deleted": client_id}
+    else:
+        return {"error": f'id {client_id} not found'}

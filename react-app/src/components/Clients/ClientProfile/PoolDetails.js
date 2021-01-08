@@ -10,7 +10,7 @@ export default function PoolDetails({ client }) {
     F: ["Fri", "Friday"],
   };
   return (
-    <div className="my-4 p-6 text-pnavy text-opacity-90">
+    <div className="my-4 p-6 text-pnavy text-opacity-90 w-full max-w-3xl">
       <h1 className="text-2xl font-semibold pb-2">Pool Details</h1>
       <div className="flex border-gray-200 border-2 border-opacity-50 max-w-2xl rounded">
         <div className="px-4 py-2 w-full">
