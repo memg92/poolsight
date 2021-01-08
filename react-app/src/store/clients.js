@@ -35,23 +35,23 @@ export const getClients = (userId) =>
 export const addClient = (clientDetails) =>
   async function (dispatch) {
     const [
-      firstName,
-      lastName,
+      firstname,
+      lastname,
       street,
       city,
       state,
       phone,
       email,
     ] = clientDetails;
-
+    console.log(firstname, lastname, street, city, state, phone, email);
     const response = await fetch("/api/clients", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        firstName,
-        lastName,
+        firstname,
+        lastname,
         street,
         city,
         state,

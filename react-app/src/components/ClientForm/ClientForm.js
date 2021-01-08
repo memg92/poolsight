@@ -6,11 +6,11 @@ import StateOptions from "./StateOptions";
 
 export default function ClientForm() {
   const [errors, setErrors] = useState([]);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
-  const [state, setState] = useState("");
+  const [state, setState] = useState("FL");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
 
@@ -18,21 +18,20 @@ export default function ClientForm() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const clientDetails = [
-    firstName,
-    lastName,
+    firstname,
+    lastname,
     street,
     city,
     state,
-    email,
     phone,
+    email,
   ];
 
   const createClient = async (e) => {
     e.preventDefault();
-    return dispatch(addClient(clientDetails)).catch((res) => {
-      if (res.client && res.client.errors) {
-        console.log(res.client.errors);
-        return setErrors(res.client.errors);
+    return dispatch(addClient(clientDetails)).then((res) => {
+      if (!res.ok && res.errors) {
+        return setErrors(res.errors);
       }
       return history.push("/");
     });
@@ -41,9 +40,7 @@ export default function ClientForm() {
   return (
     <div className="flex  bg-ghost justify-center mx-auto w-full px-4">
       <div>
-        {errors.map((error) => (
-          <div>{error}</div>
-        ))}
+        {errors && errors.map((error, i) => <div key={i}>{error}</div>)}
       </div>
       <form
         onSubmit={createClient}
@@ -55,15 +52,15 @@ export default function ClientForm() {
             className="form-input mx-4 w-full border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
             type="text"
             placeholder="First Name"
-            onChange={(e) => setFirstName(e.target.value)}
-            value={firstName}
+            onChange={(e) => setFirstname(e.target.value)}
+            value={firstname}
           />
           <input
             className="form-input w-full mr-4 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
             type="text"
             placeholder="Last Name"
-            onChange={(e) => setLastName(e.target.value)}
-            value={lastName}
+            onChange={(e) => setLastname(e.target.value)}
+            value={lastname}
           />
         </div>
         <input

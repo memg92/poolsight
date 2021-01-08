@@ -36,7 +36,7 @@ def get_all_clients(user_id):
     return {"error": "Unauthorized"}, 401
 
 
-@clients_routes.route('/', methods=['POST'])
+@clients_routes.route('', methods=['POST'])
 @login_required
 def create_client():
     """
@@ -44,17 +44,18 @@ def create_client():
     """
     form = NewClientForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    user_id = data["userId"]
-
     if form.validate_on_submit():
-        user = User(
-            username=form.data['username'],
+        client = Client(
+            user_id=current_user.get_id(),
+            firstname=form.data['firstname'],
+            lastname=form.data['lastname'],
+            street=form.data['street'],
+            city=form.data['city'],
+            state=form.data['state'],
+            phone=form.data['phone'],
             email=form.data['email'],
-            role=form.data['role'].title(),
-            password=form.data['password']
         )
-        db.session.add(user)
+        db.session.add(client)
         db.session.commit()
-        login_user(user)
-        return user.to_dict()
+        return client.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}
