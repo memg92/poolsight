@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addClient } from "../../store/clients";
+import { addClient } from "../../../store/clients";
 import StateOptions from "./StateOptions";
 
 export default function ClientForm() {

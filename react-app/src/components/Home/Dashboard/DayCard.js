@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { dateFormatter } from "../../../services/utils";
 
 export default function DayCard({ day, pools }) {
   const [showTable, setShowTable] = useState(false);
@@ -11,14 +12,14 @@ export default function DayCard({ day, pools }) {
   };
   const date = new Date();
   const today = date.toLocaleDateString("en-US", { weekday: "short" });
-  const dateFormatter = (filterDate) => {
-    const date = new Date(filterDate);
-    return date.toLocaleDateString("en-US", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    });
-  };
+  // const dateFormatter = (filterDate) => {
+  //   const date = new Date(filterDate);
+  //   return date.toLocaleDateString("en-US", {
+  //     day: "numeric",
+  //     month: "short",
+  //     year: "numeric",
+  //   });
+  // };
 
   //show client table if today matches the weekday of card
   useEffect(() => {

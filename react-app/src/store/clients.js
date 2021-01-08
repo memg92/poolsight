@@ -9,13 +9,6 @@ export const getAllClients = (clientsDetail) => {
   };
 };
 
-export const getClient = (clientData) => {
-  return {
-    type: GET_ALL_CLIENTS,
-    clients: clientData,
-  };
-};
-
 export const getClients = (userId) =>
   async function (dispatch) {
     const res = await fetch(`/api/clients/${userId}`, {
@@ -32,6 +25,17 @@ export const getClients = (userId) =>
     return clients;
   };
 
+export const getClient = (clientId) =>
+  async function (dispatch) {
+    const res = await fetch(`/api/clients/${clientId}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const client = await res.json();
+    return client;
+  };
+
 export const addClient = (clientDetails) =>
   async function (dispatch) {
     const [
@@ -43,7 +47,6 @@ export const addClient = (clientDetails) =>
       phone,
       email,
     ] = clientDetails;
-    console.log(firstname, lastname, street, city, state, phone, email);
     const response = await fetch("/api/clients", {
       method: "POST",
       headers: {

@@ -16,7 +16,7 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-@pools_routes.route('/<user_id>')
+@pools_routes.route('/<int:user_id>')
 @login_required
 def get_all_pools(user_id):
     """
