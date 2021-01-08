@@ -49,12 +49,15 @@ def get_clients(client_id):
             joinedload(Client.pools)).filter_by(id=client_id).first()
         if client:
             return {"client": client.to_dict_pools()}
+
         return {"error": "No clients found"}
     return {"error": "Unauthorized"}, 401
 
+# [pledge.to_dict_projects() for pledge in pledges]
 
-@clients_routes.route('', methods=['POST'])
-@login_required
+
+@ clients_routes.route('', methods=['POST'])
+@ login_required
 def create_client():
     """
     Creates a new client
@@ -76,3 +79,21 @@ def create_client():
         db.session.commit()
         return client.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}
+
+
+@clients_routes.route('/<int:client_id>', methods=["PUT"])
+def edit_client(client_id):
+    data = request.get_json()
+    client = Client.query.get(client_id)
+
+    if client:
+        client.firstname = data['userId']
+        client.lastname = data['lastname']
+        client.street = data['street']
+        client.city = data['city']
+        client.state = data['state']
+        client.email = data['email']
+        client.phone = data['phone']
+        db.session.commit()
+        return client.to_dict()
+    return {'error': 'Client not found'}, 400

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { dateFormatter } from "../../../services/utils";
 import ClientSummary from "./ClientSummary";
+import PoolDetails from "./PoolDetails";
 
 export default function ClientProfile() {
   const state = useSelector((state) => state);
@@ -30,9 +31,11 @@ export default function ClientProfile() {
   console.log("client:", client);
   return (
     client && (
-      <div>
-        <h1>{`${client.firstname} ${client.lastname}`}</h1>
-        <ClientSummary client={client} />
+      <div className="h-screen">
+        <div className="flex flex-col justify-center mx-auto max-w-4xl">
+          <ClientSummary client={client} />
+          <PoolDetails client={client} />
+        </div>
       </div>
     )
   );
