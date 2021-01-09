@@ -14,7 +14,6 @@ const MenuButton = () => {
         <NavLink
           to="/client/create"
           exact={true}
-          activeClassName="active"
           className="px-2 py-1 text-pnavy transition duration-200 ease-in-out hover:bg-pnavy hover:text-ghost rounded"
         >
           Add Client

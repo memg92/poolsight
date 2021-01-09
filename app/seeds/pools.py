@@ -25,7 +25,7 @@ def seed_pools():
         db.session.add(pool)
         db.session.commit()
 
-    for i in range(10):
+    for i in range(11, 20):
         pool = Pool(
             user_id=1,
             client_id=i + 1,
@@ -43,7 +43,7 @@ def seed_pools():
         db.session.add(pool)
         db.session.commit()
 
-    for i in range(10):
+    for i in range(21, 30):
         pool = Pool(
             user_id=1,
             client_id=i + 1,
@@ -61,7 +61,7 @@ def seed_pools():
         db.session.add(pool)
         db.session.commit()
 
-    for i in range(10):
+    for i in range(31, 40):
         pool = Pool(
             user_id=1,
             client_id=i + 1,
@@ -79,7 +79,7 @@ def seed_pools():
         db.session.add(pool)
         db.session.commit()
 
-    for i in range(10):
+    for i in range(41, 50):
         pool = Pool(
             user_id=1,
             client_id=i + 1,

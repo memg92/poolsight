@@ -7,7 +7,7 @@ fake = Faker()
 
 def seed_clients():
 
-    for i in range(10):
+    for i in range(12):
         client = Client(
             user_id=1,
             firstname=fake.first_name(),
@@ -23,7 +23,7 @@ def seed_clients():
         db.session.add(client)
         db.session.commit()
 
-    for i in range(10):
+    for i in range(12):
         client = Client(
             user_id=1,
             firstname=fake.first_name(),
@@ -39,7 +39,7 @@ def seed_clients():
         db.session.add(client)
         db.session.commit()
 
-    for i in range(10):
+    for i in range(12):
         client = Client(
             user_id=1,
             firstname=fake.first_name(),
@@ -55,7 +55,7 @@ def seed_clients():
         db.session.add(client)
         db.session.commit()
 
-    for i in range(10):
+    for i in range(12):
         client = Client(
             user_id=1,
             firstname=fake.first_name(),
@@ -71,7 +71,7 @@ def seed_clients():
         db.session.add(client)
         db.session.commit()
 
-    for i in range(10):
+    for i in range(12):
         client = Client(
             user_id=1,
             firstname=fake.first_name(),

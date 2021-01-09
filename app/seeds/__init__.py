@@ -14,7 +14,7 @@ seed_commands = AppGroup('seed')
 def seed():
     seed_users()
     seed_clients()
-    seed_pools()
+    # seed_pools()
     # Add other seed functions here
 
 # Creates the `flask seed pools` command

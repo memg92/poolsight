@@ -1,6 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { deleteClient } from "../../../store/clients";
 
 export default function ClientSummary({ client, setShowClientModal }) {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [error, setError] = useState("");
   const closeModal = () => {
     setShowClientModal(false);
     document.removeEventListener("click", closeModal);
@@ -11,11 +17,25 @@ export default function ClientSummary({ client, setShowClientModal }) {
     setShowClientModal(true);
   };
 
+  const handleDelete = async (e) => {
+    e.preventDefault();
+
+    return dispatch(deleteClient(client.id)).then((res) => {
+      if (!res.ok && res.error) {
+        return setError(res.error);
+      }
+      return history.push("/");
+    });
+  };
+
   return (
     <div className="shadow-xl my-4 p-6 text-pnavy text-opacity-90 max-w-3xl w-full">
       <div className="flex justify-between items-center pb-4">
         <h1 className="text-2xl font-semibold">{`${client.firstname} ${client.lastname}`}</h1>
-        <button className="bg-pnavy text-ghost p-1 rounded hover:opacity-90">
+        <button
+          className="bg-pnavy text-ghost p-1 rounded hover:opacity-90"
+          onClick={handleDelete}
+        >
           Delete Client
         </button>
       </div>

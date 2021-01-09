@@ -18,7 +18,8 @@ class Client(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
     user = db.relationship("User", back_populates="clients")
-    pools = db.relationship("Pool", uselist=False, back_populates="client")
+    pools = db.relationship(
+        "Pool", cascade="delete, delete-orphan", uselist=False, back_populates="client")
 
     def to_dict(self):
         return {

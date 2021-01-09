@@ -99,6 +99,7 @@ export const editClient = (...clientDetails) =>
 
 export const deleteClient = (clientId) =>
   async function (dispatch) {
+    console.log(clientId);
     const res = await fetch(`/api/clients/${clientId}`, {
       method: "DELETE",
       headers: {

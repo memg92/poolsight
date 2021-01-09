@@ -21,7 +21,8 @@ class Pool(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
     user = db.relationship("User", back_populates="pools")
-    client = db.relationship("Client", back_populates="pools")
+    client = db.relationship(
+        "Client", back_populates="pools")
     repairs = db.relationship(
         "Repair", back_populates="pool", cascade="delete, delete-orphan")
     equipment = db.relationship(

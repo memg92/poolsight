@@ -13,7 +13,6 @@ import ClientProfile from "./components/Clients/ClientProfile/ClientProfile";
 function App() {
   const dispatch = useDispatch();
   const [loaded, setLoaded] = useState(false);
-
   useEffect(() => {
     dispatch(authenticate()).then(() => setLoaded(true));
   }, [dispatch]);
@@ -35,7 +34,7 @@ function App() {
         <Route path="/signup" exact={true}>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path="/client/:id" exact={true}>
+        <ProtectedRoute path="/client/:id(\\d+)" exact={true}>
           <ClientProfile />
         </ProtectedRoute>
         <ProtectedRoute path="/client/create" exact={true}>

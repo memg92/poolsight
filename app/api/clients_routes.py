@@ -82,6 +82,7 @@ def create_client():
 
 
 @clients_routes.route('/<int:client_id>', methods=["PUT"])
+@ login_required
 def edit_client(client_id):
     data = request.get_json()
     client = Client.query.get(client_id)
@@ -103,8 +104,10 @@ def edit_client(client_id):
 
 
 @clients_routes.route('/<int:client_id>', methods=["DELETE"])
+@ login_required
 def delete_client(client_id):
     client = Client.query.get(client_id)
+    print('\n\n\'client:', client.pools, '\n\n\n')
     if client is not None:
         db.session.delete(client)
         db.session.commit()
