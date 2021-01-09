@@ -3,6 +3,8 @@ from app.models import Client, Pool, db
 from app.forms import NewClientForm
 from flask_login import current_user, login_required
 from sqlalchemy.orm import joinedload
+from datetime import datetime
+
 
 clients_routes = Blueprint('clients', __name__)
 
@@ -18,7 +20,7 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-@clients_routes.route('')
+@clients_routes.route('/')
 @login_required
 def get_all_clients():
     """
@@ -102,6 +104,7 @@ def edit_client(client_id):
         client.state = data['state']
         client.email = data['email']
         client.phone = data['phone']
+        client.updated_at = datetime.now()
         db.session.commit()
         return client.to_dict()
     return {'error': 'Client not found'}, 400

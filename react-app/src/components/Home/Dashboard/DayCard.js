@@ -65,7 +65,7 @@ export default function DayCard({ day, pools }) {
     <div>
       <div
         onClick={openTable}
-        className="flex h-12 items-center justify-between cursor-pointer bg-pblue mx-4 my-0.5 shadow-lg hover:bg-opacity-80"
+        className="flex h-12 items-center justify-between cursor-pointer bg-pblue mx-4 my-0.5 shadow-lg hover:bg-opacity-80 rounded"
       >
         <div className={"ml-4 text-ghost text-xl w-full"}>
           {weekdays[day][1]}
@@ -77,11 +77,11 @@ export default function DayCard({ day, pools }) {
           <table className="px-4 w-full table-auto my-2 text-pnavy">
             <thead className="text-left text-ghost text-lg bg-pnavy bg-opacity-90">
               <tr>
-                <th className="pl-4 py-1 font-normal">First Name</th>
+                <th className="pl-4 py-1 font-normal rounded-l">First Name</th>
                 <th className="font-normal">Last Name</th>
                 <th className="font-normal">Street</th>
                 <th className="font-normal">City</th>
-                <th className="font-normal">Filter Changed</th>
+                <th className="rounded-r font-normal">Filter Changed</th>
               </tr>
             </thead>
             <tbody>
@@ -90,7 +90,7 @@ export default function DayCard({ day, pools }) {
                   <tr
                     key={pool.id}
                     // onClick={(e) => console.log("clicked")}
-                    className="hover:bg-gray-100 "
+                    className="hover:bg-gray-100 rounded"
                   >
                     <td className="pl-4">
                       <Link to={`/client/${pool.client.id}`}>

@@ -1,3 +1,4 @@
 from .login_form import LoginForm
 from .signup_form import SignUpForm
 from .new_client_form import NewClientForm
+from .new_pool_form import NewPoolForm
