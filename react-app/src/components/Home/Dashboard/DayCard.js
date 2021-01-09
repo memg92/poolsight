@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link, NavLink, Redirect } from "react-router-dom";
 import { dateFormatter } from "../../../services/utils";
 
 export default function DayCard({ day, pools }) {
@@ -17,7 +18,7 @@ export default function DayCard({ day, pools }) {
   useEffect(() => {
     if (today === weekdays[day][0] && !showTable) {
       setShowTable(true);
-    } else if (today > 4 && day === "M") {
+    } else if (today !== weekdays[day][0] && day === "M") {
       setShowTable(true);
     }
   }, []);
@@ -54,6 +55,10 @@ export default function DayCard({ day, pools }) {
     };
   }, [showTable]);
 
+  const accessProfile = (e) => {
+    return console.log(e.target);
+  };
+
   const dayPools = pools.filter((client) => client.service_day === day);
 
   return (
@@ -82,12 +87,34 @@ export default function DayCard({ day, pools }) {
             <tbody>
               {dayPools.map((pool) => {
                 return (
-                  <tr key={pool.id}>
-                    <td className="pl-4">{pool.client.firstname}</td>
-                    <td>{pool.client.lastname}</td>
-                    <td>{pool.street}</td>
-                    <td>{pool.city}</td>
-                    <td>{dateFormatter(pool.filter_changed)}</td>
+                  <tr
+                    key={pool.id}
+                    // onClick={(e) => console.log("clicked")}
+                    className=""
+                  >
+                    <td className="pl-4">
+                      <Link to={`/client/${pool.client.id}`}>
+                        {pool.client.firstname}
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={`/client/${pool.client.id}`}>
+                        {pool.client.lastname}
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={`/client/${pool.client.id}`}>
+                        {pool.street}
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={`/client/${pool.client.id}`}>{pool.city}</Link>
+                    </td>
+                    <td>
+                      <Link to={`/client/${pool.client.id}`}>
+                        {dateFormatter(pool.filter_changed)}
+                      </Link>
+                    </td>
                   </tr>
                 );
               })}

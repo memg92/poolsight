@@ -34,7 +34,7 @@ function App() {
         <Route path="/signup" exact={true}>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path="/client/:id(\\d+)" exact={true}>
+        <ProtectedRoute path="/client/:id(\d+)" exact={true}>
           <ClientProfile />
         </ProtectedRoute>
         <ProtectedRoute path="/client/create" exact={true}>
