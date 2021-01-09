@@ -16,9 +16,9 @@ export const getPool = (poolData) => {
   };
 };
 
-export const getPools = (userId) =>
+export const getPools = () =>
   async function (dispatch) {
-    const res = await fetch(`/api/pools/${userId}`, {
+    const res = await fetch(`/api/pools/`, {
       headers: {
         "Content-Type": "application/json",
       },

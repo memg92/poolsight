@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import Client, db
+from app.models import Client, Pool, db
 from app.forms import NewClientForm
 from flask_login import current_user, login_required
 from sqlalchemy.orm import joinedload
@@ -18,11 +18,11 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-@clients_routes.route('/all')
+@clients_routes.route('')
 @login_required
 def get_all_clients():
     """
-    /api/clients/<user_id> gets all clients for an authenticated user
+    /api/clients/ gets all clients for an authenticated user
     """
     user = current_user
     # print("\n\n\nuser", user, "\n\n\n")
@@ -44,16 +44,20 @@ def get_clients(client_id):
     /api/clients/<client_id> gets a specific client for an authenticated user
     """
     user = current_user
-    if(user.id):
-        client = Client.query.options(
-            joinedload(Client.pools)).filter_by(id=client_id).first()
-        if client:
-            return {"client": client.to_dict_pools()}
+    if user.id:
+        client = Client.query.get(client_id)
+        pools = Pool.query.filter_by(client_id=client_id).all()
 
-        return {"error": "No clients found"}
+        # check if client exists
+        if not client:
+            return {"error": "No clients found"}
+
+        # check if client has more than one pool
+        if len(pools) < 2:
+            return {"client": client.to_dict_pool()}
+
+        return {"client": client.to_dict(), "pools": [pool.to_dict() for pool in pools]}
     return {"error": "Unauthorized"}, 401
-
-# [pledge.to_dict_projects() for pledge in pledges]
 
 
 @ clients_routes.route('', methods=['POST'])
@@ -81,7 +85,7 @@ def create_client():
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
-@clients_routes.route('/<int:client_id>', methods=["PUT"])
+@ clients_routes.route('/<int:client_id>', methods=["PUT"])
 @ login_required
 def edit_client(client_id):
     data = request.get_json()
@@ -103,7 +107,7 @@ def edit_client(client_id):
     return {'error': 'Client not found'}, 400
 
 
-@clients_routes.route('/<int:client_id>', methods=["DELETE"])
+@ clients_routes.route('/<int:client_id>', methods=["DELETE"])
 @ login_required
 def delete_client(client_id):
     client = Client.query.get(client_id)

@@ -90,7 +90,7 @@ export default function DayCard({ day, pools }) {
                   <tr
                     key={pool.id}
                     // onClick={(e) => console.log("clicked")}
-                    className=""
+                    className="hover:bg-gray-100 "
                   >
                     <td className="pl-4">
                       <Link to={`/client/${pool.client.id}`}>

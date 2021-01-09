@@ -16,19 +16,18 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-@pools_routes.route('/<int:user_id>')
+@pools_routes.route('/')
 @login_required
-def get_all_pools(user_id):
+def get_all_pools():
     """
     /api/pools/<user_id> gets all pools for an authenticated user
     """
     user = current_user
     # print("\n\n\nuser", user, "\n\n\n")
     # return
-    if(user.id == int(user_id)):
-        pools = Pool.query.filter_by(user_id=user_id).all()
-        pool_data = [pool.to_dict_clients() for pool in pools]
-        print("\n\n\n", pool_data, user_id, "\n\n\n")
+    if(user.id):
+        pools = Pool.query.filter_by(user_id=user.id).all()
+        pool_data = [pool.to_dict_client() for pool in pools]
         if pools:
             return {"pools": pool_data}
         return {"error": "No pools found"}

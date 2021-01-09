@@ -19,7 +19,7 @@ class Client(db.Model):
 
     user = db.relationship("User", back_populates="clients")
     pools = db.relationship(
-        "Pool", cascade="delete, delete-orphan", uselist=False, back_populates="client")
+        "Pool", cascade="delete, delete-orphan", uselist=False, lazy="joined", backref="client")
 
     def to_dict(self):
         return {
@@ -36,7 +36,7 @@ class Client(db.Model):
             "updated_at": self.updated_at,
         }
 
-    def to_dict_pools(self):
+    def to_dict_pool(self):
         return {
             "id": self.id,
             "user_id": self.user_id,
@@ -47,7 +47,7 @@ class Client(db.Model):
             "state": self.state,
             "email": self.email,
             "phone": self.phone,
-            "pools": self.pools.to_dict(),
+            "pool": self.pools.to_dict(),
             "created_at": self.created_at,
             "updated_at": self.updated_at,
         }

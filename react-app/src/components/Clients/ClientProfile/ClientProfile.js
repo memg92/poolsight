@@ -2,14 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ClientSummary from "./ClientSummary";
-import PoolDetails from "./PoolDetails";
+import PoolDetails from "./Pools/PoolDetails";
 import EditClientForm from "./EditClientForm";
+import Pools from "./Pools/Pools";
+import Repairs from "./Repairs/Repairs";
 
 export default function ClientProfile() {
   const state = useSelector((state) => state);
   const user = state.session.user;
   const [errors, setErrors] = useState("");
   const [client, setClient] = useState(null);
+  const [pools, setPools] = useState([]);
   const [showClientModal, setShowClientModal] = useState(false);
   const [modalClosed, setModalClosed] = useState(false);
   const params = useParams();
@@ -22,15 +25,17 @@ export default function ClientProfile() {
           "Content-Type": "application/json",
         },
       });
-      const client = await res.json();
-      if (client && client.errors) {
-        setErrors(client.errors);
+      const data = await res.json();
+      console.log(data);
+      if (data && data.errors) {
+        setErrors(data.errors);
       }
-      setClient(client.client);
+      setPools(data.pools ? data.pools : data.client.pool);
+      setClient(data.client);
     })();
   }, [clientId]);
 
-  // console.log("client:", client);
+  // console.log("clients:", client);
   return (
     client && (
       <div className="h-screen">
@@ -39,7 +44,8 @@ export default function ClientProfile() {
             client={client}
             setShowClientModal={setShowClientModal}
           />
-          <PoolDetails client={client} />
+          <Pools pools={pools} />
+          <Repairs />
           <EditClientForm
             client={client}
             showClientModal={showClientModal}

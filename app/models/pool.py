@@ -8,7 +8,7 @@ class Pool(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     client_id = db.Column(db.Integer, db.ForeignKey(
-        "clients.id"), nullable=False)
+        "clients.id"),  nullable=False)
     street = db.Column(db.String(100), nullable=False)
     city = db.Column(db.String(100), nullable=False)
     state = db.Column(db.String(5), nullable=False)
@@ -21,8 +21,8 @@ class Pool(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
     user = db.relationship("User", back_populates="pools")
-    client = db.relationship(
-        "Client", back_populates="pools")
+    # client = db.relationship(
+    #     "Client", back_populates="pools")
     repairs = db.relationship(
         "Repair", back_populates="pool", cascade="delete, delete-orphan")
     equipment = db.relationship(
@@ -45,7 +45,7 @@ class Pool(db.Model):
             "updated_at": self.updated_at,
         }
 
-    def to_dict_clients(self):
+    def to_dict_client(self):
         return {
             "id": self.id,
             "user_id": self.user_id,
