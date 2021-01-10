@@ -1,53 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import ClientSummary from "./ClientSummary";
-import PoolDetails from "./Pools/PoolDetails";
 import EditClientForm from "./EditClientForm";
 import Pools from "./Pools/Pools";
 import Repairs from "./Repairs/Repairs";
+import { getClientPools } from "../../../store/pools";
 
 export default function ClientProfile() {
-  const state = useSelector((state) => state);
-  const user = state.session.user;
-  const [errors, setErrors] = useState("");
-  const [client, setClient] = useState(null);
+  const [error, setError] = useState("");
+  const [loaded, setLoaded] = useState(false);
   const [pools, setPools] = useState([]);
   const [showClientModal, setShowClientModal] = useState(false);
   const [modalClosed, setModalClosed] = useState(false);
   const params = useParams();
   const clientId = params.id;
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    (async () => {
-      const res = await fetch(`/api/clients/${clientId}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await res.json();
-      console.log(data);
-      if (data && data.errors) {
-        setErrors(data.errors);
+    dispatch(getClientPools(clientId)).then((res) => {
+      if (!res.error) {
+        setLoaded(true);
+      } else {
+        setError(res.error);
       }
-      setPools(data.pools ? data.pools : data.client.pool);
-      setClient(data.client);
-    })();
-  }, [clientId]);
+    });
+  }, [dispatch]);
 
   // console.log("clients:", client);
   return (
-    client && (
+    loaded && (
       <div className="h-screen">
         <div className="flex flex-col items-center mx-auto max-w-4xl">
-          <ClientSummary
-            client={client}
-            setShowClientModal={setShowClientModal}
-          />
-          <Pools pools={pools} />
+          <ClientSummary setShowClientModal={setShowClientModal} />
+          <Pools />
           <Repairs />
           <EditClientForm
-            client={client}
             showClientModal={showClientModal}
             setShowClientModal={setShowClientModal}
             setModalClosed={setModalClosed}

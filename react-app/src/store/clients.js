@@ -1,11 +1,16 @@
 const GET_ALL_CLIENTS = "clients/get-all-clients";
-// const GET_CLIENT = "clients/get-client";
-// const ADD_CLIENT = "clients/add-client";
+const ADD_CLIENT = "clients/add-client";
 
 export const getAllClients = (clientsDetail) => {
   return {
     type: GET_ALL_CLIENTS,
     clients: clientsDetail,
+  };
+};
+export const addCurrentClient = (clientDetail) => {
+  return {
+    type: ADD_CLIENT,
+    client: clientDetail,
   };
 };
 
@@ -110,10 +115,12 @@ export const deleteClient = (clientId) =>
     return client;
   };
 
-const clientsReducer = (state = { clients: null }, action) => {
+const clientsReducer = (state = { clients: null, client: null }, action) => {
   switch (action.type) {
     case GET_ALL_CLIENTS:
       return { ...state, clients: action.clients };
+    case ADD_CLIENT:
+      return { ...state, client: action.client };
     default:
       return state;
   }

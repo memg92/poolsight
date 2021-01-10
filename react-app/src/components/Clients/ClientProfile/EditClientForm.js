@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import StateOptions from "../ClientForm/StateOptions";
 import { editClient } from "../../../store/clients";
 import { useHistory } from "react-router-dom";
 
 export default function EditClientForm({
-  client,
   showClientModal,
   setShowClientModal,
 }) {
+  const client = useSelector((state) => state.clientAPI.client);
+  console.log("client", client);
   const [error, setError] = useState("");
   const [firstname, setFirstname] = useState(client.firstname);
   const [lastname, setLastname] = useState(client.lastname);
@@ -17,7 +18,6 @@ export default function EditClientForm({
   const [state, setState] = useState(client.state);
   const [email, setEmail] = useState(client.email);
   const [phone, setPhone] = useState(client.phone);
-
   const dispatch = useDispatch();
   // const history = useHistory();
 

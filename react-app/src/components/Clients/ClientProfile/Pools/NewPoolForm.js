@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createClientPool } from "../../../../store/pools";
 import StateOptions from "../../ClientForm/StateOptions";
 
 export default function NewPoolForm({ formOpen, setFormOpen }) {
@@ -10,26 +12,38 @@ export default function NewPoolForm({ formOpen, setFormOpen }) {
   const [serviceDay, setServiceDay] = useState("");
   const [monthlyRate, setMonthlyRate] = useState("");
   const [filterChanged, setFilterChanged] = useState("");
+  const dispatch = useDispatch();
+
+  // const handleClick = async (e) => {
+  //   e.preventDefault()
+  //   return dispatch(createClientPool())
+  // }
 
   return (
-    <div className="flex flex-col items-center border-pnavy border-l-4 border-opacity-40 transition duration-200 ease-in-out hover:border-opacity-80 hover:shadow-md hover:bg-gray-50 w-full mb-4">
+    <form
+      // onSubmit={handleSubmit}
+      className="flex flex-col items-center border-pnavy border-l-4 border-opacity-40 transition duration-200 ease-in-out hover:border-opacity-80 hover:shadow-md hover:bg-gray-50 w-full mb-4"
+    >
       <div className="flex items-center px-4 pt-2 pb-2 w-full">
         <div className="text-lg font-medium mb-0.5">Street:</div>
         <input
           type="text"
           onChange={(e) => setStreet(e.target.value)}
-          className="form-input ml-1 p-1 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
+          value={street}
+          className="form-input text-sm ml-1 p-1 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
         />
         <div className="text-lg font-medium mb-0.5 ml-4">City:</div>
         <input
           type="text"
           onChange={(e) => setCity(e.target.value)}
-          className="form-input ml-1 p-1 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
+          value={city}
+          className="form-input text-sm ml-1 p-1 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
         />
         <div className="text-lg font-medium mb-0.5 ml-4">State:</div>
         <select
           onChange={(e) => setState(e.target.value)}
-          className="form-select ml-1 p-1 w-20 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
+          value={state}
+          className="form-select text-sm ml-1 p-1 w-20 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
         >
           <StateOptions />
         </select>
@@ -39,6 +53,7 @@ export default function NewPoolForm({ formOpen, setFormOpen }) {
           <div className="w-full font-medium mb-0.5 pr-2">Property Type</div>
           <select
             onChange={(e) => setPropertyType(e.target.value)}
+            value={propertyType}
             className="form-select text-sm w-36 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
           >
             <option value="residential">Residential</option>
@@ -49,6 +64,7 @@ export default function NewPoolForm({ formOpen, setFormOpen }) {
           <div className="w-full font-medium mb-0.5 pr-2">Service Day</div>
           <select
             onChange={(e) => setServiceDay(e.target.value)}
+            value={serviceDay}
             className="form-select text-sm border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
           >
             <option value="M">Monday</option>
@@ -63,6 +79,7 @@ export default function NewPoolForm({ formOpen, setFormOpen }) {
           <input
             type="number"
             onChange={(e) => setMonthlyRate(e.target.value)}
+            value={monthlyRate}
             className="form-input text-sm w-full border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
           />
         </div>
@@ -71,6 +88,7 @@ export default function NewPoolForm({ formOpen, setFormOpen }) {
           <input
             type="date"
             onChange={(e) => setFilterChanged(e.target.value)}
+            value={filterChanged}
             className="form-input text-sm border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
           />
         </div>
@@ -81,6 +99,6 @@ export default function NewPoolForm({ formOpen, setFormOpen }) {
       >
         Add Pool
       </button>
-    </div>
+    </form>
   );
 }

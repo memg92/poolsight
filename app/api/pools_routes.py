@@ -43,9 +43,13 @@ def create_pool():
     """
     form = NewPoolForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    user = current_user
+    if not user:
+        return {'error': 'Unauthorized'}, 401
+
     if form.validate_on_submit():
         pool = pool(
-            user_id=current_user.get_id(),
+            user_id=user.id,
             client_id=form.data['clientId'],
             street=form.data['street'],
             city=form.data['city'],
@@ -58,5 +62,22 @@ def create_pool():
         )
         db.session.add(pool)
         db.session.commit()
-        return pool.to_dict()
+        return pool.to_dict_client()
     return {'errors': validation_errors_to_error_messages(form.errors)}
+
+
+@pools_routes.route('/<int:client_id>')
+@login_required
+def get_pools(client_id):
+    """
+    /api/pools/<client_id> gets all pools for a specific client
+    """
+    user = current_user
+    if user.id:
+        pools = Pool.query.filter_by(client_id=client_id).all()
+
+        # check if client has pools
+        if pools:
+            return {"pools": [pool.to_dict_client() for pool in pools]}
+        return {"error": "Client has no pools"}
+    return {"error": "Unauthorized"}, 401
