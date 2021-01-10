@@ -24,16 +24,12 @@ export default function Pools() {
             onClick={toggleForm}
           ></i>
         </div>
-        {!formOpen && (
+        {formOpen && (
           <NewPoolForm formOpen={formOpen} setFormOpen={setFormOpen} />
         )}
-        {Array.isArray(pools) ? (
-          pools.map((pool, idx) => {
-            return <PoolDetails key={pool.id} pool={pool} />;
-          })
-        ) : (
-          <PoolDetails key={pools.id} pool={pools} />
-        )}
+        {pools.map((pool) => {
+          return <PoolDetails key={pool.id} pool={pool} />;
+        })}
       </div>
     )
   );

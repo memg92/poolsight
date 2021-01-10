@@ -7,9 +7,9 @@ import { useHistory } from "react-router-dom";
 export default function EditClientForm({
   showClientModal,
   setShowClientModal,
+  setModalClosed,
 }) {
   const client = useSelector((state) => state.clientAPI.client);
-  console.log("client", client);
   const [error, setError] = useState("");
   const [firstname, setFirstname] = useState(client.firstname);
   const [lastname, setLastname] = useState(client.lastname);
@@ -19,7 +19,6 @@ export default function EditClientForm({
   const [email, setEmail] = useState(client.email);
   const [phone, setPhone] = useState(client.phone);
   const dispatch = useDispatch();
-  // const history = useHistory();
 
   useEffect(() => {
     const modal = document.querySelector(".modal");
@@ -48,7 +47,8 @@ export default function EditClientForm({
       if (!res.ok && res.error) {
         return setError(res.error);
       }
-      return window.location.reload();
+      setShowClientModal(false);
+      return setModalClosed(true);
     });
   };
 

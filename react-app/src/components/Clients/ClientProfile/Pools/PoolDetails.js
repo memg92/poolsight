@@ -9,7 +9,7 @@ export default function PoolDetails({ pool }) {
     R: ["Thu", "Thursday"],
     F: ["Fri", "Friday"],
   };
-  console.log("pool", pool);
+  // console.log("pool", pool);
   return (
     <div className="flex flex-col border-pnavy border-l-4 border-opacity-40 transition duration-200 ease-in-out hover:border-opacity-80 hover:shadow-md hover:bg-gray-50 w-full mb-4">
       <div className="flex  items-center px-4 pt-1 pb-2 w-full">

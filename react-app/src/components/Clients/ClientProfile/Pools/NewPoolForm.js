@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createClientPool } from "../../../../store/pools";
 import StateOptions from "../../ClientForm/StateOptions";
 
 export default function NewPoolForm({ formOpen, setFormOpen }) {
-  const [errors, setErrors] = useState([]);
+  const [error, setError] = useState("");
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("FL");
@@ -12,16 +12,34 @@ export default function NewPoolForm({ formOpen, setFormOpen }) {
   const [serviceDay, setServiceDay] = useState("");
   const [monthlyRate, setMonthlyRate] = useState("");
   const [filterChanged, setFilterChanged] = useState("");
+  const client = useSelector((state) => state.clientAPI.client);
   const dispatch = useDispatch();
 
-  // const handleClick = async (e) => {
-  //   e.preventDefault()
-  //   return dispatch(createClientPool())
-  // }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    return dispatch(
+      createClientPool(
+        client.id,
+        street,
+        city,
+        state,
+        propertyType,
+        serviceDay,
+        monthlyRate,
+        filterChanged
+      )
+    ).then((res) => {
+      if (!res.ok && res.error) {
+        return setError(res.error);
+      }
+      return setFormOpen(false);
+    });
+  };
 
   return (
     <form
-      // onSubmit={handleSubmit}
+      onSubmit={handleSubmit}
       className="flex flex-col items-center border-pnavy border-l-4 border-opacity-40 transition duration-200 ease-in-out hover:border-opacity-80 hover:shadow-md hover:bg-gray-50 w-full mb-4"
     >
       <div className="flex items-center px-4 pt-2 pb-2 w-full">

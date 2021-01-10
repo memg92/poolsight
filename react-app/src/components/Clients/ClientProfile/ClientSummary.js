@@ -2,12 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { deleteClient } from "../../../store/clients";
+import EditClientForm from "./EditClientForm";
 
-export default function ClientSummary({ setShowClientModal }) {
+export default function ClientSummary({
+  showClientModal,
+  setShowClientModal,
+  setModalClosed,
+}) {
   const dispatch = useDispatch();
   const client = useSelector((state) => state.clientAPI.client);
   const history = useHistory();
   const [error, setError] = useState("");
+
   const closeModal = () => {
     setShowClientModal(false);
     document.removeEventListener("click", closeModal);
@@ -63,6 +69,11 @@ export default function ClientSummary({ setShowClientModal }) {
             Edit
           </div>
         </div>
+        <EditClientForm
+          showClientModal={showClientModal}
+          setShowClientModal={setShowClientModal}
+          setModalClosed={setModalClosed}
+        />
       </div>
     )
   );
