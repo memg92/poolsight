@@ -21,7 +21,7 @@ export default function DayCard({ day, pools }) {
     } else if (today !== weekdays[day][0] && day === "M") {
       setShowTable(true);
     }
-  }, [today, weekdays, day, showTable]);
+  }, []);
 
   const openTable = () => {
     if (showTable) {
@@ -54,10 +54,6 @@ export default function DayCard({ day, pools }) {
       document.removeEventListener("click", closeTable);
     };
   }, [showTable]);
-
-  const accessProfile = (e) => {
-    return console.log(e.target);
-  };
 
   const dayPools = pools.filter((client) => client.service_day === day);
 
