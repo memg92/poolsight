@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, session, request
 from app.models import Client, Pool, Repair, db
 from flask_login import current_user, login_required
-from app.forms import NewRepairForm
+# from app.forms import NewRepairForm
 
 repairs_routes = Blueprint('repairs', __name__)
 
@@ -36,29 +36,29 @@ def get_all_repairs():
     return {"error": "Unauthorized"}, 401
 
 
-@ repairs_routes.route('', methods=['POST'])
-@ login_required
-def create_repair():
-    """
-    Creates a new repair
-    """
-    form = NewRepairForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    user = current_user
-    if not user:
-        return {'error': 'Unauthorized'}, 401
-    # print('\n\n\n form:', form.validate_on_submit(), form.errors, '\n\n\n')
-    if form.validate_on_submit():
-        repair = repair(
-            client_id=form.data['clientId'],
-            title=form.data['title'],
-            description=form.data['description'],
-        )
-        # print('\n\n\n repair:', repair.to_dict(), '\n\n\n')
-        db.session.add(repair)
-        db.session.commit()
-        return {'repair': repair.to_dict()}
-    return {'errors': validation_errors_to_error_messages(form.errors)}
+# @ repairs_routes.route('', methods=['POST'])
+# @ login_required
+# def create_repair():
+#     """
+#     Creates a new repair
+#     """
+#     form = NewRepairForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
+#     user = current_user
+#     if not user:
+#         return {'error': 'Unauthorized'}, 401
+#     # print('\n\n\n form:', form.validate_on_submit(), form.errors, '\n\n\n')
+#     if form.validate_on_submit():
+#         repair = repair(
+#             client_id=form.data['clientId'],
+#             title=form.data['title'],
+#             description=form.data['description'],
+#         )
+#         # print('\n\n\n repair:', repair.to_dict(), '\n\n\n')
+#         db.session.add(repair)
+#         db.session.commit()
+#         return {'repair': repair.to_dict()}
+#     return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
 @ repairs_routes.route('/<int:client_id>')

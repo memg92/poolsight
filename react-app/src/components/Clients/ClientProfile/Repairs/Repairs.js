@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import NewRepairForm from "./NewRepairForm";
-import RepairDetails from "./RepairDetails";
+import RepairCard from "./RepairCard";
 
 export default function Repairs() {
   const [formOpen, setFormOpen] = useState(false);
-
-  // const repairs = useSelector((state) => state.repairAPI.clientRepairs);
+  const repairs = useSelector((state) => state.repairAPI.clientRepairs);
 
   const toggleForm = () => {
     if (formOpen) {
@@ -26,12 +25,12 @@ export default function Repairs() {
           onClick={toggleForm}
         ></i>
       </div>
-      {formOpen && (
+      {/* {formOpen && (
         <NewRepairForm formOpen={formOpen} setFormOpen={setFormOpen} />
-      )}
-      {/* {repairs.map((repair) => {
-        return <RepairDetails key={repair.id} repair={repair} />;
-      })} */}
+      )} */}
+      {repairs.map((repair) => {
+        return <RepairCard key={repair.id} repair={repair} />;
+      })}
     </div>
   );
 }

@@ -1,7 +1,8 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import Client, Pool, db
+from app.models import Client, Pool, Repair, db
 from flask_login import current_user, login_required
 from app.forms import NewPoolForm
+from sqlalchemy.orm import joinedload
 
 pools_routes = Blueprint('pools', __name__)
 
@@ -47,7 +48,7 @@ def create_pool():
     user = current_user
     if not user:
         return {'error': 'Unauthorized'}, 401
-    print('\n\n\n form:', form.validate_on_submit(), form.errors, '\n\n\n')
+    # print('\n\n\n form:', form.validate_on_submit(), form.errors, '\n\n\n')
     if form.validate_on_submit():
         pool = Pool(
             user_id=user.id,
@@ -61,7 +62,7 @@ def create_pool():
             service_day=form.data['serviceDay'],
             filter_changed=form.data['filterChanged'],
         )
-        print('\n\n\n pool:', pool.to_dict(), '\n\n\n')
+        # print('\n\n\n pool:', pool.to_dict(), '\n\n\n')
         db.session.add(pool)
         db.session.commit()
         return {'pool': pool.to_dict()}
@@ -76,13 +77,14 @@ def get_pools(client_id):
     """
     user = current_user
     if user.id:
-        pools = Pool.query.filter_by(
+        pools = Pool.query.options(joinedload(Pool.repairs)).filter_by(
             client_id=client_id).order_by(Pool.updated_at.desc()).all()
 
+        # print('\n\n\n pools:', [pool.to_dict_full()
+        #                         for pool in pools], '\n\n\n')
         # check if client has pools
-        print(pools)
         if pools:
-            return {"pools": [pool.to_dict_client() for pool in pools]}
+            return {"pools": [pool.to_dict_full() for pool in pools]}
         return {"error": "Client has no pools"}
     return {"error": "Unauthorized"}, 401
 

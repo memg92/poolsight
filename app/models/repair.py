@@ -21,7 +21,18 @@ class Repair(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "client_id": self.client_id,
+            "pool_id": self.pool_id,
+            "title": self.title,
+            "description": self.description,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at,
+        }
+
+    def to_dict_tasks(self):
+        return {
+            "id": self.id,
+            "pool_id": self.pool_id,
+            "tasks": [task.to_dict() for task in self.tasks],
             "title": self.title,
             "description": self.description,
             "created_at": self.created_at,

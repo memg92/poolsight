@@ -3,11 +3,13 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import clientsReducer from "./clients";
 import poolsReducer from "./pools";
+import repairsReducer from "./repairs";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   clientAPI: clientsReducer,
   poolAPI: poolsReducer,
+  repairAPI: repairsReducer,
 });
 
 let enhancer;

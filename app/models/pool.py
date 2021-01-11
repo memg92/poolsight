@@ -62,3 +62,22 @@ class Pool(db.Model):
             "updated_at": self.updated_at,
             "client": self.client.to_dict(),
         }
+
+    def to_dict_full(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "client_id": self.client_id,
+            "street": self.street,
+            "city": self.city,
+            "state": self.state,
+            "pool_size": self.pool_size,
+            "property_type": self.property_type,
+            "monthly_rate": self.monthly_rate,
+            "service_day": self.service_day,
+            "filter_changed": self.filter_changed,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at,
+            "client": self.client.to_dict(),
+            "repairs": [repair.to_dict_tasks() for repair in self.repairs],
+        }

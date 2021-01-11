@@ -1,4 +1,5 @@
 import { addCurrentClient } from "./clients";
+import { addClientRepairs } from "./repairs";
 
 const GET_ALL_POOLS = "pools/get-all-pools";
 const ADD_CLIENT_POOLS = "pools/add-client-pools";
@@ -56,6 +57,9 @@ export const getClientPools = (clientId) =>
       console.log(pools);
       dispatch(addClientPools(pools.pools));
       dispatch(addCurrentClient(pools.pools[0].client));
+      pools.pools.forEach((pool) => {
+        dispatch(addClientRepairs(pool.repairs));
+      });
     }
     return pools;
   };
