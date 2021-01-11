@@ -9,6 +9,7 @@ from .models import db, User
 from .api.users_routes import users_routes
 from .api.clients_routes import clients_routes
 from .api.pools_routes import pools_routes
+from .api.repairs_routes import repairs_routes
 
 from .seeds import seed_commands
 
@@ -33,6 +34,7 @@ app.config.from_object(Config)
 app.register_blueprint(users_routes, url_prefix='/api/users')
 app.register_blueprint(clients_routes, url_prefix='/api/clients')
 app.register_blueprint(pools_routes, url_prefix='/api/pools')
+app.register_blueprint(repairs_routes, url_prefix='/api/repairs')
 db.init_app(app)
 Migrate(app, db)
 
