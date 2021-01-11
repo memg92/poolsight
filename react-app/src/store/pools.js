@@ -1,10 +1,8 @@
-import StateOptions from "../components/Clients/ClientForm/StateOptions";
 import { addCurrentClient } from "./clients";
 
 const GET_ALL_POOLS = "pools/get-all-pools";
 const ADD_CLIENT_POOLS = "pools/add-client-pools";
 const DELETE_CLIENT_POOLS = "pools/delete-client-pools";
-const ADD_POOL = "pools/add-pool";
 
 export const getAllPools = (poolsDetail) => {
   return {
