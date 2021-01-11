@@ -6,7 +6,7 @@ import DayCard from "./DayCard";
 export default function Dashboard() {
   const state = useSelector((state) => state);
   const user = state.session.user;
-  const pools = state.poolAPI.pools ? state.poolAPI.pools.pools : null;
+  const pools = state.poolAPI.pools ? state.poolAPI.pools : null;
 
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState("");

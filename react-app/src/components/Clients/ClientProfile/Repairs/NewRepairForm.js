@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createClientPool } from "../../../../store/pools";
-import StateOptions from "../../ClientForm/StateOptions";
 
-export default function NewPoolForm({ formOpen, setFormOpen }) {
+export default function NewRepairForm({ formOpen, setFormOpen }) {
   const [error, setError] = useState("");
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
@@ -13,30 +11,30 @@ export default function NewPoolForm({ formOpen, setFormOpen }) {
   const [serviceDay, setServiceDay] = useState("M");
   const [monthlyRate, setMonthlyRate] = useState("");
   const [filterChanged, setFilterChanged] = useState("");
-  const client = useSelector((state) => state.clientAPI.client);
+  const repair = useSelector((state) => state.repairAPI.repair);
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    return dispatch(
-      createClientPool([
-        client.id,
-        street,
-        city,
-        state,
-        poolSize,
-        propertyType,
-        monthlyRate,
-        serviceDay,
-        filterChanged,
-      ])
-    ).then((res) => {
-      if (!res.ok && res.error) {
-        setError(res.error);
-      }
-      setFormOpen(false);
-    });
+    // return dispatch(
+    //   createRepair([
+    //     repair.id,
+    //     street,
+    //     city,
+    //     state,
+    //     poolSize,
+    //     propertyType,
+    //     monthlyRate,
+    //     serviceDay,
+    //     filterChanged,
+    //   ])
+    // ).then((res) => {
+    //   if (!res.ok && res.error) {
+    //     setError(res.error);
+    //   }
+    //   setFormOpen(false);
+    // });
   };
 
   return (
@@ -66,9 +64,7 @@ export default function NewPoolForm({ formOpen, setFormOpen }) {
           onChange={(e) => setState(e.target.value)}
           value={state}
           className="form-select text-sm ml-1 p-1 w-20 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
-        >
-          <StateOptions />
-        </select>
+        ></select>
       </div>
       <div className="flex justify-between px-4 py-3 w-full">
         <div className="flex flex-col w-20 pr-2">

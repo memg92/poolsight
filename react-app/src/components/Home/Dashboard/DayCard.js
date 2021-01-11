@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { dateFormatter } from "../../../services/utils";
 
 export default function DayCard({ day, pools }) {
@@ -21,7 +21,7 @@ export default function DayCard({ day, pools }) {
     } else if (today !== weekdays[day][0] && day === "M") {
       setShowTable(true);
     }
-  }, []);
+  }, [today, weekdays, day, showTable]);
 
   const openTable = () => {
     if (showTable) {

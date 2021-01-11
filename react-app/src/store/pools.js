@@ -1,7 +1,9 @@
+import StateOptions from "../components/Clients/ClientForm/StateOptions";
 import { addCurrentClient } from "./clients";
 
 const GET_ALL_POOLS = "pools/get-all-pools";
 const ADD_CLIENT_POOLS = "pools/add-client-pools";
+const DELETE_CLIENT_POOLS = "pools/delete-client-pools";
 const ADD_POOL = "pools/add-pool";
 
 export const getAllPools = (poolsDetail) => {
@@ -12,9 +14,16 @@ export const getAllPools = (poolsDetail) => {
 };
 
 export const addClientPools = (poolData) => {
+  // console.log("poolsDAta:", poolData.pools);
   return {
     type: ADD_CLIENT_POOLS,
     clientPools: poolData,
+  };
+};
+export const deleteClientPool = (poolId) => {
+  return {
+    type: DELETE_CLIENT_POOLS,
+    clientPools: poolId,
   };
 };
 
@@ -25,9 +34,10 @@ export const getPools = () =>
         "Content-Type": "application/json",
       },
     });
+    //expected res = {pools: [...]}
     const pools = await res.json();
     if (!pools.error) {
-      dispatch(getAllPools(pools));
+      dispatch(getAllPools(pools.pools));
     } else {
       dispatch(getAllPools(null));
     }
@@ -41,10 +51,12 @@ export const getClientPools = (clientId) =>
         "Content-Type": "application/json",
       },
     });
+    //expected res = {pools: [...]}
     const pools = await res.json();
 
     if (!pools.error) {
-      dispatch(addClientPools(pools));
+      console.log(pools);
+      dispatch(addClientPools(pools.pools));
       dispatch(addCurrentClient(pools.pools[0].client));
     }
     return pools;
@@ -81,20 +93,48 @@ export const createClientPool = (poolDetails) =>
         filterChanged,
       }),
     });
+    //expected res = {pool: [...]}
     const pool = await response.json();
+    console.log("\n\npool res:", pool, "\n\n");
     if (!pool.errors) {
-      dispatch(addClientPools(pool));
-      dispatch(addCurrentClient(pool.client));
+      dispatch(addClientPools([pool.pool]));
     }
     return pool;
   };
 
-const poolsReducer = (state = { pools: null, clientPools: null }, action) => {
+export const deletePool = (poolId) =>
+  async function (dispatch) {
+    const res = await fetch(`/api/pools/${poolId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const pool = await res.json();
+    if (!pool.error) {
+      dispatch(deleteClientPool(poolId));
+    }
+    return pool;
+  };
+
+const poolsReducer = (state = { pools: [], clientPools: [] }, action) => {
   switch (action.type) {
     case GET_ALL_POOLS:
-      return { ...state, pools: action.pools };
+      return { ...state, pools: [...action.pools] };
     case ADD_CLIENT_POOLS:
-      return { ...state, clientPools: action.clientPools };
+      //spread new data into pools array
+      return {
+        ...state,
+        clientPools: [...state.clientPools, ...action.clientPools],
+      };
+    case DELETE_CLIENT_POOLS:
+      //remove pool where poolId does not match ids in the store
+      return {
+        ...state,
+        clientPools: state.clientPools.filter(
+          (pool) => pool.id !== action.clientPools
+        ),
+      };
     default:
       return state;
   }

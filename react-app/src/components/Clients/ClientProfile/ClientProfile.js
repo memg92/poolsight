@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import ClientSummary from "./ClientSummary";
-import EditClientForm from "./EditClientForm";
 import Pools from "./Pools/Pools";
 import Repairs from "./Repairs/Repairs";
 import { getClientPools } from "../../../store/pools";

@@ -27,7 +27,8 @@ def get_all_pools():
     # print("\n\n\nuser", user, "\n\n\n")
     # return
     if(user.id):
-        pools = Pool.query.filter_by(user_id=user.id).all()
+        pools = Pool.query.filter_by(
+            user_id=user.id).order_by(Pool.updated_at.desc()).all()
         pool_data = [pool.to_dict_client() for pool in pools]
         if pools:
             return {"pools": pool_data}
@@ -46,9 +47,9 @@ def create_pool():
     user = current_user
     if not user:
         return {'error': 'Unauthorized'}, 401
-
+    print('\n\n\n form:', form.validate_on_submit(), form.errors, '\n\n\n')
     if form.validate_on_submit():
-        pool = pool(
+        pool = Pool(
             user_id=user.id,
             client_id=form.data['clientId'],
             street=form.data['street'],
@@ -58,26 +59,42 @@ def create_pool():
             property_type=form.data['propertyType'],
             monthly_rate=form.data['monthlyRate'],
             service_day=form.data['serviceDay'],
-            filter_change=form.data['filterChanged'],
+            filter_changed=form.data['filterChanged'],
         )
+        print('\n\n\n pool:', pool.to_dict(), '\n\n\n')
         db.session.add(pool)
         db.session.commit()
-        return pool.to_dict_client()
+        return {'pool': pool.to_dict()}
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
-@pools_routes.route('/<int:client_id>')
-@login_required
+@ pools_routes.route('/<int:client_id>')
+@ login_required
 def get_pools(client_id):
     """
     /api/pools/<client_id> gets all pools for a specific client
     """
     user = current_user
     if user.id:
-        pools = Pool.query.filter_by(client_id=client_id).all()
+        pools = Pool.query.filter_by(
+            client_id=client_id).order_by(Pool.updated_at.desc()).all()
 
         # check if client has pools
+        print(pools)
         if pools:
             return {"pools": [pool.to_dict_client() for pool in pools]}
         return {"error": "Client has no pools"}
     return {"error": "Unauthorized"}, 401
+
+
+@ pools_routes.route('/<int:pool_id>', methods=["DELETE"])
+@ login_required
+def delete_pool(pool_id):
+    pool = Pool.query.get(pool_id)
+
+    if pool is not None:
+        db.session.delete(pool)
+        db.session.commit()
+        return {"deleted": pool_id}
+    else:
+        return {"error": f'id {pool_id} not found'}
