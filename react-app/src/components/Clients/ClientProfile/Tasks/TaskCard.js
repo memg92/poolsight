@@ -8,7 +8,6 @@ export default function TaskCard({ task }) {
       <div>{task.description}</div>
       <div>{task.rate}</div>
       <div>{task.cost}</div>
-      <div>Add a new task</div>
     </div>
   );
 }

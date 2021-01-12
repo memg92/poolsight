@@ -103,15 +103,15 @@ export const deleteTask = (taskId) =>
 
 const tasksReducer = (state = { tasks: [], clientTasks: [] }, action) => {
   switch (action.type) {
-    case GET_ALL_taskS:
+    case GET_ALL_TASKS:
       return { ...state, tasks: [...action.tasks] };
-    case ADD_CLIENT_taskS:
+    case ADD_CLIENT_TASKS:
       //spread new data into tasks array
       return {
         ...state,
         clientTasks: [...state.clientTasks, ...action.clientTasks],
       };
-    case DELETE_CLIENT_taskS:
+    case DELETE_CLIENT_TASKS:
       //remove task where taskId does not match ids in the store
       return {
         ...state,

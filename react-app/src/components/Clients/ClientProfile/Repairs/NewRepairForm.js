@@ -68,7 +68,7 @@ export default function NewRepairForm({ formOpen, setFormOpen }) {
       </div>
 
       <button
-        className="mb-2 mx-4 w-36 self-center bg-pblue text-white px-6 py-1.5 rounded hover:opacity-90"
+        className="mb-2 mx-4 w-36 self-center bg-pnavy text-white px-6 py-1.5 rounded hover:opacity-90"
         type="submit"
       >
         Add Repair
