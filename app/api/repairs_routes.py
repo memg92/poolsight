@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, session, request
 from app.models import Client, Pool, Repair, db
 from flask_login import current_user, login_required
-# from app.forms import NewRepairForm
+from app.forms import NewRepairForm
 
 repairs_routes = Blueprint('repairs', __name__)
 
@@ -36,7 +36,7 @@ def get_all_repairs():
     return {"error": "Unauthorized"}, 401
 
 
-@ repairs_routes.route('/', methods=['POST'])
+@ repairs_routes.route('', methods=['POST'])
 @ login_required
 def create_repair():
     """
@@ -49,8 +49,8 @@ def create_repair():
         return {'error': 'Unauthorized'}, 401
     # print('\n\n\n form:', form.validate_on_submit(), form.errors, '\n\n\n')
     if form.validate_on_submit():
-        repair = repair(
-            client_id=form.data['clientId'],
+        repair = Repair(
+            pool_id=form.data['poolId'],
             title=form.data['title'],
             description=form.data['description'],
         )

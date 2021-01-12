@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { createClientRepair } from "../../../../store/repairs";
 
 export default function NewRepairForm({ formOpen, setFormOpen }) {
+  const pools = useSelector((state) => state.poolAPI.clientPools);
   const [error, setError] = useState("");
-  const [poolId, setPoolId] = useState("");
+  const [poolId, setPoolId] = useState(pools[0].id);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const pools = useSelector((state) => state.poolAPI.clientPools);
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
@@ -22,7 +22,6 @@ export default function NewRepairForm({ formOpen, setFormOpen }) {
       }
     );
   };
-  console.log(pools);
 
   return (
     <form

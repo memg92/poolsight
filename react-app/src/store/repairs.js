@@ -62,17 +62,7 @@ export const getClientRepairs = (clientId) =>
 
 export const createClientRepair = (repairDetails) =>
   async function (dispatch) {
-    const [
-      clientId,
-      street,
-      city,
-      state,
-      repairSize,
-      propertyType,
-      monthlyRate,
-      serviceDay,
-      filterChanged,
-    ] = repairDetails;
+    const [poolId, title, description] = repairDetails;
 
     const response = await fetch("/api/repairs", {
       method: "POST",
@@ -80,20 +70,15 @@ export const createClientRepair = (repairDetails) =>
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        clientId,
-        street,
-        city,
-        state,
-        repairSize,
-        propertyType,
-        monthlyRate,
-        serviceDay,
-        filterChanged,
+        poolId,
+        title,
+        description,
       }),
     });
-    //expected res = {repair: [...]}
+    //expected res = {repair: {...}}
     const repair = await response.json();
     console.log("\n\nrepair res:", repair, "\n\n");
+    console.log("\npool ID:", poolId, "\n\n");
     if (!repair.errors) {
       dispatch(addClientRepairs([repair.repair]));
     }

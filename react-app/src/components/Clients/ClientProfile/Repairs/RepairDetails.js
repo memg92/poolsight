@@ -23,7 +23,7 @@ export default function RepairDetails({ repair }) {
         </div>
         <div className="container pb-2">
           <div className="font-medium text-lg">Tasks</div>
-          {tasks.length ? (
+          {tasks && tasks.length ? (
             tasks.map((task) => {
               return <TaskCard task={task} />;
             })

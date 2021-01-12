@@ -95,7 +95,7 @@ export const createClientPool = (poolDetails) =>
         filterChanged,
       }),
     });
-    //expected res = {pool: [...]}
+    //expected res = {pool: {...}}
     const pool = await response.json();
     console.log("\n\npool res:", pool, "\n\n");
     if (!pool.errors) {
