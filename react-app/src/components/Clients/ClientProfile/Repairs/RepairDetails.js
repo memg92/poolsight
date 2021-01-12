@@ -7,13 +7,13 @@ export default function RepairDetails({ repair }) {
   const tasks = repair.tasks;
 
   return (
-    <div className="container">
-      <div>
-        <div>Description</div>
+    <div className="container details px-6">
+      <div className="container pb-2">
+        <div className="font-medium text-lg">Description</div>
         <div>{repair.description}</div>
       </div>
       <div>
-        <div>Tasks</div>
+        <div className="font-medium text-lg">Tasks</div>
         {tasks.length &&
           tasks.map((task) => {
             return (
