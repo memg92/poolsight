@@ -17,11 +17,11 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-@repairs_routes.route('/')
+@repairs_routes.route('')
 @login_required
 def get_all_repairs():
     """
-    /api/repairs/ gets all repairs for an authenticated user
+    /api/repairs gets all repairs for an authenticated user
     """
     user = current_user
     # print("\n\n\nuser", user, "\n\n\n")

@@ -20,7 +20,7 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-@clients_routes.route('/')
+@clients_routes.route('')
 @login_required
 def get_all_clients():
     """

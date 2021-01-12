@@ -28,7 +28,7 @@ export const deleteClientPool = (poolId) => {
 
 export const getPools = () =>
   async function (dispatch) {
-    const res = await fetch(`/api/pools/`, {
+    const res = await fetch(`/api/pools`, {
       headers: {
         "Content-Type": "application/json",
       },

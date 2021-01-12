@@ -12,11 +12,11 @@ export default function RepairDetails({ repair }) {
 
   return (
     <div className="container details px-6">
-      <div className="container flex">
+      <div className="container flex pt-2">
         <div className="font-medium text-lg pr-2">Pool Address: </div>
         <div>{`${pool.street}, ${pool.city}, ${pool.state}`}</div>
       </div>
-      <div className="container border-2 px-2 mb-2 bg-ghost">
+      <div className="container border-2 border-pnavy border-opacity-10 px-2 mb-2 rounded-lg">
         <div className="container pb-2">
           <div className="font-medium text-lg">Description</div>
           <div>{repair.description}</div>

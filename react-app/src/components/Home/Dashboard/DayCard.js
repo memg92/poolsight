@@ -4,6 +4,7 @@ import { dateFormatter } from "../../../services/utils";
 
 export default function DayCard({ day, pools }) {
   const [showTable, setShowTable] = useState(false);
+
   const weekdays = {
     M: ["Mon", "Monday"],
     T: ["Tue", "Tuesday"],
@@ -16,9 +17,15 @@ export default function DayCard({ day, pools }) {
 
   //show client table if today matches the weekday of card
   useEffect(() => {
-    if (today === weekdays[day][0] && !showTable) {
-      setShowTable(true);
-    } else if (today !== weekdays[day][0] && day === "M") {
+    let temp = false;
+    for (let [key, value] of Object.entries(weekdays)) {
+      if (value[0] === today) temp = true;
+      if (value[0] === today && key === day) {
+        setShowTable(true);
+        return;
+      }
+    }
+    if (!temp && day === "M") {
       setShowTable(true);
     }
   }, []);

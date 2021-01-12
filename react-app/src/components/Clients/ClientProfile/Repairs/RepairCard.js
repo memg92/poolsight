@@ -49,7 +49,8 @@ export default function RepairCard({ repair }) {
     <>
       <div
         onClick={openDetails}
-        className="flex flex-col border-pnavy border-l-4 border-opacity-40 transition duration-200 ease-in-out hover:border-opacity-80 hover:shadow-md hover:bg-gray-50 w-full mb-4"
+        className="flex flex-col border-pnavy border-l-4 border-opacity-40 transition duration-200 ease-in-out hover:border-opacity-80 hover:shadow-md hover:bg-gray-50
+        w-full mb-4"
       >
         <div className="flex justify-between w-full px-4 pt-1  items-center pb-2 cursor-pointer">
           <div className="flex items-center">

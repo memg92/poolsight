@@ -1,5 +1,3 @@
-import { addCurrentClient } from "./clients";
-
 const GET_ALL_REPAIRS = "repairs/get-all-repairs";
 const ADD_CLIENT_REPAIRS = "repairs/add-client-repairs";
 const DELETE_CLIENT_REPAIRS = "repairs/delete-client-repairs";
@@ -27,7 +25,7 @@ export const deleteClientRepair = (repairId) => {
 
 export const getRepairs = () =>
   async function (dispatch) {
-    const res = await fetch(`/api/repairs/`, {
+    const res = await fetch(`/api/repairs`, {
       headers: {
         "Content-Type": "application/json",
       },
