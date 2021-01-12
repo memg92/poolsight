@@ -69,7 +69,7 @@ export default function RepairCard({ repair }) {
             ></i>
           </div>
         </div>
-        {showDetails && <RepairDetails repair={repair} />}
+        {<RepairDetails repair={repair} />}
       </div>
     </>
   );

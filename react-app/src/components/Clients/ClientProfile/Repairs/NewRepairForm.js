@@ -1,133 +1,77 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { createClientRepair } from "../../../../store/repairs";
 
 export default function NewRepairForm({ formOpen, setFormOpen }) {
   const [error, setError] = useState("");
-  const [street, setStreet] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("FL");
-  const [poolSize, setPoolSize] = useState("");
-  const [propertyType, setPropertyType] = useState("Residential");
-  const [serviceDay, setServiceDay] = useState("M");
-  const [monthlyRate, setMonthlyRate] = useState("");
-  const [filterChanged, setFilterChanged] = useState("");
-  const repair = useSelector((state) => state.repairAPI.repair);
+  const [poolId, setPoolId] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const pools = useSelector((state) => state.poolAPI.clientPools);
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // return dispatch(
-    //   createRepair([
-    //     repair.id,
-    //     street,
-    //     city,
-    //     state,
-    //     poolSize,
-    //     propertyType,
-    //     monthlyRate,
-    //     serviceDay,
-    //     filterChanged,
-    //   ])
-    // ).then((res) => {
-    //   if (!res.ok && res.error) {
-    //     setError(res.error);
-    //   }
-    //   setFormOpen(false);
-    // });
+    return dispatch(createClientRepair([poolId, title, description])).then(
+      (res) => {
+        if (!res.ok && res.error) {
+          setError(res.error);
+        }
+        setFormOpen(false);
+      }
+    );
   };
+  console.log(pools);
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col items-center border-pnavy border-l-4 border-opacity-40 transition duration-200 ease-in-out hover:border-opacity-80 hover:shadow-md hover:bg-gray-50 w-full mb-4"
+      className="flex flex-col border-pnavy border-l-4 border-opacity-40 transition duration-200 ease-in-out hover:border-opacity-80 hover:shadow-md hover:bg-gray-50 mb-4"
     >
-      <div className="flex items-center px-4 py-2 w-full">
-        <div className="text-lg font-medium mb-0.5">Street:</div>
-        <input
-          type="text"
-          onChange={(e) => setStreet(e.target.value)}
-          placeholder="e.g. 1234 Street st."
-          value={street}
-          className="form-input text-sm ml-1 p-1 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
-        />
-        <div className="text-lg font-medium mb-0.5 ml-4">City:</div>
-        <input
-          type="text"
-          onChange={(e) => setCity(e.target.value)}
-          placeholder="e.g. Deerfield"
-          value={city}
-          className="form-input text-sm ml-1 p-1 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
-        />
-        <div className="text-lg font-medium mb-0.5 ml-4">State:</div>
+      <div className="flex px-4 py-2 w-full">
+        <div className="text-lg  w-36 font-medium mb-0.5">Pool Address:</div>
         <select
-          onChange={(e) => setState(e.target.value)}
-          value={state}
-          className="form-select text-sm ml-1 p-1 w-20 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
-        ></select>
+          onChange={(e) => setPoolId(e.target.value)}
+          placeholder="e.g. 1234 title st."
+          value={poolId}
+          className="form-select w-full text-sm ml-1 p-1 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
+        >
+          {pools.map((pool) => {
+            return (
+              <option
+                key={pool.id}
+                value={pool.id}
+              >{`${pool.street}, ${pool.city}, ${pool.state}`}</option>
+            );
+          })}
+        </select>
       </div>
-      <div className="flex justify-between px-4 py-3 w-full">
-        <div className="flex flex-col w-20 pr-2">
-          <div className="font-medium mb-0.5">Size</div>
-          <input
-            type="number"
-            onChange={(e) => setPoolSize(e.target.value)}
-            placeholder="sqf"
-            value={poolSize}
-            className="form-input text-sm border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
-          />
-        </div>
-        <div className="flex flex-col pr-2">
-          <div className="font-medium mb-0.5">Property Type</div>
-          <select
-            onChange={(e) => setPropertyType(e.target.value)}
-            value={propertyType}
-            className="form-select text-sm w-36 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
-          >
-            <option value="residential">Residential</option>
-            <option value="commercial">Commercial</option>
-          </select>
-        </div>
-        <div className="flex flex-col pr-2">
-          <div className="font-medium mb-0.5">Service Day</div>
-          <select
-            onChange={(e) => setServiceDay(e.target.value)}
-            value={serviceDay}
-            className="form-select text-sm border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
-          >
-            <option value="M">Monday</option>
-            <option value="T">Tuesday</option>
-            <option value="W">Wednesday</option>
-            <option value="R">Thursday</option>
-            <option value="F">Friday</option>
-          </select>
-        </div>
-        <div className="flex flex-col w-28 pr-2">
-          <div className="font-medium mb-0.5">Monthly Rate</div>
-          <input
-            type="number"
-            onChange={(e) => setMonthlyRate(e.target.value)}
-            placeholder="e.g. 80"
-            value={monthlyRate}
-            className="form-input text-sm border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
-          />
-        </div>
-        <div className="flex flex-col w-44 pr-2">
-          <div className="font-medium mb-0.5">Filter Changed</div>
-          <input
-            type="date"
-            onChange={(e) => setFilterChanged(e.target.value)}
-            placeholder="mm/dd/yyyy"
-            value={filterChanged}
-            className="form-input text-sm border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
-          />
-        </div>
+      <div className="flex px-4 py-2 w-full">
+        <div className="text-lg w-36 font-medium mb-0.5">Title:</div>
+        <input
+          type="text"
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Insert Repair Title"
+          value={title}
+          className="form-input text-sm ml-1 p-1 w-full border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
+        />
       </div>
+      <div className="flex px-4 py-2 w-full">
+        <div className="text-lg w-36 font-medium mb-0.5">Description:</div>
+        <textarea
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Insert Repair Description"
+          value={description}
+          className="form-textarea text-sm ml-1 p-1 w-full border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
+        />
+      </div>
+
       <button
-        className="mb-2 mx-4 bg-pnavy text-ghost px-6 py-1.5 rounded hover:opacity-90"
+        className="mb-2 mx-4 w-36 self-center bg-pblue text-white px-6 py-1.5 rounded hover:opacity-90"
         type="submit"
       >
-        Add Pool
+        Add Repair
       </button>
     </form>
   );

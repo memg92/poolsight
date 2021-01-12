@@ -16,7 +16,7 @@ class Repair(db.Model):
     pool = db.relationship(
         "Pool", back_populates="repairs")
     tasks = db.relationship(
-        "Task", back_populates="repair", cascade="delete, delete-orphan")
+        "Task", back_populates="repair", order_by="Task.updated_at.desc()", cascade="delete, delete-orphan")
 
     def to_dict(self):
         return {

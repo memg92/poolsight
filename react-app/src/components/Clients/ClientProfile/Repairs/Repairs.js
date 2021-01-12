@@ -25,9 +25,9 @@ export default function Repairs() {
           onClick={toggleForm}
         ></i>
       </div>
-      {/* {formOpen && (
+      {formOpen && (
         <NewRepairForm formOpen={formOpen} setFormOpen={setFormOpen} />
-      )} */}
+      )}
       {repairs.map((repair) => {
         return <RepairCard key={repair.id} repair={repair} />;
       })}

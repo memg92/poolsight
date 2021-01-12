@@ -106,7 +106,7 @@ export default function ClientForm() {
         </div>
 
         <button
-          className="m-3 mx-4 bg-pnavy text-ghost py-1.5 rounded hover:opacity-90"
+          className="m-3 mx-4 w-36 bg-pnavy text-ghost py-1.5 rounded hover:opacity-90"
           type="submit"
         >
           Submit New Client

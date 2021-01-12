@@ -24,7 +24,7 @@ class Pool(db.Model):
     # client = db.relationship(
     #     "Client", back_populates="pools")
     repairs = db.relationship(
-        "Repair", back_populates="pool", cascade="delete, delete-orphan")
+        "Repair", back_populates="pool", cascade="delete, delete-orphan", order_by="Repair.updated_at.desc()")
     equipment = db.relationship(
         "Equipment", back_populates="pool", cascade="delete, delete-orphan")
 
