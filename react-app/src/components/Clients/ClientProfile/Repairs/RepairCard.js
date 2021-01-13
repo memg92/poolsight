@@ -48,7 +48,7 @@ export default function RepairCard({ repair }) {
             ></i>
           </div>
         </div>
-        {<RepairDetails repair={repair} />}
+        {showDetails && <RepairDetails repair={repair} />}
       </div>
     </>
   );

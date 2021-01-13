@@ -7,12 +7,13 @@ import NewTaskForm from "../Tasks/NewTaskForm";
 
 export default function RepairDetails({ repair }) {
   const [formOpen, setFormOpen] = useState(false);
-  const tasks = repair.tasks;
+  const taskState = useSelector((state) => state.taskAPI.clientTasks);
+  const tasks = taskState.filter((task) => task.repair_id === repair.id);
+
   const pools = useSelector((state) => state.poolAPI.clientPools);
   const [pool] = pools.filter((pool) => pool.id === repair.pool_id);
 
   const toggleForm = (e) => {
-    console.log("we hit add task button");
     e.stopPropagation();
     if (formOpen) {
       return setFormOpen(false);
@@ -53,7 +54,10 @@ export default function RepairDetails({ repair }) {
               </tbody>
             </table>
           </div>
-          <div className="font-bold cursor-pointer" onClick={toggleForm}>
+          <div
+            className="text-sm font-bold cursor-pointer"
+            onClick={toggleForm}
+          >
             <i
               className={`${formOpen ? "fas fa-minus" : "fas fa-plus"} px-2 `}
             ></i>

@@ -17,9 +17,10 @@ export default function NewTaskForm({ repair, setFormOpen }) {
     return dispatch(
       createClientTask([repair.id, title, category, rate, cost, description])
     ).then((res) => {
-      if (!res.ok && res.error) {
-        setError(res.error);
+      if (!res.ok && res.errors) {
+        setError(res.errors);
       }
+
       setFormOpen(false);
     });
   };
