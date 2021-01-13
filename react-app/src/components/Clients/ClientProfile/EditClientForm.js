@@ -7,7 +7,6 @@ import { useHistory } from "react-router-dom";
 export default function EditClientForm({
   showClientModal,
   setShowClientModal,
-  setModalClosed,
 }) {
   const client = useSelector((state) => state.clientAPI.client);
   const [error, setError] = useState("");
@@ -27,6 +26,11 @@ export default function EditClientForm({
         e.stopPropagation();
       });
     }
+    return () => {
+      document.removeEventListener("click", (e) => {
+        e.stopPropagation();
+      });
+    };
   }, [showClientModal]);
 
   const handleEditSubmit = async (e) => {
@@ -43,12 +47,11 @@ export default function EditClientForm({
         email
       )
     ).then((res) => {
-      console.log("res", res);
       if (!res.ok && res.error) {
         return setError(res.error);
+      } else {
+        setShowClientModal(false);
       }
-      setShowClientModal(false);
-      return setModalClosed(true);
     });
   };
 

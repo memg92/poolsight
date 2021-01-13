@@ -4,11 +4,7 @@ import { useHistory } from "react-router-dom";
 import { deleteClient } from "../../../store/clients";
 import EditClientForm from "./EditClientForm";
 
-export default function ClientSummary({
-  showClientModal,
-  setShowClientModal,
-  setModalClosed,
-}) {
+export default function ClientSummary({ showClientModal, setShowClientModal }) {
   const dispatch = useDispatch();
   const client = useSelector((state) => state.clientAPI.client);
   const history = useHistory();
@@ -19,9 +15,10 @@ export default function ClientSummary({
     document.removeEventListener("click", closeModal);
   };
 
-  const handleEditClick = () => {
-    document.addEventListener("click", closeModal);
+  const handleEditClick = (e) => {
+    // e.stopPropagation();
     setShowClientModal(true);
+    return document.addEventListener("click", closeModal);
   };
 
   const handleDelete = async (e) => {
@@ -31,7 +28,6 @@ export default function ClientSummary({
       if (!res.ok && res.error) {
         return setError(res.error);
       }
-      return history.push("/");
     });
   };
 
@@ -72,7 +68,6 @@ export default function ClientSummary({
         <EditClientForm
           showClientModal={showClientModal}
           setShowClientModal={setShowClientModal}
-          setModalClosed={setModalClosed}
         />
       </div>
     )

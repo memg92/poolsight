@@ -3,9 +3,12 @@ import { useDispatch } from "react-redux";
 import RepairDetails from "./RepairDetails";
 import { deleteRepair } from "../../../../store/repairs";
 import { dateFormatter } from "../../../../services/utils";
+import EditRepairForm from "./EditRepairForm";
 
 export default function RepairCard({ repair }) {
   const [showDetails, setShowDetails] = useState(false);
+  const [showRepairModal, setShowRepairModal] = useState(false);
+
   const dispatch = useDispatch();
 
   const toggleDetails = (e) => {
@@ -14,6 +17,17 @@ export default function RepairCard({ repair }) {
     } else {
       setShowDetails(true);
     }
+  };
+
+  const closeModal = () => {
+    setShowRepairModal(false);
+    document.removeEventListener("click", closeModal);
+  };
+
+  const handleEditClick = (e) => {
+    // e.stopPropagation();
+    setShowRepairModal(true);
+    return document.addEventListener("click", closeModal);
   };
 
   const handleDelete = (e) => {
@@ -39,9 +53,13 @@ export default function RepairCard({ repair }) {
             <div className="text-lg font-medium">{repair.title}</div>
           </div>
           <div className="flex items-center">
-            <div className="text-sm italic pr-4">{`Updated: ${dateFormatter(
+            <div className="text-sm italic pr-3">{`Updated: ${dateFormatter(
               repair.updated_at
             )}`}</div>
+            <i
+              onClick={handleEditClick}
+              className="fas fa-edit opacity-50 hover:opacity-100 cursor-pointer pr-2"
+            ></i>
             <i
               onClick={handleDelete}
               className="fas fa-trash opacity-50 hover:opacity-100 cursor-pointer"
@@ -50,6 +68,13 @@ export default function RepairCard({ repair }) {
         </div>
         {showDetails && <RepairDetails repair={repair} />}
       </div>
+      {showRepairModal && (
+        <EditRepairForm
+          repair={repair}
+          showRepairModal={showRepairModal}
+          setShowRepairModal={setShowRepairModal}
+        />
+      )}
     </>
   );
 }

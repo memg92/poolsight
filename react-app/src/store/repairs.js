@@ -1,5 +1,6 @@
 const GET_ALL_REPAIRS = "repairs/get-all-repairs";
 const ADD_CLIENT_REPAIRS = "repairs/add-client-repairs";
+const EDIT_CLIENT_REPAIRS = "repairs/edit-client-repairs";
 const DELETE_CLIENT_REPAIRS = "repairs/delete-client-repairs";
 
 export const getAllRepairs = (repairsDetail) => {
@@ -10,6 +11,13 @@ export const getAllRepairs = (repairsDetail) => {
 };
 
 export const addClientRepairs = (repairData) => {
+  // console.log("repairsDAta:", repairData.repairs);
+  return {
+    type: ADD_CLIENT_REPAIRS,
+    clientRepairs: repairData,
+  };
+};
+export const editClientRepairs = (repairData) => {
   // console.log("repairsDAta:", repairData.repairs);
   return {
     type: ADD_CLIENT_REPAIRS,
@@ -79,6 +87,27 @@ export const createClientRepair = (repairDetails) =>
     // console.log("\npool ID:", poolId, "\n\n");
     if (!repair.errors) {
       dispatch(addClientRepairs([repair.repair]));
+    }
+    return repair;
+  };
+
+export const editRepair = (...repairDetails) =>
+  async function (dispatch) {
+    const [repairId, poolId, title, description] = repairDetails;
+    const response = await fetch(`/api/repairs/${repairId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        poolId,
+        title,
+        description,
+      }),
+    });
+    const repair = await response.json();
+    if (!repair.error) {
+      dispatch(editClientRepairs(repair));
     }
     return repair;
   };

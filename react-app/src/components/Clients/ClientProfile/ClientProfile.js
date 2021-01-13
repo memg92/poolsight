@@ -10,7 +10,6 @@ export default function ClientProfile() {
   const [error, setError] = useState("");
   const [loaded, setLoaded] = useState(false);
   const [showClientModal, setShowClientModal] = useState(false);
-  const [modalClosed, setModalClosed] = useState(false);
   const params = useParams();
   const clientId = params.id;
   const dispatch = useDispatch();
@@ -23,7 +22,7 @@ export default function ClientProfile() {
         setError(res.error);
       }
     });
-  }, [dispatch, modalClosed]);
+  }, [dispatch]);
 
   // console.log("clients:", client);
   return (
@@ -33,7 +32,6 @@ export default function ClientProfile() {
           <ClientSummary
             showClientModal={showClientModal}
             setShowClientModal={setShowClientModal}
-            setModalClosed={setModalClosed}
           />
           <Pools />
           <Repairs />

@@ -1,5 +1,6 @@
 const GET_ALL_CLIENTS = "clients/get-all-clients";
 const ADD_CLIENT = "clients/add-client";
+const EDIT_CLIENT = "clients/edit-client";
 
 export const getAllClients = (clientsDetail) => {
   return {
@@ -10,6 +11,12 @@ export const getAllClients = (clientsDetail) => {
 export const addCurrentClient = (clientDetail) => {
   return {
     type: ADD_CLIENT,
+    client: clientDetail,
+  };
+};
+export const editCurrentClient = (clientDetail) => {
+  return {
+    type: EDIT_CLIENT,
     client: clientDetail,
   };
 };
@@ -99,6 +106,9 @@ export const editClient = (...clientDetails) =>
       }),
     });
     const client = await response.json();
+    if (!client.error) {
+      dispatch(editCurrentClient(client));
+    }
     return client;
   };
 
@@ -120,6 +130,8 @@ const clientsReducer = (state = { clients: null, client: null }, action) => {
     case GET_ALL_CLIENTS:
       return { ...state, clients: action.clients };
     case ADD_CLIENT:
+      return { ...state, client: action.client };
+    case EDIT_CLIENT:
       return { ...state, client: action.client };
     default:
       return state;
