@@ -1,5 +1,6 @@
 import { addCurrentClient } from "./clients";
 import { addClientRepairs } from "./repairs";
+import { addClientTasks } from "./tasks";
 
 const GET_ALL_POOLS = "pools/get-all-pools";
 const ADD_CLIENT_POOLS = "pools/add-client-pools";
@@ -59,6 +60,9 @@ export const getClientPools = (clientId) =>
       dispatch(addCurrentClient(pools.pools[0].client));
       pools.pools.forEach((pool) => {
         dispatch(addClientRepairs(pool.repairs));
+        pool.repairs.forEach((repair) => {
+          dispatch(addClientTasks(repair.tasks));
+        });
       });
     }
     return pools;
@@ -97,7 +101,7 @@ export const createClientPool = (poolDetails) =>
     });
     //expected res = {pool: {...}}
     const pool = await response.json();
-    console.log("\n\npool res:", pool, "\n\n");
+    // console.log("\n\npool res:", pool, "\n\n");
     if (!pool.errors) {
       dispatch(addClientPools([pool.pool]));
     }

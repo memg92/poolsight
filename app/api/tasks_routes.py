@@ -23,15 +23,15 @@ def create_task():
     """
     Creates a new task
     """
-    form = NewtaskForm()
+    form = NewTaskForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     user = current_user
     if not user:
         return {'error': 'Unauthorized'}, 401
     # print('\n\n\n form:', form.validate_on_submit(), form.errors, '\n\n\n')
     if form.validate_on_submit():
-        task = task(
-            pool_id=form.data['poolId'],
+        task = Task(
+            repair_id=form.data['repairId'],
             title=form.data['title'],
             category=form.data['category'],
             rate=form.data['rate'],

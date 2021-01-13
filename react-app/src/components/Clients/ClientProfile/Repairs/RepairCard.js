@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import RepairDetails from "./RepairDetails";
 import { deleteRepair } from "../../../../store/repairs";
@@ -8,37 +8,13 @@ export default function RepairCard({ repair }) {
   const [showDetails, setShowDetails] = useState(false);
   const dispatch = useDispatch();
 
-  const openDetails = () => {
+  const toggleDetails = (e) => {
     if (showDetails) {
       setShowDetails(false);
+    } else {
+      setShowDetails(true);
     }
-    setShowDetails(true);
   };
-
-  //handle change in showDetails state and listen for clicks to close tbale
-  useEffect(() => {
-    if (!showDetails) return;
-
-    const closeDetails = () => {
-      setShowDetails(false);
-    };
-
-    //listen for click to close details
-    document.addEventListener("click", closeDetails);
-
-    //stop propagation at the details level
-    const details = document.querySelector(".details") || null;
-    if (details) {
-      details.addEventListener("click", (e) => {
-        e.stopPropagation();
-      });
-    }
-
-    //remove listener so that card can be reopened after
-    return () => {
-      document.removeEventListener("click", closeDetails);
-    };
-  }, [showDetails]);
 
   const handleDelete = (e) => {
     e.stopPropagation();
@@ -48,11 +24,13 @@ export default function RepairCard({ repair }) {
   return (
     <>
       <div
-        onClick={openDetails}
         className="flex flex-col border-pnavy border-l-4 border-opacity-40 transition duration-200 ease-in-out hover:border-opacity-80 hover:shadow-md hover:bg-gray-50
         w-full mb-4"
       >
-        <div className="flex justify-between w-full px-4 pt-1  items-center pb-2 cursor-pointer">
+        <div
+          onClick={toggleDetails}
+          className="flex justify-between w-full px-4 pt-1  items-center pb-2 cursor-pointer"
+        >
           <div className="flex items-center">
             <i className="fas fa-chevron-circle-down pr-3 text-pnavy"></i>
             <div className="pr-3 font-medium">

@@ -75,8 +75,8 @@ export const createClientRepair = (repairDetails) =>
     });
     //expected res = {repair: {...}}
     const repair = await response.json();
-    console.log("\n\nrepair res:", repair, "\n\n");
-    console.log("\npool ID:", poolId, "\n\n");
+    // console.log("\n\nrepair res:", repair, "\n\n");
+    // console.log("\npool ID:", poolId, "\n\n");
     if (!repair.errors) {
       dispatch(addClientRepairs([repair.repair]));
     }

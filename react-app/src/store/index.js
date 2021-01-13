@@ -4,12 +4,14 @@ import sessionReducer from "./session";
 import clientsReducer from "./clients";
 import poolsReducer from "./pools";
 import repairsReducer from "./repairs";
+import tasksReducer from "./tasks";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   clientAPI: clientsReducer,
   poolAPI: poolsReducer,
   repairAPI: repairsReducer,
+  taskAPI: tasksReducer,
 });
 
 let enhancer;

@@ -60,7 +60,7 @@ export const getClientTasks = (clientId) =>
 
 export const createClientTask = (taskDetails) =>
   async function (dispatch) {
-    const [poolId, title, category, rate, cost, description] = taskDetails;
+    const [repairId, title, category, rate, cost, description] = taskDetails;
 
     const response = await fetch("/api/tasks", {
       method: "POST",
@@ -68,7 +68,7 @@ export const createClientTask = (taskDetails) =>
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        poolId,
+        repairId,
         title,
         category,
         rate,
@@ -78,8 +78,7 @@ export const createClientTask = (taskDetails) =>
     });
     //expected res = {task: {...}}
     const task = await response.json();
-    console.log("\n\ntask res:", task, "\n\n");
-    console.log("\npool ID:", poolId, "\n\n");
+    // console.log("\n\ntask res:", task, "\n\n");
     if (!task.errors) {
       dispatch(addClientTasks([task.task]));
     }

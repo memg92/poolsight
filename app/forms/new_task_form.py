@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired, NumberRange
 
 
 class NewTaskForm(FlaskForm):
-    poolId = IntegerField('pool_id')
+    repairId = IntegerField('repair_id')
     title = StringField('title', validators=[
         DataRequired()])
     category = StringField('category', validators=[
