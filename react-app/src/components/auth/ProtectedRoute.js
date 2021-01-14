@@ -5,7 +5,13 @@ import { useSelector } from "react-redux";
 const ProtectedRoute = (props) => {
   const state = useSelector((state) => state);
   const user = state.session.user;
-
+  const client = state.clientAPI.client;
+  if (user && client) {
+    if (client.user_id !== user.id) {
+      console.log("redirected");
+      return <Redirect to="/" />;
+    }
+  }
   return (
     <Route {...props}>{user ? props.children : <Redirect to="/login" />}</Route>
   );

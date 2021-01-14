@@ -19,7 +19,7 @@ export default function Pools() {
     pools && (
       <div className="my-2 px-6 py-4 text-pnavy text-opacity-90 w-full max-w-4xl border-b-2 border-gray-100">
         <div className="flex justify-between items-center pb-2">
-          <h1 className="text-xl font-semibold">Pool Details</h1>
+          <h1 className="text-3xl font-semibold">Pool Details</h1>
           <i
             className={`${
               formOpen ? "fas fa-minus" : "fas fa-plus"

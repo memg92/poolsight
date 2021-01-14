@@ -1,6 +1,9 @@
+import { useSelector } from "react-redux";
+
 const GET_ALL_CLIENTS = "clients/get-all-clients";
 const ADD_CLIENT = "clients/add-client";
 const EDIT_CLIENT = "clients/edit-client";
+// const user = useSelector((state) => state.session.user);
 
 export const getAllClients = (clientsDetail) => {
   return {
@@ -45,6 +48,7 @@ export const getClient = (clientId) =>
       },
     });
     const client = await res.json();
+    console.log("client", client);
     return client;
   };
 
@@ -75,6 +79,9 @@ export const addClient = (clientDetails) =>
       }),
     });
     const client = await response.json();
+    if (!client.errors) {
+      dispatch(addCurrentClient(client));
+    }
     return client;
   };
 
@@ -114,7 +121,6 @@ export const editClient = (...clientDetails) =>
 
 export const deleteClient = (clientId) =>
   async function (dispatch) {
-    console.log(clientId);
     const res = await fetch(`/api/clients/${clientId}`, {
       method: "DELETE",
       headers: {

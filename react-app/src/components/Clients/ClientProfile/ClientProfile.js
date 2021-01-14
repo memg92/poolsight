@@ -7,7 +7,7 @@ import Repairs from "./Repairs/Repairs";
 import { getClientPools } from "../../../store/pools";
 
 export default function ClientProfile() {
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState("");
   const [loaded, setLoaded] = useState(false);
   const [showClientModal, setShowClientModal] = useState(false);
   const params = useParams();
@@ -19,7 +19,7 @@ export default function ClientProfile() {
       if (!res.error) {
         setLoaded(true);
       } else {
-        setError(res.error);
+        setErrors(res.error);
       }
     });
   }, [dispatch]);
@@ -29,6 +29,20 @@ export default function ClientProfile() {
     loaded && (
       <div className="h-screen">
         <div className="flex flex-col items-center mx-auto max-w-4xl">
+          <div className="w-full">
+            {errors && (
+              <ul className="mx-auto m-4 p-4 bg-red-100 text-red-900 border-2 border-red-900 rounded">
+                <div className="font-semibold">
+                  We encountered the following errors, please try again later:
+                </div>
+                {errors.map((error, i) => (
+                  <li className="list-disc list-inside" key={i}>
+                    {error}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
           <ClientSummary
             showClientModal={showClientModal}
             setShowClientModal={setShowClientModal}

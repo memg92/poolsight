@@ -78,14 +78,13 @@ def get_pools(client_id):
     user = current_user
     if user.id:
         pools = Pool.query.options(joinedload(Pool.repairs)).filter_by(
-            client_id=client_id).order_by(Pool.updated_at.desc()).all()
+            client_id=client_id, user_id=user.id).order_by(Pool.updated_at.desc()).all()
 
-        # print('\n\n\n pools:', [pool.to_dict_full()
-        #                         for pool in pools], '\n\n\n')
+        print('\n\n\n pools:', pools, '\n\n\n')
         # check if client has pools
         if pools:
             return {"pools": [pool.to_dict_full() for pool in pools]}
-        return {"error": "Client has no pools"}
+        return {"error": "No pools found"}
     return {"error": "Unauthorized"}, 401
 
 

@@ -1,52 +1,102 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addClient } from "../../../store/clients";
+import { addClient, deleteClient } from "../../../store/clients";
 import StateOptions from "./StateOptions";
+import { createClientPool } from "../../../store/pools";
+import { dateFormatter } from "../../../services/utils";
 
 export default function ClientForm() {
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("FL");
-  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [poolStreet, setPoolStreet] = useState("");
+  const [poolCity, setPoolCity] = useState("");
+  const [poolState, setPoolState] = useState("FL");
+  const [poolSize, setPoolSize] = useState("");
+  const [propertyType, setPropertyType] = useState("Residential");
+  const [serviceDay, setServiceDay] = useState("M");
+  const [monthlyRate, setMonthlyRate] = useState("");
+  const [filterChanged, setFilterChanged] = useState(dateFormatter(new Date()));
+  const [checked, setChecked] = useState(false);
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.session.user);
-  const clientDetails = [
-    firstname,
-    lastname,
-    street,
-    city,
-    state,
-    phone,
-    email,
-  ];
 
   const createClient = async (e) => {
     e.preventDefault();
-    return dispatch(addClient(clientDetails)).then((res) => {
+    let clientId;
+
+    return dispatch(
+      addClient([firstname, lastname, street, city, state, phone, email])
+    ).then((res) => {
       if (!res.ok && res.errors) {
         return setErrors(res.errors);
+      } else {
+        clientId = res.id;
+        return dispatch(
+          createClientPool([
+            clientId,
+            poolStreet,
+            poolCity,
+            poolState,
+            poolSize,
+            propertyType,
+            monthlyRate,
+            serviceDay,
+            filterChanged,
+          ])
+        ).then((res) => {
+          if (!res.ok && res.errors) {
+            dispatch(deleteClient(clientId));
+            return setErrors(res.errors);
+          }
+          return history.push("/");
+        });
       }
-      return history.push("/");
     });
   };
 
+  const handleCheck = (e) => {
+    if (checked) {
+      setPoolStreet("");
+      setPoolCity("");
+      setPoolState("");
+      return setChecked(false);
+    } else {
+      setChecked(true);
+      setPoolStreet(street);
+      setPoolCity(city);
+      setPoolState(state);
+    }
+  };
+
   return (
-    <div className="flex bg-ghost h-full justify-center mx-auto w-full px-4">
-      <div>
-        {errors && errors.map((error, i) => <div key={i}>{error}</div>)}
+    <div className="flex flex-col bg-ghost h-full items-center mx-auto w-full px-4">
+      <div className="mt-10 max-w-lg w-full">
+        {errors && (
+          <ul className="mx-auto m-4 p-4 bg-red-100 text-red-900 border-2 border-red-900 rounded">
+            <div className="font-semibold">
+              Please correct the following errors:
+            </div>
+            {errors.map((error, i) => (
+              <li className="list-disc list-inside" key={i}>
+                {error}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       <form
         onSubmit={createClient}
-        className="flex flex-col max-w-lg w-full my-auto shadow-lg justify-center bg-white"
+        className="flex flex-col max-w-lg w-full  mb-auto shadow-lg justify-center bg-white"
       >
-        <div className="p-3 text-lg">New Client</div>
+        <div className="p-3 text-2xl">New Client</div>
         <div className="flex">
           <input
             className="form-input mx-4 w-full border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
@@ -66,7 +116,7 @@ export default function ClientForm() {
         <input
           className="form-input mx-4 mt-4 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
           type="text"
-          placeholder="Street Address"
+          placeholder="Billing Street Address"
           onChange={(e) => setStreet(e.target.value)}
           value={street}
         />
@@ -88,7 +138,7 @@ export default function ClientForm() {
             <StateOptions />
           </select>
         </div>
-        <div className="flex">
+        <div className="flex border-b-2 pb-6 mb-2">
           <input
             className="form-input w-full mx-4 mt-4 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
             type="number"
@@ -104,9 +154,97 @@ export default function ClientForm() {
             value={email}
           />
         </div>
+        <h1 className="p-3 text-2xl">Pool Details</h1>
+        <div className="flex flex-col justify-center px-4 w-full">
+          <input
+            type="text"
+            name="poolStreet"
+            onChange={(e) => setPoolStreet(e.target.value)}
+            placeholder="Street Address"
+            value={checked ? street : poolStreet}
+            className="form-input border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
+          />
+          <div className="flex items-center p-1">
+            <input
+              type="checkbox"
+              onChange={handleCheck}
+              className="form-checkbox border-2 border-gray-200"
+            />
+            <label className="text-sm ml-1">Same as billing address</label>
+          </div>
+          <div className="flex mt-4">
+            <input
+              type="text"
+              name="poolCity"
+              onChange={(e) => setPoolCity(e.target.value)}
+              placeholder="City"
+              value={checked ? city : poolCity}
+              className="form-input mr-4 w-full border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
+            />
+            <select
+              name="poolState"
+              onChange={(e) => setPoolState(e.target.value)}
+              value={checked ? state : poolState}
+              className="form-select w-36 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
+            >
+              <StateOptions />
+            </select>
+          </div>
+        </div>
+        <div className="flex mx-4 mt-4">
+          <input
+            type="number"
+            onChange={(e) => setPoolSize(e.target.value)}
+            placeholder="Pool Size (sqf)"
+            value={poolSize}
+            className="form-input w-full mr-4 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
+          />
 
+          <select
+            onChange={(e) => setPropertyType(e.target.value)}
+            value={propertyType}
+            className="form-select w-full border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
+          >
+            <option value="residential">Residential</option>
+            <option value="commercial">Commercial</option>
+          </select>
+        </div>
+        <div className="flex mx-4 mt-4 justify-between items-center">
+          <div className="font-medium mr-1">Service Day</div>
+          <select
+            onChange={(e) => setServiceDay(e.target.value)}
+            value={serviceDay}
+            className="form-select mr-4 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
+          >
+            <option value="M">Monday</option>
+            <option value="T">Tuesday</option>
+            <option value="W">Wednesday</option>
+            <option value="R">Thursday</option>
+            <option value="F">Friday</option>
+          </select>
+          <div className="flex py-2 items-center">
+            <div className="font-medium mr-1">Monthly Rate</div>
+            <input
+              type="number"
+              onChange={(e) => setMonthlyRate(e.target.value)}
+              placeholder="e.g. 80"
+              value={monthlyRate}
+              className="form-input w-28 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
+            />
+          </div>
+        </div>
+        <div className="flex items-center mx-4 mt-4">
+          <div className="font-medium w-60 mr-1">Date Filter Changed</div>
+          <input
+            type="date"
+            onChange={(e) => setFilterChanged(e.target.value)}
+            placeholder="mm/dd/yyyy"
+            value={filterChanged}
+            className="form-input w-full border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
+          />
+        </div>
         <button
-          className="m-3 mx-4 self-center w-36 bg-pnavy text-ghost py-1.5 rounded hover:opacity-90"
+          className="m-4 mx-4 self-center p-2 bg-pnavy text-ghost py-1.5 rounded hover:opacity-90"
           type="submit"
         >
           Submit New Client

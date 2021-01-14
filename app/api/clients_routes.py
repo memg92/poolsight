@@ -16,7 +16,7 @@ def validation_errors_to_error_messages(validation_errors):
     errorMessages = []
     for field in validation_errors:
         for error in validation_errors[field]:
-            errorMessages.append(f"{field} : {error}")
+            errorMessages.append(f"{field.title()} : {error}")
     return errorMessages
 
 
@@ -48,6 +48,10 @@ def get_clients(client_id):
     user = current_user
     if user.id:
         client = Client.query.get(client_id)
+        # check if client belongs to current user
+        if client.user_id != user.id:
+            return {"error": "Unauthorized"}, 401
+
         pools = Pool.query.filter_by(client_id=client_id).all()
 
         # check if client exists

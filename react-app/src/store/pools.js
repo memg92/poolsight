@@ -36,8 +36,9 @@ export const getPools = () =>
     });
     //expected res = {pools: [...]}
     const pools = await res.json();
+    // console.log(pools);
     if (!pools.error) {
-      dispatch(getAllPools(pools.pools));
+      dispatch(getAllPools([...pools.pools]));
     } else {
       dispatch(getAllPools(null));
     }
@@ -55,7 +56,7 @@ export const getClientPools = (clientId) =>
     const pools = await res.json();
 
     if (!pools.error) {
-      console.log(pools);
+      console.log("pool res", pools);
       dispatch(addClientPools(pools.pools));
       dispatch(addCurrentClient(pools.pools[0].client));
       pools.pools.forEach((pool) => {
@@ -128,9 +129,9 @@ const poolsReducer = (state = { pools: [], clientPools: [] }, action) => {
     case GET_ALL_POOLS:
       if (action.pools) {
         if (action.pools.length) {
-          return { ...state, pools: [...state.pools, ...action.pools] };
+          return { ...state, pools: [...action.pools] };
         }
-        return { ...state, pools: [...state.pools, action.pools] };
+        return state;
       }
     case ADD_CLIENT_POOLS:
       if (action.clientPools) {
