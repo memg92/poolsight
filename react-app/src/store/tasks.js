@@ -1,5 +1,6 @@
 const GET_ALL_TASKS = "tasks/get-all-tasks";
 const ADD_CLIENT_TASKS = "tasks/add-client-tasks";
+const EDIT_CLIENT_TASK = "tasks/edit-client-task";
 const DELETE_CLIENT_TASKS = "tasks/delete-client-tasks";
 
 export const getAllTasks = (tasksDetail) => {
@@ -13,6 +14,13 @@ export const addClientTasks = (taskData) => {
   // console.log("tasksDAta:", taskData.tasks);
   return {
     type: ADD_CLIENT_TASKS,
+    clientTasks: taskData,
+  };
+};
+export const editClientTask = (taskData) => {
+  // console.log("tasksDAta:", taskData.tasks);
+  return {
+    type: EDIT_CLIENT_TASK,
     clientTasks: taskData,
   };
 };
@@ -51,7 +59,6 @@ export const getClientTasks = (clientId) =>
     const tasks = await res.json();
 
     if (!tasks.error) {
-      console.log(tasks);
       dispatch(addClientTasks(tasks.tasks));
       // dispatch(addCurrentClient(tasks.tasks[0].client));
     }
@@ -85,6 +92,29 @@ export const createClientTask = (taskDetails) =>
     return task;
   };
 
+export const editTask = (...taskDetails) =>
+  async function (dispatch) {
+    const [taskId, title, category, rate, cost, description] = taskDetails;
+    const response = await fetch(`/api/tasks/${taskId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title,
+        category,
+        rate,
+        cost,
+        description,
+      }),
+    });
+    const task = await response.json();
+    if (!task.error) {
+      dispatch(editClientTask([task]));
+    }
+    return task;
+  };
+
 export const deleteTask = (taskId) =>
   async function (dispatch) {
     const res = await fetch(`/api/tasks/${taskId}`, {
@@ -109,6 +139,25 @@ const tasksReducer = (state = { tasks: [], clientTasks: [] }, action) => {
       return {
         ...state,
         clientTasks: [...state.clientTasks, ...action.clientTasks],
+      };
+    case EDIT_CLIENT_TASK:
+      const index = state.clientTasks.findIndex(
+        (task) => task.id === action.clientTasks[0].id
+      );
+      console.log(index, state.clientTasks);
+      if (index > -1) {
+        return {
+          ...state,
+          clientTasks: [
+            ...state.clientTasks.slice(0, index),
+            action.clientTasks[0],
+            ...state.clientTasks.slice(index + 1),
+          ],
+        };
+      }
+      return {
+        ...state,
+        clientTasks: [...state.clientTasks, action.clientTasks[0]],
       };
     case DELETE_CLIENT_TASKS:
       //remove task where taskId does not match ids in the store

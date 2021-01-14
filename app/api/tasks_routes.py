@@ -66,6 +66,24 @@ def create_task():
 #     return {"error": "Unauthorized"}, 401
 
 
+@ tasks_routes.route('/<int:task_id>', methods=["PUT"])
+@ login_required
+def edit_task(task_id):
+    data = request.get_json()
+    task = Task.query.get(task_id)
+    # print(data)
+    if task:
+        task.title = data['title']
+        task.category = data['category']
+        task.rate = data['rate']
+        task.cost = data['cost']
+        task.description = data['description']
+        task.updated_at = datetime.now()
+        db.session.commit()
+        return task.to_dict()
+    return {'error': 'task not found'}, 400
+
+
 @ tasks_routes.route('/<int:task_id>', methods=["DELETE"])
 @ login_required
 def delete_task(task_id):

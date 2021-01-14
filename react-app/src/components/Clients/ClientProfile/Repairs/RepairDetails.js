@@ -4,11 +4,14 @@ import { deleteRepair } from "../../../../store/repairs";
 import { dateFormatter } from "../../../../services/utils";
 import TaskCard from "../Tasks/TaskCard";
 import NewTaskForm from "../Tasks/NewTaskForm";
+import EditTaskForm from "../Tasks/EditTaskForm";
 
 export default function RepairDetails({ repair }) {
   const [formOpen, setFormOpen] = useState(false);
+  const [showTaskModal, setShowTaskModal] = useState(false);
   const taskState = useSelector((state) => state.taskAPI.clientTasks);
   const tasks = taskState.filter((task) => task.repair_id === repair.id);
+  const [editTaskId, setEditTaskId] = useState(null);
 
   const pools = useSelector((state) => state.poolAPI.clientPools);
   const [pool] = pools.filter((pool) => pool.id === repair.pool_id);
@@ -41,21 +44,37 @@ export default function RepairDetails({ repair }) {
                   <th className="font-normal w-64">Description</th>
                   <th className="font-normal w-28 text-center">Rate Charged</th>
                   <th className="font-normal w-16 text-center">Costs</th>
+                  <th className="font-normal w-10 text-center">Edit</th>
                   <th className="rounded-tr font-normal w-10 text-center">
-                    Edit
+                    Delete
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {tasks && tasks.length ? (
                   tasks.map((task) => {
-                    return <TaskCard key={task.id} task={task} />;
+                    return (
+                      <TaskCard
+                        key={task.id}
+                        task={task}
+                        setShowTaskModal={setShowTaskModal}
+                        setEditTaskId={setEditTaskId}
+                      />
+                    );
                   })
                 ) : (
                   <tr></tr>
                 )}
               </tbody>
             </table>
+            {showTaskModal && (
+              <EditTaskForm
+                tasks={tasks}
+                setShowTaskModal={setShowTaskModal}
+                editTaskId={editTaskId}
+                setEditTaskId={setEditTaskId}
+              />
+            )}
           </div>
           <div
             className="flex justify-center items-center text-sm font-bold w-40 cursor-pointer hover:bg-pblue hover:bg-opacity-50 transform ease-in-out duration-200 rounded"
