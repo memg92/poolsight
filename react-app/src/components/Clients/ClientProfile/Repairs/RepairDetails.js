@@ -31,7 +31,7 @@ export default function RepairDetails({ repair }) {
           <div>{`${pool.street}, ${pool.city}, ${pool.state}`}</div>
         </div>
         <div className="container px-2 mb-2 rounded-lg">
-          <div className="container py-2">
+          <div className="container pt-2 pb-4">
             <div className="font-medium text-lg">Description</div>
             <div>{repair.description}</div>
           </div>

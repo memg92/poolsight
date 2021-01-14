@@ -66,7 +66,7 @@ export default function ClientSummary({ showClientModal, setShowClientModal }) {
                 <div className="text-sm">{client.email}</div>
               </div>
               <div className="flex items-center">
-                <i class="fas fa-phone pr-2"></i>
+                <i className="fas fa-phone pr-2"></i>
                 <div className="text-sm">{client.phone}</div>
               </div>
             </div>

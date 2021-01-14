@@ -67,7 +67,7 @@ const SignUpForm = () => {
             Log In
           </NavLink>
         </div>
-        <div className="p-3">Sign Up</div>
+        <div className="p-4 text-xl">Sign Up</div>
         <input
           className="form-input mx-4 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
           type="text"

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { dateFormatter } from "../../../services/utils";
 
 export default function DayCard({ day, pools }) {
@@ -77,52 +77,70 @@ export default function DayCard({ day, pools }) {
       </div>
       {showTable && (
         <div className="mx-4">
-          <table className="px-4 w-full table-auto my-2 text-pnavy">
-            <thead className="text-left text-ghost text-lg bg-pnavy bg-opacity-90">
-              <tr>
-                <th className="pl-4 py-1 font-normal rounded-l">First Name</th>
-                <th className="font-normal">Last Name</th>
-                <th className="font-normal">Street</th>
-                <th className="font-normal">City</th>
-                <th className="rounded-r font-normal">Filter Changed</th>
-              </tr>
-            </thead>
-            <tbody>
-              {dayPools.map((pool) => {
-                return (
-                  <tr
-                    key={pool.id}
-                    // onClick={(e) => console.log("clicked")}
-                    className="hover:bg-gray-100 rounded"
-                  >
-                    <td className="pl-4">
-                      <Link to={`/client/${pool.client.id}`}>
-                        {pool.client.firstname}
-                      </Link>
-                    </td>
-                    <td>
-                      <Link to={`/client/${pool.client.id}`}>
-                        {pool.client.lastname}
-                      </Link>
-                    </td>
-                    <td>
-                      <Link to={`/client/${pool.client.id}`}>
-                        {pool.street}
-                      </Link>
-                    </td>
-                    <td>
-                      <Link to={`/client/${pool.client.id}`}>{pool.city}</Link>
-                    </td>
-                    <td>
-                      <Link to={`/client/${pool.client.id}`}>
-                        {dateFormatter(pool.filter_changed)}
-                      </Link>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          {dayPools.length ? (
+            <table className="px-4 w-full table-auto my-2 text-pnavy">
+              <thead className="text-left text-ghost text-lg bg-pnavy bg-opacity-90">
+                <tr>
+                  <th className="pl-4 py-1 font-normal rounded-l">
+                    First Name
+                  </th>
+                  <th className="font-normal">Last Name</th>
+                  <th className="font-normal">Street</th>
+                  <th className="font-normal">City</th>
+                  <th className="rounded-r font-normal">Filter Changed</th>
+                </tr>
+              </thead>
+              <tbody>
+                {dayPools.map((pool) => {
+                  return (
+                    <tr
+                      key={pool.id}
+                      // onClick={(e) => console.log("clicked")}
+                      className="hover:bg-gray-100 rounded"
+                    >
+                      <td className="pl-4">
+                        <Link to={`/client/${pool.client.id}`}>
+                          {pool.client.firstname}
+                        </Link>
+                      </td>
+                      <td>
+                        <Link to={`/client/${pool.client.id}`}>
+                          {pool.client.lastname}
+                        </Link>
+                      </td>
+                      <td>
+                        <Link to={`/client/${pool.client.id}`}>
+                          {pool.street}
+                        </Link>
+                      </td>
+                      <td>
+                        <Link to={`/client/${pool.client.id}`}>
+                          {pool.city}
+                        </Link>
+                      </td>
+                      <td>
+                        <Link to={`/client/${pool.client.id}`}>
+                          {dateFormatter(pool.filter_changed)}
+                        </Link>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          ) : (
+            <div className="px-4 py-2">
+              <h1 className="text-pnavy mb-2">
+                You have no clients for this day.
+              </h1>
+              <NavLink
+                to="/client/create"
+                className="text-ghost font-bold p-1 bg-pnavy bg-opacity-80 hover:bg-opacity-90 cursor-pointer rounded"
+              >
+                Add a client!
+              </NavLink>
+            </div>
+          )}
         </div>
       )}
     </div>

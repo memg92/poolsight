@@ -126,13 +126,26 @@ export const deletePool = (poolId) =>
 const poolsReducer = (state = { pools: [], clientPools: [] }, action) => {
   switch (action.type) {
     case GET_ALL_POOLS:
-      return { ...state, pools: [...action.pools] };
+      if (action.pools) {
+        if (action.pools.length) {
+          return { ...state, pools: [...state.pools, ...action.pools] };
+        }
+        return { ...state, pools: [...state.pools, action.pools] };
+      }
     case ADD_CLIENT_POOLS:
-      //spread new data into pools array
-      return {
-        ...state,
-        clientPools: [...state.clientPools, ...action.clientPools],
-      };
+      if (action.clientPools) {
+        if (action.clientPools.length) {
+          //spread new data into pools array
+          return {
+            ...state,
+            clientPools: [...state.clientPools, ...action.clientPools],
+          };
+        }
+        return {
+          ...state,
+          clientPools: [...state.clientPools, action.clientPools],
+        };
+      }
     case DELETE_CLIENT_POOLS:
       //remove pool where poolId does not match ids in the store
       return {

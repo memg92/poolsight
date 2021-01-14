@@ -38,15 +38,15 @@ export default function ClientForm() {
   };
 
   return (
-    <div className="flex  bg-ghost justify-center mx-auto w-full px-4">
+    <div className="flex bg-ghost h-full justify-center mx-auto w-full px-4">
       <div>
         {errors && errors.map((error, i) => <div key={i}>{error}</div>)}
       </div>
       <form
         onSubmit={createClient}
-        className="flex flex-col max-w-lg w-full h-auto my-20 shadow-lg justify-center bg-white"
+        className="flex flex-col max-w-lg w-full my-auto shadow-lg justify-center bg-white"
       >
-        <div className="p-3">New Client</div>
+        <div className="p-3 text-lg">New Client</div>
         <div className="flex">
           <input
             className="form-input mx-4 w-full border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
@@ -106,7 +106,7 @@ export default function ClientForm() {
         </div>
 
         <button
-          className="m-3 mx-4 w-36 bg-pnavy text-ghost py-1.5 rounded hover:opacity-90"
+          className="m-3 mx-4 self-center w-36 bg-pnavy text-ghost py-1.5 rounded hover:opacity-90"
           type="submit"
         >
           Submit New Client

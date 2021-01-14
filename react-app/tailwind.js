@@ -29,7 +29,7 @@ module.exports = {
       pnavy: "#1C325F",
       pblue: "#6290C8",
       pyellow: "#E0B700",
-      ghost: "#F3EFF5",
+      ghost: "#F5F5F5",
     },
     spacing: {
       px: "1px",

@@ -43,7 +43,7 @@ export default function EditRepairForm({
         <div className="mt-20 mx-auto max-w-xl shadow-lg">
           <div className="modal bg-ghost flex flex-col justify-center rounded-lg px-6 py-4 w-full">
             <form
-              className="flex flex-col w-full py-2 text-pnavy text-opacity-90"
+              className="flex flex-col w-full  text-pnavy text-opacity-90"
               onSubmit={handleEditSubmit}
             >
               <h1 className="text-xl font-bold pb-2 mb-2 border-b-2 border-pnavy border-opacity-40">

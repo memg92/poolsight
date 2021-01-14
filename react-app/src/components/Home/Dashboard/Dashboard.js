@@ -35,6 +35,13 @@ export default function Dashboard() {
       })}
     </>
   ) : (
-    <h1>Loading pools</h1>
+    <>
+      <div className="p-2 mx-4 mt-6 mb-2 text-3xl text-pnavy font-bold shadow-sm">
+        My Routes
+      </div>
+      {days.map((day) => {
+        return <DayCard day={day} key={day} pools={pools} />;
+      })}
+    </>
   );
 }

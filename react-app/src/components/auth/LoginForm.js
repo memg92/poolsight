@@ -70,7 +70,7 @@ const LoginForm = () => {
             Sign Up!
           </NavLink>
         </div>
-        <div className="p-3">Log In</div>
+        <div className="p-4 text-xl">Log In</div>
         <input
           name="email"
           type="text"
