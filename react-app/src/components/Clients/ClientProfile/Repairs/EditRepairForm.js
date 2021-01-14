@@ -7,9 +7,9 @@ export default function EditRepairForm({
   showRepairModal,
   setShowRepairModal,
 }) {
-  // const repairs = useSelector((state) => state.repairAPI.repairs);
+  const pools = useSelector((state) => state.poolAPI.clientPools);
   const [error, setError] = useState("");
-  const [poolId, setPoolId] = useState(repair.poolId);
+  const [poolId, setPoolId] = useState(repair.pool_id);
   const [title, setTitle] = useState(repair.title);
   const [description, setDescription] = useState(repair.description);
   const dispatch = useDispatch();
@@ -25,13 +25,16 @@ export default function EditRepairForm({
 
   const handleEditSubmit = async (e) => {
     e.preventDefault();
-    return dispatch(editRepair(poolId, title, description)).then((res) => {
-      console.log("res", res);
-      if (!res.ok && res.error) {
-        return setError(res.error);
+    console.log(repair.id);
+    return dispatch(editRepair(repair.id, poolId, title, description)).then(
+      (res) => {
+        console.log("repair res", res);
+        if (!res.ok && res.error) {
+          return setError(res.error);
+        }
+        return setShowRepairModal(false);
       }
-      return setShowRepairModal(false);
-    });
+    );
   };
 
   return (
@@ -46,24 +49,43 @@ export default function EditRepairForm({
               <h1 className="text-xl font-bold pb-2 mb-2 border-b-2 border-pnavy border-opacity-40">
                 Edit Repair
               </h1>
-              <div className="flex mt-2">
-                <div className="flex flex-col w-full mr-1">
-                  <div className="">Title</div>
-                  <input
-                    className="form-input text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 "
+              <div className="flex flex-col mt-2">
+                <div className="flex items-center w-full mb-4 mr-1">
+                  <div className="pr-2 ">Pool Address:</div>
+                  <select
+                    className="form-select text-sm rounded border-gray-300 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 "
                     type="text"
                     value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                  />
+                    onChange={(e) => setPoolId(e.target.value)}
+                  >
+                    {pools.map((pool) => {
+                      return (
+                        <option key={pool.id} value={pool.id}>
+                          {`${pool.street}, ${pool.city}, ${pool.state}`}
+                        </option>
+                      );
+                    })}
+                  </select>
                 </div>
-                <div className="flex flex-col w-full ml-1">
-                  <div className="">Description</div>
-                  <input
-                    className="form-input text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50"
-                    type="text"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                  />
+                <div className="flex">
+                  <div className="flex flex-col w-full mr-1">
+                    <div className="">Title</div>
+                    <input
+                      className="form-input text-sm mb-4 rounded border-gray-300 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 "
+                      type="text"
+                      value={title}
+                      onChange={(e) => setTitle(e.target.value)}
+                    />
+                  </div>
+                  <div className="flex flex-col w-full ml-1">
+                    <div className="">Description</div>
+                    <input
+                      className="form-input text-sm mb-4 rounded border-gray-300 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50"
+                      type="text"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                    />
+                  </div>
                 </div>
               </div>
               <button

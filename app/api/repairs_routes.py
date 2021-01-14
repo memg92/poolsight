@@ -2,6 +2,8 @@ from flask import Blueprint, jsonify, session, request
 from app.models import Client, Pool, Repair, db
 from flask_login import current_user, login_required
 from app.forms import NewRepairForm
+from datetime import datetime
+
 
 repairs_routes = Blueprint('repairs', __name__)
 
@@ -59,6 +61,22 @@ def create_repair():
         db.session.commit()
         return {'repair': repair.to_dict()}
     return {'errors': validation_errors_to_error_messages(form.errors)}
+
+
+@ repairs_routes.route('/<int:repair_id>', methods=["PUT"])
+@ login_required
+def edit_repair(repair_id):
+    data = request.get_json()
+    repair = Repair.query.get(repair_id)
+    print(data)
+    if repair:
+        repair.pool_id = data['poolId']
+        repair.title = data['title']
+        repair.description = data['description']
+        repair.updated_at = datetime.now()
+        db.session.commit()
+        return repair.to_dict()
+    return {'error': 'repair not found'}, 400
 
 
 @ repairs_routes.route('/<int:client_id>')

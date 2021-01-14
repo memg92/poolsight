@@ -15,9 +15,9 @@ export default function Repairs() {
   };
 
   return (
-    <div className="my-2 px-6 py-4 text-pnavy text-opacity-90 w-full max-w-3xl">
+    <div className="my-2 px-6 py-4 text-pnavy text-opacity-90 w-full max-w-4xl">
       <div className="flex justify-between items-center pb-2">
-        <h1 className="text-2xl font-semibold">Repair History</h1>
+        <h1 className="text-3xl font-semibold">Repair History</h1>
         <i
           className={`${
             formOpen ? "fas fa-minus" : "fas fa-plus"

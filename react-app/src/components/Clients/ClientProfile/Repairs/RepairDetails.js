@@ -39,8 +39,11 @@ export default function RepairDetails({ repair }) {
                   <th className="pl-2 font-normal rounded-tl w-28">Tasks</th>
                   <th className="font-normal w-36">Category</th>
                   <th className="font-normal w-64">Description</th>
-                  <th className="font-normal w-28">Rate Charged</th>
-                  <th className="rounded-tr font-normal w-16">Costs</th>
+                  <th className="font-normal w-28 text-center">Rate Charged</th>
+                  <th className="font-normal w-16 text-center">Costs</th>
+                  <th className="rounded-tr font-normal w-10 text-center">
+                    Edit
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -55,11 +58,11 @@ export default function RepairDetails({ repair }) {
             </table>
           </div>
           <div
-            className="text-sm font-bold cursor-pointer"
+            className="flex justify-center items-center text-sm font-bold w-40 cursor-pointer hover:bg-pblue hover:bg-opacity-50 transform ease-in-out duration-200 rounded"
             onClick={toggleForm}
           >
             <i
-              className={`${formOpen ? "fas fa-minus" : "fas fa-plus"} px-2 `}
+              className={`${formOpen ? "fas fa-minus" : "fas fa-plus"} mr-2 `}
             ></i>
             <span>Add a new task</span>
           </div>

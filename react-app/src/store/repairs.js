@@ -20,7 +20,7 @@ export const addClientRepairs = (repairData) => {
 export const editClientRepairs = (repairData) => {
   // console.log("repairsDAta:", repairData.repairs);
   return {
-    type: ADD_CLIENT_REPAIRS,
+    type: EDIT_CLIENT_REPAIRS,
     clientRepairs: repairData,
   };
 };
@@ -83,8 +83,6 @@ export const createClientRepair = (repairDetails) =>
     });
     //expected res = {repair: {...}}
     const repair = await response.json();
-    // console.log("\n\nrepair res:", repair, "\n\n");
-    // console.log("\npool ID:", poolId, "\n\n");
     if (!repair.errors) {
       dispatch(addClientRepairs([repair.repair]));
     }
@@ -107,7 +105,7 @@ export const editRepair = (...repairDetails) =>
     });
     const repair = await response.json();
     if (!repair.error) {
-      dispatch(editClientRepairs(repair));
+      dispatch(editClientRepairs([repair]));
     }
     return repair;
   };
@@ -136,6 +134,25 @@ const repairsReducer = (state = { repairs: [], clientRepairs: [] }, action) => {
       return {
         ...state,
         clientRepairs: [...state.clientRepairs, ...action.clientRepairs],
+      };
+    case EDIT_CLIENT_REPAIRS:
+      const index = state.clientRepairs.findIndex(
+        (repair) => repair.id === action.clientRepairs[0].id
+      );
+      console.log(index, state.clientRepairs);
+      if (index > -1) {
+        return {
+          ...state,
+          clientRepairs: [
+            ...state.clientRepairs.slice(0, index),
+            action.clientRepairs[0],
+            ...state.clientRepairs.slice(index + 1),
+          ],
+        };
+      }
+      return {
+        ...state,
+        clientRepairs: [...state.clientRepairs, action.clientRepairs[0]],
       };
     case DELETE_CLIENT_REPAIRS:
       //remove repair where repairId does not match ids in the store

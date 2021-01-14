@@ -25,7 +25,7 @@ export default function RepairCard({ repair }) {
   };
 
   const handleEditClick = (e) => {
-    // e.stopPropagation();
+    e.stopPropagation();
     setShowRepairModal(true);
     return document.addEventListener("click", closeModal);
   };
@@ -68,13 +68,13 @@ export default function RepairCard({ repair }) {
         </div>
         {showDetails && <RepairDetails repair={repair} />}
       </div>
-      {showRepairModal && (
+      {
         <EditRepairForm
           repair={repair}
           showRepairModal={showRepairModal}
           setShowRepairModal={setShowRepairModal}
         />
-      )}
+      }
     </>
   );
 }
