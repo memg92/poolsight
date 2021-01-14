@@ -1,6 +1,6 @@
 # poolsight
 
-poolsight is a client-management application for business owners in the pool service industry
+poolsight is a client-management platforms for business owners in the pool service industry
 
 ### MVP
 
