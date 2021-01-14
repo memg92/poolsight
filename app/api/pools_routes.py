@@ -73,18 +73,18 @@ def create_pool():
 @ login_required
 def get_pools(client_id):
     """
-    /api/pools/<client_id> gets all pools for a specific client
+    /api/pools/<client_id> gets all pools for a specific client, including client and repair data
     """
     user = current_user
     if user.id:
         pools = Pool.query.options(joinedload(Pool.repairs)).filter_by(
             client_id=client_id, user_id=user.id).order_by(Pool.updated_at.desc()).all()
 
-        print('\n\n\n pools:', pools, '\n\n\n')
+        # print('\n\n\n pools:', pools, '\n\n\n')
         # check if client has pools
         if pools:
             return {"pools": [pool.to_dict_full() for pool in pools]}
-        return {"error": "No pools found"}
+        return {"error": "No pools matched client ID"}
     return {"error": "Unauthorized"}, 401
 
 
@@ -92,8 +92,12 @@ def get_pools(client_id):
 @ login_required
 def delete_pool(pool_id):
     pool = Pool.query.get(pool_id)
-
+    user = current_user
     if pool is not None:
+        # check if pool belongs to user
+        if pool.user_id != user.id:
+            return {"error": "Unauthorized"}, 401
+
         db.session.delete(pool)
         db.session.commit()
         return {"deleted": pool_id}

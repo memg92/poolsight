@@ -51,15 +51,19 @@ def create_repair():
         return {'error': 'Unauthorized'}, 401
     # print('\n\n\n form:', form.validate_on_submit(), form.errors, '\n\n\n')
     if form.validate_on_submit():
-        repair = Repair(
-            pool_id=form.data['poolId'],
-            title=form.data['title'],
-            description=form.data['description'],
-        )
-        # print('\n\n\n repair:', repair.to_dict(), '\n\n\n')
-        db.session.add(repair)
-        db.session.commit()
-        return {'repair': repair.to_dict()}
+        # make sure pool exists
+        pool = Pool.query.get(form.data['poolId'])
+        if pool:
+            repair = Repair(
+                pool_id=form.data['poolId'],
+                title=form.data['title'],
+                description=form.data['description'],
+            )
+            # print('\n\n\n repair:', repair.to_dict(), '\n\n\n')
+            db.session.add(repair)
+            db.session.commit()
+            return {'repair': repair.to_dict()}
+        return {'error': f'No pool ID {form.data["poolId"]} found'}
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
@@ -68,7 +72,7 @@ def create_repair():
 def edit_repair(repair_id):
     data = request.get_json()
     repair = Repair.query.get(repair_id)
-    print(data)
+
     if repair:
         repair.pool_id = data['poolId']
         repair.title = data['title']

@@ -101,6 +101,7 @@ export default function ClientForm() {
           <input
             className="form-input mx-4 w-full border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
             type="text"
+            name="firstname"
             placeholder="First Name"
             onChange={(e) => setFirstname(e.target.value)}
             value={firstname}
@@ -108,6 +109,7 @@ export default function ClientForm() {
           <input
             className="form-input w-full mr-4 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
             type="text"
+            name="firstname"
             placeholder="Last Name"
             onChange={(e) => setLastname(e.target.value)}
             value={lastname}
@@ -117,6 +119,7 @@ export default function ClientForm() {
           className="form-input mx-4 mt-4 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
           type="text"
           placeholder="Billing Street Address"
+          name="street"
           onChange={(e) => setStreet(e.target.value)}
           value={street}
         />
@@ -125,6 +128,7 @@ export default function ClientForm() {
             className="form-input w-full mx-4 mt-4 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
             type="text"
             placeholder="City"
+            name="city"
             onChange={(e) => setCity(e.target.value)}
             value={city}
           />
@@ -132,6 +136,7 @@ export default function ClientForm() {
             className="form-select w-36 mr-4 mt-4 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
             type="text"
             placeholder="State"
+            name="state"
             onChange={(e) => setState(e.target.value)}
             value={state}
           >
@@ -143,6 +148,7 @@ export default function ClientForm() {
             className="form-input w-full mx-4 mt-4 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
             type="number"
             placeholder="Phone Number"
+            name="phone"
             onChange={(e) => setPhone(e.target.value)}
             value={phone}
           />
@@ -150,6 +156,7 @@ export default function ClientForm() {
             className="form-input w-full mr-4 mt-4 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
             type="email"
             placeholder="Email"
+            name="email"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
           />
@@ -196,12 +203,14 @@ export default function ClientForm() {
             type="number"
             onChange={(e) => setPoolSize(e.target.value)}
             placeholder="Pool Size (sqf)"
+            name="poolSize"
             value={poolSize}
             className="form-input w-full mr-4 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
           />
 
           <select
             onChange={(e) => setPropertyType(e.target.value)}
+            name="poolPropType"
             value={propertyType}
             className="form-select w-full border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
           >
@@ -213,6 +222,7 @@ export default function ClientForm() {
           <div className="font-medium mr-1">Service Day</div>
           <select
             onChange={(e) => setServiceDay(e.target.value)}
+            name="serviceDay"
             value={serviceDay}
             className="form-select mr-4 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
           >
@@ -228,6 +238,7 @@ export default function ClientForm() {
               type="number"
               onChange={(e) => setMonthlyRate(e.target.value)}
               placeholder="e.g. 80"
+              name="monthlyRate"
               value={monthlyRate}
               className="form-input w-28 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
             />
@@ -239,6 +250,7 @@ export default function ClientForm() {
             type="date"
             onChange={(e) => setFilterChanged(e.target.value)}
             placeholder="mm/dd/yyyy"
+            name="filterChanged"
             value={filterChanged}
             className="form-input w-full border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
           />

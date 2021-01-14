@@ -51,9 +51,9 @@ export default function EditRepairForm({
               </h1>
               <div className="flex flex-col mt-2">
                 <div className="flex items-center w-full mb-4 mr-1">
-                  <div className="pr-2 ">Pool Address:</div>
+                  <div className="pr-2 w-36">Pool Address:</div>
                   <select
-                    className="form-select text-sm rounded border-gray-300 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 "
+                    className="form-select text-sm w-full rounded border-gray-300 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 "
                     type="text"
                     value={title}
                     onChange={(e) => setPoolId(e.target.value)}

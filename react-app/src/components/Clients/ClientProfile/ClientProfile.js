@@ -16,9 +16,11 @@ export default function ClientProfile() {
 
   useEffect(() => {
     dispatch(getClientPools(clientId)).then((res) => {
+      console.log("clientprofile res:", res);
       if (!res.error) {
         setLoaded(true);
       } else {
+        setLoaded(true);
         setErrors(res.error);
       }
     });
@@ -33,22 +35,30 @@ export default function ClientProfile() {
             {errors && (
               <ul className="mx-auto m-4 p-4 bg-red-100 text-red-900 border-2 border-red-900 rounded">
                 <div className="font-semibold">
-                  We encountered the following errors, please try again later:
+                  We encountered the following errors:
                 </div>
-                {errors.map((error, i) => (
-                  <li className="list-disc list-inside" key={i}>
-                    {error}
-                  </li>
-                ))}
+                {Array.isArray(errors) ? (
+                  errors.map((error, i) => (
+                    <li className="list-disc list-inside" key={i}>
+                      {error}
+                    </li>
+                  ))
+                ) : (
+                  <li className="list-disc list-inside">{errors}</li>
+                )}
               </ul>
             )}
           </div>
-          <ClientSummary
-            showClientModal={showClientModal}
-            setShowClientModal={setShowClientModal}
-          />
-          <Pools />
-          <Repairs />
+          {!errors && (
+            <>
+              <ClientSummary
+                showClientModal={showClientModal}
+                setShowClientModal={setShowClientModal}
+              />
+              <Pools />
+              <Repairs />
+            </>
+          )}
         </div>
       </div>
     )

@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import Client, Pool, Task, db
+from app.models import Client, Pool, Repair, Task, db
 from flask_login import current_user, login_required
 from app.forms import NewTaskForm
 from datetime import datetime
@@ -32,18 +32,26 @@ def create_task():
         return {'error': 'Unauthorized'}, 401
     # print('\n\n\n form:', form.validate_on_submit(), form.errors, '\n\n\n')
     if form.validate_on_submit():
-        task = Task(
-            repair_id=form.data['repairId'],
-            title=form.data['title'],
-            category=form.data['category'],
-            rate=form.data['rate'],
-            cost=form.data['cost'],
-            description=form.data['description'],
-        )
-        # print('\n\n\n task:', task.to_dict(), '\n\n\n')
-        db.session.add(task)
-        db.session.commit()
-        return {'task': task.to_dict()}
+        # check that repair exists
+        try:
+            repair = Repair.query.get(form.data['repairId'])
+        except TypeError:
+            return {'error': f'Repair ID {form.data["repairId"]} was invalid'}
+
+        if repair:
+            task = Task(
+                repair_id=form.data['repairId'],
+                title=form.data['title'],
+                category=form.data['category'],
+                rate=form.data['rate'],
+                cost=form.data['cost'],
+                description=form.data['description'],
+            )
+            # print('\n\n\n task:', task.to_dict(), '\n\n\n')
+            db.session.add(task)
+            db.session.commit()
+            return {'task': task.to_dict()}
+        return {'error': f'No repair with ID {form.data["repairId"]} found'}
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
 # not sure I will need this
