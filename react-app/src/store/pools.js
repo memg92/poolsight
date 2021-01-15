@@ -133,6 +133,7 @@ const poolsReducer = (state = { pools: [], clientPools: [] }, action) => {
         }
         return state;
       }
+      return state;
     case ADD_CLIENT_POOLS:
       if (action.clientPools) {
         if (action.clientPools.length) {
@@ -147,6 +148,7 @@ const poolsReducer = (state = { pools: [], clientPools: [] }, action) => {
           clientPools: [...state.clientPools, action.clientPools],
         };
       }
+      return state;
     case DELETE_CLIENT_POOLS:
       //remove pool where poolId does not match ids in the store
       return {

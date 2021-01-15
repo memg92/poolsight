@@ -32,15 +32,19 @@ function App() {
         </Route>
         <Route path="/login" exact={true}>
           <LoginForm />
+          <Footer />
         </Route>
         <Route path="/signup" exact={true}>
           <SignUpForm />
+          <Footer />
         </Route>
         <ProtectedRoute path="/client/:id(\d+)" exact={true}>
           <ClientProfile />
+          <Footer />
         </ProtectedRoute>
         <ProtectedRoute path="/client/create" exact={true}>
           <ClientForm />
+          <Footer />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

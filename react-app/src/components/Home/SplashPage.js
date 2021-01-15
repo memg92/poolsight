@@ -9,21 +9,13 @@ export default function SplashPage() {
 
   const playVideo = (e) => {
     e.target.play();
-    console.log("play");
   };
   const pauseVideo = (e) => {
     e.target.pause();
-    console.log("pause");
   };
-  // const playVideoTwo = (e) => {
-  //   video2.play();
-  // };
-  // const pauseVideoTwo = (e) => {
-  //   video2.pause();
-  // };
 
   return (
-    <div className="mx-auto h-auto  bg-pblue bg-opacity-70">
+    <div className="mx-auto h-full bg-pblue bg-opacity-70">
       <div className="xl:flex px-20 py-8 items-center justify-center  text-ghost border-b-4 border-pnavy border-opacity-50">
         <div className="px-4 py-6 text-center">
           <h1 className="text-2xl py-2 font-semibold">
@@ -45,7 +37,7 @@ export default function SplashPage() {
             onMouseOver={playVideo}
             onMouseOut={pauseVideo}
             alt="Dashboard"
-            className="mx-auto max-w-2xl h-auto shadow-lg rounded-lg border-2 border-pnavy"
+            className="mx-auto max-w-md sm:max-w-lg md:max-w-2xl h-auto shadow-lg rounded-lg border-2 border-pnavy"
           />
         </div>
       </div>
@@ -59,7 +51,7 @@ export default function SplashPage() {
             onMouseOver={playVideo}
             onMouseOut={pauseVideo}
             alt="Dashboard"
-            className="mx-auto max-w-2xl h-auto shadow-lg rounded-lg border-2 border-pnavy"
+            className="mx-auto max-w-md sm:max-w-lg md:max-w-2xl h-auto shadow-lg rounded-lg border-2 border-pnavy"
           />
         </div>
         <div className="px-4 py-6 text-center">
