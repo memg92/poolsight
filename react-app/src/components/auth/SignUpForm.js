@@ -22,7 +22,6 @@ const SignUpForm = () => {
     e.preventDefault();
     if (password === repeatPassword) {
       return dispatch(signUp(username, email, role, password)).then((res) => {
-        // console.log(res);
         if (!res.ok && res.errors) {
           return setErrors(res.errors);
         }

@@ -48,7 +48,6 @@ export const getClient = (clientId) =>
       },
     });
     const client = await res.json();
-    console.log("client", client);
     return client;
   };
 

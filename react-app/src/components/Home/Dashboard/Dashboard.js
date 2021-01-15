@@ -11,7 +11,6 @@ export default function Dashboard() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
 
-  // console.log(loaded, pools);
   useEffect(() => {
     dispatch(getPools(user.id)).then((res) => {
       if (!res.error) {

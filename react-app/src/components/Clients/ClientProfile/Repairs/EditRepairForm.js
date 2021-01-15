@@ -25,10 +25,8 @@ export default function EditRepairForm({
 
   const handleEditSubmit = async (e) => {
     e.preventDefault();
-    console.log(repair.id);
     return dispatch(editRepair(repair.id, poolId, title, description)).then(
       (res) => {
-        console.log("repair res", res);
         if (!res.ok && res.error) {
           return setError(res.error);
         }

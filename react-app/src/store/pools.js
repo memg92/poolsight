@@ -14,7 +14,6 @@ export const getAllPools = (poolsDetail) => {
 };
 
 export const addClientPools = (poolData) => {
-  // console.log("poolsDAta:", poolData.pools);
   return {
     type: ADD_CLIENT_POOLS,
     clientPools: poolData,
@@ -36,7 +35,6 @@ export const getPools = () =>
     });
     //expected res = {pools: [...]}
     const pools = await res.json();
-    // console.log(pools);
     if (!pools.error) {
       dispatch(getAllPools([...pools.pools]));
     } else {
@@ -56,7 +54,6 @@ export const getClientPools = (clientId) =>
     const pools = await res.json();
 
     if (!pools.error) {
-      console.log("pool res", pools);
       dispatch(addClientPools(pools.pools));
       dispatch(addCurrentClient(pools.pools[0].client));
       pools.pools.forEach((pool) => {
@@ -102,7 +99,6 @@ export const createClientPool = (poolDetails) =>
     });
     //expected res = {pool: {...}}
     const pool = await response.json();
-    // console.log("\n\npool res:", pool, "\n\n");
     if (!pool.errors) {
       dispatch(addClientPools([pool.pool]));
     }

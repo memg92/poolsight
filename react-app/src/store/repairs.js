@@ -11,14 +11,12 @@ export const getAllRepairs = (repairsDetail) => {
 };
 
 export const addClientRepairs = (repairData) => {
-  // console.log("repairsDAta:", repairData.repairs);
   return {
     type: ADD_CLIENT_REPAIRS,
     clientRepairs: repairData,
   };
 };
 export const editClientRepairs = (repairData) => {
-  // console.log("repairsDAta:", repairData.repairs);
   return {
     type: EDIT_CLIENT_REPAIRS,
     clientRepairs: repairData,
@@ -59,7 +57,6 @@ export const getClientRepairs = (clientId) =>
     const repairs = await res.json();
 
     if (!repairs.error) {
-      console.log(repairs);
       dispatch(addClientRepairs(repairs.repairs));
       // dispatch(addCurrentClient(repairs.repairs[0].client));
     }
@@ -139,7 +136,6 @@ const repairsReducer = (state = { repairs: [], clientRepairs: [] }, action) => {
       const index = state.clientRepairs.findIndex(
         (repair) => repair.id === action.clientRepairs[0].id
       );
-      console.log(index, state.clientRepairs);
       if (index > -1) {
         return {
           ...state,

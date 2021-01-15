@@ -11,14 +11,12 @@ export const getAllTasks = (tasksDetail) => {
 };
 
 export const addClientTasks = (taskData) => {
-  // console.log("tasksDAta:", taskData.tasks);
   return {
     type: ADD_CLIENT_TASKS,
     clientTasks: taskData,
   };
 };
 export const editClientTask = (taskData) => {
-  // console.log("tasksDAta:", taskData.tasks);
   return {
     type: EDIT_CLIENT_TASK,
     clientTasks: taskData,
@@ -85,7 +83,6 @@ export const createClientTask = (taskDetails) =>
     });
     //expected res = {task: {...}}
     const task = await response.json();
-    // console.log("\n\ntask res:", task, "\n\n");
     if (!task.errors) {
       dispatch(addClientTasks([task.task]));
     }
@@ -144,7 +141,6 @@ const tasksReducer = (state = { tasks: [], clientTasks: [] }, action) => {
       const index = state.clientTasks.findIndex(
         (task) => task.id === action.clientTasks[0].id
       );
-      console.log(index, state.clientTasks);
       if (index > -1) {
         return {
           ...state,

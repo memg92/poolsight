@@ -93,11 +93,7 @@ export default function DayCard({ day, pools }) {
               <tbody>
                 {dayPools.map((pool) => {
                   return (
-                    <tr
-                      key={pool.id}
-                      // onClick={(e) => console.log("clicked")}
-                      className="hover:bg-gray-100 rounded"
-                    >
+                    <tr key={pool.id} className="hover:bg-gray-100 rounded">
                       <td className="pl-4">
                         <Link to={`/client/${pool.client.id}`}>
                           {pool.client.firstname}

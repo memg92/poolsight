@@ -8,7 +8,6 @@ const ProtectedRoute = (props) => {
   const client = state.clientAPI.client;
   if (user && client) {
     if (client.user_id !== user.id) {
-      console.log("redirected");
       return <Redirect to="/" />;
     }
   }

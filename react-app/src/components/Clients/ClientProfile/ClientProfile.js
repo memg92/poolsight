@@ -18,7 +18,6 @@ export default function ClientProfile() {
 
   useEffect(() => {
     dispatch(getClientPools(clientId)).then((res) => {
-      console.log("clientprofile res:", res);
       if (!res.error) {
         setLoaded(true);
       } else {
@@ -28,7 +27,6 @@ export default function ClientProfile() {
     });
   }, [dispatch]);
 
-  // console.log("clients:", client);
   return loaded ? (
     <div className="h-screen z-0">
       <div className="flex flex-col items-center mx-auto max-w-4xl">

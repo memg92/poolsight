@@ -5,7 +5,7 @@ import { addClient } from "../../store/clients";
 import StateOptions from "./StateOptions";
 
 export default function ClientForm() {
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [street, setStreet] = useState("");
@@ -29,10 +29,10 @@ export default function ClientForm() {
 
   const createClient = async (e) => {
     e.preventDefault();
-    return dispatch(addClient(clientDetails)).catch((res) => {
-      if (res.user && res.user.errors) {
-        console.log(res.user.errors);
-        return setErrors(res.user.errors);
+    return dispatch(addClient(clientDetails)).then((res) => {
+      if (!res.ok && res.errors) {
+        // console.log(res.errors);
+        return setErrors(res.errors);
       }
       return history.push("/");
     });
@@ -41,9 +41,18 @@ export default function ClientForm() {
   return (
     <div className="flex  bg-ghost justify-center mx-auto w-full px-4">
       <div>
-        {errors.map((error) => (
-          <div>{error}</div>
-        ))}
+        {errors && (
+          <ul className="mx-auto p-4 bg-red-100 text-red-900 border-2 border-red-900 rounded">
+            <div className="font-semibold">
+              Please correct the following errors:
+            </div>
+            {errors.map((error, i) => (
+              <li className="list-disc list-inside" key={i}>
+                {error}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       <form
         onSubmit={createClient}
