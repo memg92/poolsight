@@ -9,7 +9,6 @@ export default function Dashboard() {
   const pools = state.poolAPI.pools ? state.poolAPI.pools : null;
 
   const [loaded, setLoaded] = useState(false);
-  const [error, setError] = useState("");
   const dispatch = useDispatch();
 
   // console.log(loaded, pools);
@@ -17,8 +16,6 @@ export default function Dashboard() {
     dispatch(getPools(user.id)).then((res) => {
       if (!res.error) {
         setLoaded(true);
-      } else {
-        setError(res.error);
       }
     });
   }, [dispatch]);
@@ -26,22 +23,23 @@ export default function Dashboard() {
   const days = ["M", "T", "W", "R", "F"];
 
   return loaded ? (
-    <>
+    <div className="h-screen">
       <div className="p-2 mx-4 mt-6 mb-2 text-3xl text-pnavy font-bold shadow-sm">
         My Routes
       </div>
       {days.map((day) => {
         return <DayCard day={day} key={day} pools={pools} />;
       })}
-    </>
+    </div>
   ) : (
-    <>
+    <div className="h-screen">
       <div className="p-2 mx-4 mt-6 mb-2 text-3xl text-pnavy font-bold shadow-sm">
         My Routes
       </div>
-      {days.map((day) => {
-        return <DayCard day={day} key={day} pools={pools} />;
-      })}
-    </>
+      <div className="flex flex-col items-center mt-20 text-pnavy text-4xl">
+        <div className="pb-2">Loading...</div>
+        <i className="fas fa-spinner animate-spin"></i>
+      </div>
+    </div>
   );
 }
