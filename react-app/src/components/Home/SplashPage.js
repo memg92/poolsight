@@ -1,44 +1,78 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import dashboard from "../../assets/GIFs/dashboard.gif";
-import newclient from "../../assets/GIFs/newclient.gif";
-import newtask from "../../assets/GIFs/newtask.gif";
+import dashboard from "../../assets/dashboard.mov";
+import repairhistory from "../../assets/repairhistory.mov";
 
 export default function SplashPage() {
+  const video1 = document.querySelector(".myvideo1");
+  const video2 = document.querySelector(".myvideo2");
+
+  const playVideo = (e) => {
+    e.target.play();
+    console.log("play");
+  };
+  const pauseVideo = (e) => {
+    e.target.pause();
+    console.log("pause");
+  };
+  // const playVideoTwo = (e) => {
+  //   video2.play();
+  // };
+  // const pauseVideoTwo = (e) => {
+  //   video2.pause();
+  // };
+
   return (
-    <div className="mx-auto py-10 bg-pblue ">
-      <div className="flex px-40 py-6 items-center justify-center bg-pblue bg-opacity-80 text-ghost">
-        <div className="px-8">
-          <h1 className="text-2xl font-semibold">
+    <div className="mx-auto h-auto  bg-pblue bg-opacity-70">
+      <div className="xl:flex px-20 py-8 items-center justify-center  text-ghost border-b-4 border-pnavy border-opacity-50">
+        <div className="px-4 py-6 text-center">
+          <h1 className="text-2xl py-2 font-semibold">
             View all of your clients in an easy-to-use Dashboard!
           </h1>
-          <NavLink to="/signup">Learn More</NavLink>
+          <NavLink
+            to="/signup"
+            className="p-2 hover:bg-pnavy hover:bg-opacity-80 underline rounded-lg"
+          >
+            Learn More
+          </NavLink>
         </div>
-        <div>
-          <img src={dashboard} alt="Dashboard" className="w-auto h-56" />
+        <div className="pb-6">
+          <video
+            src={dashboard}
+            loop
+            muted
+            playsInline
+            onMouseOver={playVideo}
+            onMouseOut={pauseVideo}
+            alt="Dashboard"
+            className="mx-auto max-w-2xl h-auto shadow-lg rounded-lg border-2 border-pnavy"
+          />
         </div>
       </div>
-      <div className="flex px-40 py-6 items-center justify-evenly bg-ghost text-pnavy">
-        <div>
-          <img src={newclient} alt="Dashboard" className="w-auto h-56" />
+      <div className="xl:flex px-20 py-8 items-center justify-evenly text-ghost">
+        <div className="pt-6">
+          <video
+            src={repairhistory}
+            loop
+            muted
+            playsInline
+            onMouseOver={playVideo}
+            onMouseOut={pauseVideo}
+            alt="Dashboard"
+            className="mx-auto max-w-2xl h-auto shadow-lg rounded-lg border-2 border-pnavy"
+          />
         </div>
-        <div className="px-8">
-          <h1 className="text-2xl font-semibold">
-            Easily add your clients, including all their relevant pool details
+        <div className="px-4 py-6 text-center">
+          <h1 className="text-2xl py-2 font-semibold">
+            Easily add your clients and keep track of their pools, including
+            repairs!
           </h1>
-          <NavLink to="/signup">Learn More</NavLink>
-        </div>
-      </div>
-      <div className="flex px-40 py-6 items-center justify-evenly bg-pblue bg-opacity-80 text-ghost">
-        <div className="px-8">
-          <h1 className="text-2xl font-semibold">
-            Keep track of all of your repairs for each client, all in the palm
-            of your hand!
-          </h1>
-          <NavLink to="/signup">Learn More</NavLink>
-        </div>
-        <div>
-          <img src={newtask} alt="Dashboard" className="w-auto h-56" />
+          <NavLink
+            to="/signup"
+            className="p-2 hover:bg-pnavy hover:bg-opacity-80 underline rounded-lg"
+          >
+            Learn More
+          </NavLink>
         </div>
       </div>
     </div>
