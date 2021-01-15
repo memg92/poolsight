@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import RepairDetails from "./RepairDetails";
 import { deleteRepair } from "../../../../store/repairs";

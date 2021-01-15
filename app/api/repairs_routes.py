@@ -95,7 +95,7 @@ def get_repairs(client_id):
             client_id=client_id).order_by(Repair.updated_at.desc()).all()
 
         # check if client has repairs
-        print(repairs)
+        # print(repairs)
         if repairs:
             return {"repairs": [repair.to_dict_client() for repair in repairs]}
         return {"error": "Client has no repairs"}

@@ -32,7 +32,6 @@ def get_all_clients():
     if(user.id):
         clients = Client.query.filter_by(user_id=user_id).all()
         client_data = [client.to_dict() for client in clients]
-        print("\n\n\n", client_data, "\n\n\n")
         if clients:
             return {"clients": client_data}
         return {"error": "No clients found"}
@@ -118,7 +117,6 @@ def edit_client(client_id):
 @ login_required
 def delete_client(client_id):
     client = Client.query.get(client_id)
-    print('\n\n\'client:', client.pools, '\n\n\n')
     if client is not None:
         db.session.delete(client)
         db.session.commit()

@@ -17,7 +17,7 @@ export default function Dashboard() {
         setLoaded(true);
       }
     });
-  }, [dispatch]);
+  }, [dispatch, user.id]);
 
   const days = ["M", "T", "W", "R", "F"];
 

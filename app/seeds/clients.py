@@ -1,4 +1,4 @@
-from app.models import db, Client
+from app.models import db, User, Client
 from faker import Faker
 
 
@@ -6,10 +6,14 @@ fake = Faker()
 
 
 def seed_clients():
+    try:
+        user = User.query.first()
+    except:
+        user = {id: 1}
 
     for i in range(12):
         client = Client(
-            user_id=1,
+            user_id=user.id,
             firstname=fake.first_name(),
             lastname=fake.last_name(),
             street=fake.street_address(),
@@ -25,7 +29,7 @@ def seed_clients():
 
     for i in range(12):
         client = Client(
-            user_id=1,
+            user_id=user.id,
             firstname=fake.first_name(),
             lastname=fake.last_name(),
             street=fake.street_address(),
@@ -41,7 +45,7 @@ def seed_clients():
 
     for i in range(12):
         client = Client(
-            user_id=1,
+            user_id=user.id,
             firstname=fake.first_name(),
             lastname=fake.last_name(),
             street=fake.street_address(),
@@ -57,7 +61,7 @@ def seed_clients():
 
     for i in range(12):
         client = Client(
-            user_id=1,
+            user_id=user.id,
             firstname=fake.first_name(),
             lastname=fake.last_name(),
             street=fake.street_address(),
@@ -73,7 +77,7 @@ def seed_clients():
 
     for i in range(12):
         client = Client(
-            user_id=1,
+            user_id=user.id,
             firstname=fake.first_name(),
             lastname=fake.last_name(),
             street=fake.street_address(),
@@ -95,5 +99,6 @@ def seed_clients():
 
 
 def undo_clients():
-    db.session.execute('TRUNCATE clients;')
+    db.session.execute(
+        'TRUNCATE TABLE users, clients, pools, repairs, tasks, equipment CASCADE;')
     db.session.commit()

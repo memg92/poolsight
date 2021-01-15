@@ -6,7 +6,7 @@ from app.models import User
 
 def username_exists(form, field):
     print("Checking if user exits", form.data)
-    print(form.data)
+    # print(form.data)
     username = field.data
     user = User.query.filter(User.username == username).first()
     if user:
@@ -15,7 +15,7 @@ def username_exists(form, field):
 
 def email_exists(form, field):
     print("Checking if user exits", form.data)
-    print(form.data)
+    # print(form.data)
     email = field.data
     user = User.query.filter(User.email == email).first()
     if user:

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { deleteClient } from "../../../store/clients";
 import EditClientForm from "./EditClientForm";
 

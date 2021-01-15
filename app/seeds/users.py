@@ -20,5 +20,6 @@ def seed_users():
 
 
 def undo_users():
-    db.session.execute('TRUNCATE users;')
+    db.session.execute(
+        'TRUNCATE TABLE users, clients, pools, repairs, tasks, equipment CASCADE;')
     db.session.commit()

@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteRepair } from "../../../../store/repairs";
-import { dateFormatter } from "../../../../services/utils";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import TaskCard from "../Tasks/TaskCard";
 import NewTaskForm from "../Tasks/NewTaskForm";
 import EditTaskForm from "../Tasks/EditTaskForm";

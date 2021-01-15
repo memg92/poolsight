@@ -1,4 +1,4 @@
-from app.models import db, Pool
+from app.models import db, Pool, User, Client
 from faker import Faker
 
 
@@ -6,11 +6,17 @@ fake = Faker()
 
 
 def seed_pools():
+    try:
+        client = Client.query.first()
+        user = User.query.first()
+    except:
+        client = {id: 1}
+        user = {id: 1}
 
     for i in range(10):
         pool = Pool(
-            user_id=1,
-            client_id=i + 1,
+            user_id=user.id,
+            client_id=i + client.id,
             street=fake.street_address(),
             city=fake.city(),
             state="FL",
@@ -18,7 +24,8 @@ def seed_pools():
             property_type="Residential",
             monthly_rate=80,
             service_day="M",
-            filter_changed=fake.date_time(),
+            filter_changed=fake.date_between(
+                start_date='-5y', end_date='today'),
             created_at=fake.date_time(),
             updated_at=fake.date_time(),
         )
@@ -27,8 +34,8 @@ def seed_pools():
 
     for i in range(11, 20):
         pool = Pool(
-            user_id=1,
-            client_id=i + 1,
+            user_id=user.id,
+            client_id=i + client.id,
             street=fake.street_address(),
             city=fake.city(),
             state="FL",
@@ -36,7 +43,8 @@ def seed_pools():
             property_type="Commercial",
             monthly_rate=80,
             service_day="T",
-            filter_changed=fake.date_time(),
+            filter_changed=fake.date_between(
+                start_date='-5y', end_date='today'),
             created_at=fake.date_time(),
             updated_at=fake.date_time(),
         )
@@ -45,8 +53,8 @@ def seed_pools():
 
     for i in range(21, 30):
         pool = Pool(
-            user_id=1,
-            client_id=i + 1,
+            user_id=user.id,
+            client_id=i + client.id,
             street=fake.street_address(),
             city=fake.city(),
             state="FL",
@@ -54,7 +62,8 @@ def seed_pools():
             property_type="Residential",
             monthly_rate=80,
             service_day="W",
-            filter_changed=fake.date_time(),
+            filter_changed=fake.date_between(
+                start_date='-5y', end_date='today'),
             created_at=fake.date_time(),
             updated_at=fake.date_time(),
         )
@@ -63,8 +72,8 @@ def seed_pools():
 
     for i in range(31, 40):
         pool = Pool(
-            user_id=1,
-            client_id=i + 1,
+            user_id=user.id,
+            client_id=i + client.id,
             street=fake.street_address(),
             city=fake.city(),
             state="FL",
@@ -72,7 +81,8 @@ def seed_pools():
             property_type="Residential",
             monthly_rate=85,
             service_day="R",
-            filter_changed=fake.date_time(),
+            filter_changed=fake.date_between(
+                start_date='-5y', end_date='today'),
             created_at=fake.date_time(),
             updated_at=fake.date_time(),
         )
@@ -81,8 +91,8 @@ def seed_pools():
 
     for i in range(41, 50):
         pool = Pool(
-            user_id=1,
-            client_id=i + 1,
+            user_id=user.id,
+            client_id=i + client.id,
             street=fake.street_address(),
             city=fake.city(),
             state="FL",
@@ -90,7 +100,8 @@ def seed_pools():
             property_type="Commercial",
             monthly_rate=75,
             service_day="F",
-            filter_changed=fake.date_time(),
+            filter_changed=fake.date_between(
+                start_date='-5y', end_date='today'),
             created_at=fake.date_time(),
             updated_at=fake.date_time(),
         )

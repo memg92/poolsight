@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
-import LogoutButton from "../auth/LogoutButton";
 import MenuButton from "./MenuButton";
 
 const NavBar = () => {

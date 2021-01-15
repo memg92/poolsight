@@ -26,7 +26,7 @@ export default function ClientProfile() {
         setErrors(res.error);
       }
     });
-  }, [dispatch]);
+  }, [dispatch, clientId]);
 
   return loaded ? (
     <div className="h-full mb-10">

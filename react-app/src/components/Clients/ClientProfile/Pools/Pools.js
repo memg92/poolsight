@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import NewPoolForm from "./NewPoolForm";
 import PoolDetails from "./PoolDetails";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function Pools() {
   const [formOpen, setFormOpen] = useState(false);
