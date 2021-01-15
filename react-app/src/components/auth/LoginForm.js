@@ -4,7 +4,7 @@ import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 
 const LoginForm = () => {
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const user = useSelector((state) => state.session.user);
@@ -16,9 +16,10 @@ const LoginForm = () => {
   }
   const onLogin = async (e) => {
     e.preventDefault();
-    return dispatch(login(email, password)).catch((res) => {
-      if (res.user && res.user.errors) {
-        return setErrors(res.user.errors);
+    return dispatch(login(email, password)).then((res) => {
+      console.log(res);
+      if (!res.ok && res.errors) {
+        return setErrors(res.errors);
       }
       return history.push("/");
     });
@@ -37,8 +38,8 @@ const LoginForm = () => {
 
     return dispatch(login(emailField.value, passwordField.value)).catch(
       (res) => {
-        if (res.user && res.user.errors) {
-          return setErrors(res.user.errors);
+        if (!res.ok && res.errors) {
+          return setErrors(res.errors);
         }
         return history.push("/");
       }
@@ -54,15 +55,24 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="flex bg-ghost justify-center h-screen mx-auto  w-full px-4">
-      <div>
-        {errors.map((error) => (
-          <div>{error}</div>
-        ))}
+    <div className="flex flex-col bg-ghost items-center h-screen mx-auto  w-full px-4">
+      <div className="mt-20 mb-5 max-w-md w-full">
+        {errors && (
+          <ul className="mx-auto p-4 bg-red-100 text-red-900 border-2 border-red-900 rounded">
+            <div className="font-semibold">
+              Please correct the following errors:
+            </div>
+            {errors.map((error, i) => (
+              <li className="list-disc list-inside" key={i}>
+                {error}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       <form
         onSubmit={onLogin}
-        className="flex flex-col max-w-md w-full mt-20 mb-auto shadow-lg justify-center bg-white"
+        className="flex flex-col max-w-md w-full mb-auto shadow-lg justify-center bg-white"
       >
         <div className="flex justify-center w-full p-2 mx-0 mb-2 bg-ghost border-2 border-opacity-90">
           <span className="pr-2">Don't have an account? </span>

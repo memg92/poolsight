@@ -9,6 +9,7 @@ import { authenticate } from "./store/session";
 import HomeManager from "./components/Home/HomeManager";
 import ClientForm from "./components/Clients/ClientForm/ClientForm";
 import ClientProfile from "./components/Clients/ClientProfile/ClientProfile";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function App() {
       <Switch>
         <Route path="/" exact={true}>
           {loaded && <HomeManager />}
+          <Footer />
         </Route>
         <Route path="/login" exact={true}>
           <LoginForm />
