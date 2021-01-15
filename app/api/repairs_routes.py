@@ -49,7 +49,7 @@ def create_repair():
     user = current_user
     if not user:
         return {'error': 'Unauthorized'}, 401
-    # print('\n\n\n form:', form.validate_on_submit(), form.errors, '\n\n\n')
+
     if form.validate_on_submit():
         # make sure pool exists
         pool = Pool.query.get(form.data['poolId'])
@@ -59,7 +59,7 @@ def create_repair():
                 title=form.data['title'],
                 description=form.data['description'],
             )
-            # print('\n\n\n repair:', repair.to_dict(), '\n\n\n')
+
             db.session.add(repair)
             db.session.commit()
             return {'repair': repair.to_dict()}

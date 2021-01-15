@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import StateOptions from "../ClientForm/StateOptions";
 import { editClient } from "../../../store/clients";
-import { useHistory } from "react-router-dom";
 
 export default function EditClientForm({
   showClientModal,
@@ -73,6 +72,7 @@ export default function EditClientForm({
                   <input
                     className="form-input text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 "
                     type="text"
+                    required
                     value={firstname}
                     onChange={(e) => setFirstname(e.target.value)}
                   />
@@ -82,6 +82,7 @@ export default function EditClientForm({
                   <input
                     className="form-input text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50"
                     type="text"
+                    required
                     value={lastname}
                     onChange={(e) => setLastname(e.target.value)}
                   />
@@ -91,6 +92,7 @@ export default function EditClientForm({
               <input
                 className="form-input text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50"
                 type="text"
+                required
                 value={street}
                 onChange={(e) => setStreet(e.target.value)}
               />
@@ -101,6 +103,7 @@ export default function EditClientForm({
                   <input
                     className="form-input text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50"
                     type="text"
+                    required
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
                   />
@@ -110,6 +113,7 @@ export default function EditClientForm({
                   <select
                     className="form-select text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50"
                     type="text"
+                    required
                     value={state}
                     onChange={(e) => setState(e.target.value)}
                   >
@@ -123,6 +127,7 @@ export default function EditClientForm({
                   <input
                     className="form-input text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50"
                     type="email"
+                    required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -132,6 +137,7 @@ export default function EditClientForm({
                   <input
                     className="form-input text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50"
                     type="text"
+                    required
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                   />

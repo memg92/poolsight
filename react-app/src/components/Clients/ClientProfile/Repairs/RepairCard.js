@@ -46,7 +46,11 @@ export default function RepairCard({ repair }) {
           className="flex justify-between w-full px-4 pt-1  items-center pb-2 cursor-pointer"
         >
           <div className="flex items-center">
-            <i className="fas fa-chevron-circle-down pr-3 text-pnavy"></i>
+            <i
+              className={`fas ${
+                showDetails ? "fa-chevron-circle-up" : "fa-chevron-circle-down"
+              } pr-3 text-pnavy`}
+            ></i>
             <div className="pr-3 font-medium">
               {dateFormatter(repair.created_at)}
             </div>

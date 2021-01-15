@@ -1,9 +1,6 @@
-import { useSelector } from "react-redux";
-
 const GET_ALL_CLIENTS = "clients/get-all-clients";
 const ADD_CLIENT = "clients/add-client";
 const EDIT_CLIENT = "clients/edit-client";
-// const user = useSelector((state) => state.session.user);
 
 export const getAllClients = (clientsDetail) => {
   return {

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Redirect, useHistory, NavLink } from "react-router-dom";
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
+import MultiErrorHandler from "../Errors/MultiErrorHandler";
 
 const LoginForm = () => {
   const [errors, setErrors] = useState("");
@@ -56,18 +57,7 @@ const LoginForm = () => {
   return (
     <div className="flex flex-col bg-ghost items-center h-screen mx-auto  w-full px-4">
       <div className="mt-20 mb-5 max-w-md w-full">
-        {errors && (
-          <ul className="mx-auto p-4 bg-red-100 text-red-900 border-2 border-red-900 rounded">
-            <div className="font-semibold">
-              Please correct the following errors:
-            </div>
-            {errors.map((error, i) => (
-              <li className="list-disc list-inside" key={i}>
-                {error}
-              </li>
-            ))}
-          </ul>
-        )}
+        {errors && <MultiErrorHandler errors={errors} />}
       </div>
       <form
         onSubmit={onLogin}

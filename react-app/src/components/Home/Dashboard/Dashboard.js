@@ -23,7 +23,7 @@ export default function Dashboard() {
 
   return loaded ? (
     <div className="h-screen">
-      <div className="p-2 mx-4 mt-6 mb-2 text-3xl text-pnavy font-bold shadow-sm">
+      <div className="p-2 mx-4 mt-6 mb-2 text-3xl text-pnavy font-bold shadow-md rounded-lg">
         My Routes
       </div>
       {days.map((day) => {

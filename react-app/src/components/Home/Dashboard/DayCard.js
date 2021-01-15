@@ -73,7 +73,11 @@ export default function DayCard({ day, pools }) {
         <div className={"ml-4 text-ghost text-xl w-full"}>
           {weekdays[day][1]}
         </div>
-        <i className="fas fa-chevron-circle-down mr-4 text-pnavy"></i>
+        <i
+          className={`fas ${
+            showTable ? "fa-chevron-circle-up" : "fa-chevron-circle-down"
+          } mr-4 text-pnavy`}
+        ></i>
       </div>
       {showTable && (
         <div className="mx-4">

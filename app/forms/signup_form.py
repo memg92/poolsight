@@ -32,4 +32,4 @@ class SignUpForm(FlaskForm):
     )], choices=[('admin', 'Admin'), ('tech', 'Technician')])
 
     password = StringField('password', validators=[DataRequired(), Length(
-        min=6, max=12, message=f'Password must be between {min} and {max} characters long')])
+        min=6, max=12, message=f'Password must be between %(min)d and %(max)d characters long')])

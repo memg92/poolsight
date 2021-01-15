@@ -7,7 +7,6 @@ import EditClientForm from "./EditClientForm";
 export default function ClientSummary({ showClientModal, setShowClientModal }) {
   const dispatch = useDispatch();
   const client = useSelector((state) => state.clientAPI.client);
-  const history = useHistory();
   const [error, setError] = useState("");
 
   const closeModal = () => {
@@ -34,6 +33,16 @@ export default function ClientSummary({ showClientModal, setShowClientModal }) {
   return (
     client && (
       <div className="shadow-xl mb-4 mt-10 p-6 text-pnavy text-opacity-90 max-w-4xl w-full">
+        <div className="w-full">
+          {error && (
+            <ul className="mx-auto m-4 p-4 bg-red-100 text-red-900 border-2 border-red-900 rounded">
+              <div className="font-semibold">
+                We encountered the following error:
+              </div>
+              <li className="list-disc list-inside">{error}</li>
+            </ul>
+          )}
+        </div>
         <div className="flex justify-between items-center pb-4">
           <h1 className="text-3xl font-semibold">{`${client.firstname} ${client.lastname}`}</h1>
           <div className="flex">

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addClient, deleteClient } from "../../../store/clients";
 import StateOptions from "./StateOptions";
 import { createClientPool } from "../../../store/pools";
-import { dateFormatter } from "../../../services/utils";
+import MultiErrorHandler from "../../Errors/MultiErrorHandler";
 
 export default function ClientForm() {
   const [errors, setErrors] = useState("");
@@ -22,7 +22,7 @@ export default function ClientForm() {
   const [propertyType, setPropertyType] = useState("Residential");
   const [serviceDay, setServiceDay] = useState("M");
   const [monthlyRate, setMonthlyRate] = useState("");
-  const [filterChanged, setFilterChanged] = useState(dateFormatter(new Date()));
+  const [filterChanged, setFilterChanged] = useState("");
   const [checked, setChecked] = useState(false);
 
   const history = useHistory();
@@ -77,20 +77,9 @@ export default function ClientForm() {
   };
 
   return (
-    <div className="flex flex-col bg-ghost h-screen items-center mx-auto w-full px-4 pb-10">
+    <div className="flex flex-col bg-ghost items-center mx-auto w-full px-4 pb-10">
       <div className="mt-10 max-w-lg w-full">
-        {errors && (
-          <ul className="mx-auto m-4 p-4 bg-red-100 text-red-900 border-2 border-red-900 rounded">
-            <div className="font-semibold">
-              Please correct the following errors:
-            </div>
-            {errors.map((error, i) => (
-              <li className="list-disc list-inside" key={i}>
-                {error}
-              </li>
-            ))}
-          </ul>
-        )}
+        {errors && <MultiErrorHandler errors={errors} />}
       </div>
       <form
         onSubmit={createClient}
