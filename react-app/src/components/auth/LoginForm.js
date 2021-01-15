@@ -54,7 +54,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="flex  bg-ghost justify-center mx-auto  w-full px-4">
+    <div className="flex bg-ghost justify-center h-screen mx-auto  w-full px-4">
       <div>
         {errors.map((error) => (
           <div>{error}</div>
@@ -62,7 +62,7 @@ const LoginForm = () => {
       </div>
       <form
         onSubmit={onLogin}
-        className="flex flex-col max-w-md w-full h-auto my-20 shadow-lg justify-center bg-white"
+        className="flex flex-col max-w-md w-full mt-20 mb-auto shadow-lg justify-center bg-white"
       >
         <div className="flex justify-center w-full p-2 mx-0 mb-2 bg-ghost border-2 border-opacity-90">
           <span className="pr-2">Don't have an account? </span>

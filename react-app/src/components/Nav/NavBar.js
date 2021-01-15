@@ -34,7 +34,7 @@ const NavBar = () => {
         </NavLink>
         <div
           onClick={openMenu}
-          className="relative mx-4 p-2  transition duration-200 ease-in-out cursor-pointer hover:bg-pblue rounded"
+          className="relative mx-4 p-2 z-0 transition duration-200 ease-in-out cursor-pointer hover:bg-pblue rounded"
         >
           <i className="fas fa-water text-5xl md:text-3xl text-ghost"></i>
           {showMenu && <MenuButton />}

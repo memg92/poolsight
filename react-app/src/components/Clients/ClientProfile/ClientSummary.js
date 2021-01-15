@@ -33,7 +33,7 @@ export default function ClientSummary({ showClientModal, setShowClientModal }) {
 
   return (
     client && (
-      <div className="shadow-xl my-4 p-6 text-pnavy text-opacity-90 max-w-4xl w-full">
+      <div className="shadow-xl mb-4 mt-10 p-6 text-pnavy text-opacity-90 max-w-4xl w-full">
         <div className="flex justify-between items-center pb-4">
           <h1 className="text-3xl font-semibold">{`${client.firstname} ${client.lastname}`}</h1>
           <div className="flex">

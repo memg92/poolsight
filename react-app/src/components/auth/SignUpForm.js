@@ -4,10 +4,10 @@ import { signUp } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 
 const SignUpForm = () => {
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState("tech");
+  const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const dispatch = useDispatch();
@@ -21,14 +21,15 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      return dispatch(signUp(username, email, role, password)).catch((res) => {
-        if (res.user && res.user.errors) {
-          console.log(res.user.errors);
-          return setErrors(res.user.errors);
+      return dispatch(signUp(username, email, role, password)).then((res) => {
+        console.log(res);
+        if (!res.ok && res.errors) {
+          return setErrors(res.errors);
         }
         return history.push("/");
       });
     }
+    return setErrors(["Password: your password did not match"]);
   };
 
   const updateUsername = (e) => {
@@ -51,15 +52,24 @@ const SignUpForm = () => {
   };
   // border-gray-400 border-2 border-opacity-5
   return (
-    <div className="flex  bg-ghost justify-center mx-auto w-full px-4">
-      <div>
-        {errors.map((error) => (
-          <div>{error}</div>
-        ))}
+    <div className="flex flex-col h-screen bg-ghost items-center mx-auto w-full px-4">
+      <div className="mt-20 mb-5 max-w-md w-full">
+        {errors && (
+          <ul className="mx-auto  p-4 bg-red-100 text-red-900 border-2 border-red-900 rounded">
+            <div className="font-semibold">
+              Please correct the following errors:
+            </div>
+            {errors.map((error, i) => (
+              <li className="list-disc list-inside" key={i}>
+                {error}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       <form
         onSubmit={onSignUp}
-        className="flex flex-col max-w-md w-full h-auto my-20 shadow-lg justify-center bg-white"
+        className="flex flex-col max-w-md w-full mb-auto shadow-lg justify-center bg-white"
       >
         <div className="flex justify-center w-full p-2 mx-0 mb-2 bg-ghost border-2 border-opacity-90">
           <span className="pr-2">Already have an account? </span>
@@ -89,6 +99,9 @@ const SignUpForm = () => {
           value={role}
           onChange={updateRole}
         >
+          <option value="" defaultValue disabled>
+            Select Role
+          </option>
           <option value="tech">Technician</option>
           <option value="admin">Admin</option>
         </select>

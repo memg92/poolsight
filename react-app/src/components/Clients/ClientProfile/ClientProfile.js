@@ -29,7 +29,7 @@ export default function ClientProfile() {
   // console.log("clients:", client);
   return (
     loaded && (
-      <div className="h-screen">
+      <div className="h-screen z-0">
         <div className="flex flex-col items-center mx-auto max-w-4xl">
           <div className="w-full">
             {errors && (

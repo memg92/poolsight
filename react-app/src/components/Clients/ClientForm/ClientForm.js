@@ -77,7 +77,7 @@ export default function ClientForm() {
   };
 
   return (
-    <div className="flex flex-col bg-ghost h-full items-center mx-auto w-full px-4">
+    <div className="flex flex-col bg-ghost h-full items-center mx-auto w-full px-4 pb-10">
       <div className="mt-10 max-w-lg w-full">
         {errors && (
           <ul className="mx-auto m-4 p-4 bg-red-100 text-red-900 border-2 border-red-900 rounded">
@@ -94,7 +94,7 @@ export default function ClientForm() {
       </div>
       <form
         onSubmit={createClient}
-        className="flex flex-col max-w-lg w-full  mb-auto shadow-lg justify-center bg-white"
+        className="flex flex-col max-w-lg w-full shadow-lg justify-center bg-white"
       >
         <div className="p-3 text-2xl">New Client</div>
         <div className="flex">
