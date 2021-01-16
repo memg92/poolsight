@@ -1,8 +1,8 @@
-"""adding PK constraint to client_id in Pool model
+"""dropped db and remigrating all tables
 
-Revision ID: 896308c3b006
-Revises: 756fc62c64cc
-Create Date: 2021-01-09 16:06:01.200370
+Revision ID: a78b3571e6e4
+Revises: 
+Create Date: 2021-01-15 21:18:31.210113
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '896308c3b006'
-down_revision = '756fc62c64cc'
+revision = 'a78b3571e6e4'
+down_revision = None
 branch_labels = None
 depends_on = None
 
@@ -61,7 +61,7 @@ def upgrade():
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['client_id'], ['clients.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id', 'client_id')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('equipment',
     sa.Column('id', sa.Integer(), nullable=False),
