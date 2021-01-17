@@ -16,8 +16,10 @@ def seed_repairs():
             pool_id=i + pool.id,
             title='Underwater Lights',
             description='Client reported broken lights. Replacing with new ones.',
-            created_at=fake.date_time(),
-            updated_at=fake.date_time(),
+            created_at=fake.date_between(
+                start_date='-3y', end_date='today'),
+            updated_at=fake.date_between(
+                start_date='-3y', end_date='today'),
         )
         db.session.add(repair)
         db.session.commit()
@@ -27,8 +29,10 @@ def seed_repairs():
             pool_id=i + pool.id,
             title='Underwater Lights',
             description='Client reported broken lights. Replacing with new ones.',
-            created_at=fake.date_time(),
-            updated_at=fake.date_time(),
+            created_at=fake.date_between(
+                start_date='-3y', end_date='today'),
+            updated_at=fake.date_between(
+                start_date='-3y', end_date='today'),
 
         )
         db.session.add(repair)
@@ -39,8 +43,10 @@ def seed_repairs():
             pool_id=i + pool.id,
             title='Underwater Lights',
             description='Client reported broken lights. Replacing with new ones.',
-            created_at=fake.date_time(),
-            updated_at=fake.date_time(),
+            created_at=fake.date_between(
+                start_date='-3y', end_date='today'),
+            updated_at=fake.date_between(
+                start_date='-3y', end_date='today'),
 
         )
         db.session.add(repair)
@@ -51,8 +57,10 @@ def seed_repairs():
             pool_id=i + pool.id,
             title='Underwater Lights',
             description='Client reported broken lights. Replacing with new ones.',
-            created_at=fake.date_time(),
-            updated_at=fake.date_time(),
+            created_at=fake.date_between(
+                start_date='-3y', end_date='today'),
+            updated_at=fake.date_between(
+                start_date='-3y', end_date='today'),
 
         )
         db.session.add(repair)

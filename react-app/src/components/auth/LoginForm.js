@@ -36,7 +36,7 @@ const LoginForm = () => {
     emailField.value = "demo@email.com";
     passwordField.value = "password";
 
-    return dispatch(login(emailField.value, passwordField.value)).catch(
+    return dispatch(login(emailField.value, passwordField.value)).then(
       (res) => {
         if (!res.ok && res.errors) {
           return setErrors(res.errors);
