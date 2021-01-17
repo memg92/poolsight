@@ -20,7 +20,7 @@ def seed_tasks():
             cost='60',
             description='Replaced lights, charging cost plus',
             created_at=fake.date_between(
-                start_date='-3y', end_date='today'),
+                start_date='-1y', end_date='today'),
             updated_at=fake.date_time(),
         )
         db.session.add(task)
