@@ -1,12 +1,21 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { getPools } from "../../store/pools";
 import Suggestions from "./Suggestions";
 
 export default function SearchForm({ setSearchOpen }) {
   const pools = useSelector((state) => state.poolAPI.pools);
+  const user = useSelector((state) => state.session.user);
   const [searchInput, setSearchInput] = useState("");
   const [searching, setSearching] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
+  const location = useLocation();
+  const dispatch = useDispatch();
+
+  if (!pools.length && location.pathname !== "/") {
+    dispatch(getPools(user.id));
+  }
 
   //helper function to deal with multiple keywords
   const myIncludes = (target, keywords) => {
@@ -55,13 +64,16 @@ export default function SearchForm({ setSearchOpen }) {
   };
 
   return (
-    <form className="relative w-full mx-2">
+    <form
+      className="relative z-10 w-full mx-2"
+      onSubmit={(e) => e.preventDefault()}
+    >
       <input
         type="text"
         placeholder="Search client..."
         onChange={handleSearchInput}
         value={searchInput}
-        className="form-input w-full rounded-lg"
+        className="form-input text-pnavy w-full focus:bg-blue-100 focus:border-pblue border-2 rounded-lg"
       />
       {searching && (
         <Suggestions suggestions={suggestions} setSearchOpen={setSearchOpen} />

@@ -47,7 +47,7 @@ export default function ClientProfile() {
       </div>
     </div>
   ) : (
-    <div className="h-screen z-0">
+    <div className="h-screen">
       <div className="flex flex-col items-center mx-auto max-w-4xl">
         <LoadingClient />
         <LoadingPools />
