@@ -1,8 +1,9 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import Client, Pool, Repair, db
+from app.models import Client, Pool, Repair, Task, db
 from flask_login import current_user, login_required
 from app.forms import NewPoolForm
 from sqlalchemy.orm import joinedload
+from sqlalchemy import or_
 
 pools_routes = Blueprint('pools', __name__)
 
@@ -85,6 +86,35 @@ def get_pools(client_id):
         if pools:
             return {"pools": [pool.to_dict_full() for pool in pools]}
         return {"error": "No pools matched client ID"}
+    return {"error": "Unauthorized"}, 401
+
+
+@ pools_routes.route('/search/<query>')
+@ login_required
+def search_pools(query):
+    """
+    /api/pools/search/<query> searches pool, client, repair, and task tables for key words
+    """
+    user = current_user
+    if user.id:
+        # repair_data = Repair.query.join(Repair.tasks).filter(or_(Repair.title.ilike(f"%{query}%"), Repair.description.ilike(
+        #     f"%{query}%"), Task.title.ilike(f"%{query}%"), Task.description.ilike(f"%{query}%"))).order_by(Repair.updated_at.desc()).all()
+
+        repair_data = Repair.query.filter(or_(Repair.title.ilike(f"%{query}%"), Repair.description.ilike(
+            f"%{query}%"))).order_by(Repair.updated_at.desc()).all()
+
+        pool_data = Pool.query.join(Pool.client).filter(or_(Client.firstname.ilike(f"%{query}%"), Client.lastname.ilike(
+            f"%{query}%"), Client.street.ilike(f"%{query}%"), Client.city.ilike(f"%{query}%"))).order_by(Pool.updated_at.desc()).all()
+
+        data = {}
+        print('\n\n\n repairs:', repair_data, '\n\n\n')
+        if repair_data:
+            data["repairs"] = [repair.to_dict_full() for repair in repair_data]
+        if pool_data:
+            data["pools"] = [pool.to_dict_full() for pool in pool_data]
+        if data:
+            return {"data": data}
+        return {"error": "No matches found"}
     return {"error": "Unauthorized"}, 401
 
 

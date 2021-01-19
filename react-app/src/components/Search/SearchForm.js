@@ -63,11 +63,16 @@ export default function SearchForm({ setSearchOpen }) {
     setSuggestions(results);
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let searchQuery = searchInput.replace(/\s/g, "");
+    let res = await fetch(`/api/pools/search/${searchQuery}`);
+    let data = await res.json();
+    console.log(data);
+  };
+
   return (
-    <form
-      className="relative z-10 w-full mx-2"
-      onSubmit={(e) => e.preventDefault()}
-    >
+    <form className="relative z-10 w-full mx-2" onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Search client..."
