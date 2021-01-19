@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, session, request
 from app.models import Client, Pool, Repair, Task, db
 from flask_login import current_user, login_required
 from app.forms import NewPoolForm
+from itertools import chain
 from sqlalchemy.orm import joinedload
 from sqlalchemy import or_
 
@@ -97,17 +98,34 @@ def search_pools(query):
     """
     user = current_user
     if user.id:
-        # repair_data = Repair.query.join(Repair.tasks).filter(or_(Repair.title.ilike(f"%{query}%"), Repair.description.ilike(
-        #     f"%{query}%"), Task.title.ilike(f"%{query}%"), Task.description.ilike(f"%{query}%"))).order_by(Repair.updated_at.desc()).all()
+        # check if query has multiple words
+        if query.find('+') != -1:
 
-        repair_data = Repair.query.filter(or_(Repair.title.ilike(f"%{query}%"), Repair.description.ilike(
-            f"%{query}%"))).order_by(Repair.updated_at.desc()).all()
+            # split query into multiple keywords
+            keywords = query.split('+')
+            # filters for each word if there are multiple keywords
+            repair_filter = list(chain.from_iterable((Repair.title.ilike(
+                f'%{keyword}%'), Repair.description.ilike(
+                f'%{keyword}%')) for keyword in keywords))
+            client_filter = list(chain.from_iterable((Client.firstname.ilike(
+                f'%{keyword}%'), Client.lastname.ilike(
+                f'%{keyword}%'), Client.street.ilike(
+                f'%{keyword}%'), Client.city.ilike(
+                f'%{keyword}%')) for keyword in keywords))
 
-        pool_data = Pool.query.join(Pool.client).filter(or_(Client.firstname.ilike(f"%{query}%"), Client.lastname.ilike(
-            f"%{query}%"), Client.street.ilike(f"%{query}%"), Client.city.ilike(f"%{query}%"))).order_by(Pool.updated_at.desc()).all()
+            repair_data = Repair.query.filter(
+                or_(*repair_filter)).order_by(Repair.updated_at.desc()).all()
+            pool_data = Pool.query.join(Pool.client).filter(
+                or_(*client_filter)).order_by(Pool.updated_at.desc()).all()
+        else:
+            repair_data = Repair.query.filter(or_(Repair.title.ilike(f"%{query}%"), Repair.description.ilike(
+                f"%{query}%"))).order_by(Repair.updated_at.desc()).all()
+
+            pool_data = Pool.query.join(Pool.client).filter(or_(Client.firstname.ilike(f"%{query}%"), Client.lastname.ilike(
+                f"%{query}%"), Client.street.ilike(f"%{query}%"), Client.city.ilike(f"%{query}%"))).order_by(Pool.updated_at.desc()).all()
 
         data = {}
-        print('\n\n\n repairs:', repair_data, '\n\n\n')
+        # print('\n\n\n repairs:', repair_data, '\n\n\n')
         if repair_data:
             data["repairs"] = [repair.to_dict_full() for repair in repair_data]
         if pool_data:
