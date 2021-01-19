@@ -32,7 +32,7 @@ export default function Footer() {
           <div className="flex flex-col px-6">
             <div className="font-bold text-lg">Contact</div>
             <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=memg92@gmail.com&su=SUBJECT&body=BODY"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=memg92@gmail.com&su=poolsight"
               className="flex items-center"
             >
               <i className="fas fa-envelope p-1 m-2 shadow-lg rounded-lg"></i>
