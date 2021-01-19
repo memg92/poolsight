@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteClient } from "../../../store/clients";
 import EditClientForm from "./EditClientForm";
 
 export default function ClientSummary({ showClientModal, setShowClientModal }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const client = useSelector((state) => state.clientAPI.client);
   const [error, setError] = useState("");
 
@@ -26,6 +28,7 @@ export default function ClientSummary({ showClientModal, setShowClientModal }) {
       if (!res.ok && res.error) {
         return setError(res.error);
       }
+      return history.push("/");
     });
   };
 
