@@ -92,15 +92,14 @@ def get_pools(client_id):
 
 @ pools_routes.route('/search/<query>')
 @ login_required
-def search_pools(query):
+def search_query(query):
     """
-    /api/pools/search/<query> searches pool, client, repair, and task tables for key words
+    /api/pools/search/<query> searches pool, client, and repair tables for key words
     """
     user = current_user
     if user.id:
         # check if query has multiple words
         if query.find('+') != -1:
-
             # split query into multiple keywords
             keywords = query.split('+')
             # filters for each word if there are multiple keywords
@@ -113,11 +112,13 @@ def search_pools(query):
                 f'%{keyword}%'), Client.city.ilike(
                 f'%{keyword}%')) for keyword in keywords))
 
+            # query repair and pool tables using modified filter clauses for multiple keywords
             repair_data = Repair.query.filter(
                 or_(*repair_filter)).order_by(Repair.updated_at.desc()).all()
             pool_data = Pool.query.join(Pool.client).filter(
                 or_(*client_filter)).order_by(Pool.updated_at.desc()).all()
         else:
+            # query repair and pool tables using regular single keyword filters
             repair_data = Repair.query.filter(or_(Repair.title.ilike(f"%{query}%"), Repair.description.ilike(
                 f"%{query}%"))).order_by(Repair.updated_at.desc()).all()
 
@@ -125,7 +126,6 @@ def search_pools(query):
                 f"%{query}%"), Client.street.ilike(f"%{query}%"), Client.city.ilike(f"%{query}%"))).order_by(Pool.updated_at.desc()).all()
 
         data = {}
-        # print('\n\n\n repairs:', repair_data, '\n\n\n')
         if repair_data:
             data["repairs"] = [repair.to_dict_full() for repair in repair_data]
         if pool_data:
