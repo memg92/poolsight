@@ -1,6 +1,7 @@
 const GET_ALL_CLIENTS = "clients/get-all-clients";
 const ADD_CLIENT = "clients/add-client";
 const EDIT_CLIENT = "clients/edit-client";
+const RESET_CLIENT = "clients/reset-client";
 
 export const getAllClients = (clientsDetail) => {
   return {
@@ -18,6 +19,11 @@ export const editCurrentClient = (clientDetail) => {
   return {
     type: EDIT_CLIENT,
     client: clientDetail,
+  };
+};
+export const resetClients = () => {
+  return {
+    type: RESET_CLIENT,
   };
 };
 
@@ -135,6 +141,8 @@ const clientsReducer = (state = { clients: null, client: null }, action) => {
       return { ...state, client: action.client };
     case EDIT_CLIENT:
       return { ...state, client: action.client };
+    case RESET_CLIENT:
+      return { clients: null, client: null };
     default:
       return state;
   }
