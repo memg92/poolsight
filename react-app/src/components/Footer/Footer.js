@@ -16,16 +16,16 @@ export default function Footer() {
             <div className="font-bold text-lg">Useful Links</div>
             <a
               href="https://github.com/memg92/poolsight"
-              className="flex items-center"
+              className="flex items-center mb-2"
             >
-              <i className="fab fa-github p-1 m-2 shadow-lg rounded-lg"></i>
+              <i className="fab fa-github p-1 mr-1 shadow-lg rounded-lg"></i>
               <div>poolsight Wiki</div>
             </a>
             <a
               href="https://github.com/memg92/poolsight/issues"
-              className="flex items-center"
+              className="flex items-center mb-2"
             >
-              <i className="fab fa-github p-1 m-2 shadow-lg rounded-lg"></i>
+              <i className="fab fa-github p-1 mr-1 shadow-lg rounded-lg"></i>
               <div>Report a bug</div>
             </a>
           </div>
@@ -33,20 +33,23 @@ export default function Footer() {
             <div className="font-bold text-lg">Contact</div>
             <a
               href="https://mail.google.com/mail/?view=cm&fs=1&to=memg92@gmail.com&su=SUBJECT&body=BODY"
-              className="flex items-center"
+              className="flex items-center mb-2"
             >
-              <i className="fas fa-envelope p-1 m-2 shadow-lg rounded-lg"></i>
+              <i className="fas fa-envelope p-1 mr-1 shadow-lg rounded-lg"></i>
               <div>memg92@gmail.com</div>
             </a>
-            <a href="https://github.com/memg92" className="flex items-center">
-              <i className="fab fa-github p-1 m-2 shadow-lg rounded-lg"></i>
+            <a
+              href="https://github.com/memg92"
+              className="flex items-center mb-2"
+            >
+              <i className="fab fa-github p-1 mr-1 shadow-lg rounded-lg"></i>
               <div>Github</div>
             </a>
             <a
               href="https://linkedin.com/in/miguel-munoz-4678b757"
-              className="flex items-center"
+              className="flex items-center mb-2"
             >
-              <i className="fab fa-linkedin p-1 m-2 shadow-lg rounded-lg"></i>
+              <i className="fab fa-linkedin p-1 mr-1 shadow-lg rounded-lg"></i>
               <div>LinkedIn</div>
             </a>
           </div>

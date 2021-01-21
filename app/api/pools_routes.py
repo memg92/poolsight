@@ -140,6 +140,7 @@ def search_query(query):
 @ login_required
 def delete_pool(pool_id):
     pool = Pool.query.get(pool_id)
+    pool_data = pool.to_dict_full()
     user = current_user
     if pool is not None:
         # check if pool belongs to user
@@ -148,6 +149,6 @@ def delete_pool(pool_id):
 
         db.session.delete(pool)
         db.session.commit()
-        return {"deleted": pool_id}
+        return {"deleted": pool_data}
     else:
         return {"error": f'id {pool_id} not found'}

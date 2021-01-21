@@ -1,5 +1,5 @@
 import { addCurrentClient } from "./clients";
-import { addClientRepairs } from "./repairs";
+import { addClientRepairs, deleteClientRepair } from "./repairs";
 import { addClientTasks } from "./tasks";
 
 const GET_ALL_POOLS = "pools/get-all-pools";
@@ -122,6 +122,8 @@ export const deletePool = (poolId) =>
     const pool = await res.json();
     if (!pool.error) {
       dispatch(deleteClientPool(poolId));
+      let poolRepairs = pool.deleted.repairs;
+      poolRepairs.forEach((repair) => dispatch(deleteClientRepair(repair.id)));
     }
     return pool;
   };
