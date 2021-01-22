@@ -51,17 +51,11 @@ def get_clients(client_id):
         if client.user_id != user.id:
             return {"error": "Unauthorized"}, 401
 
-        pools = Pool.query.filter_by(client_id=client_id).all()
-
         # check if client exists
         if not client:
             return {"error": "No clients found"}
 
-        # check if client has more than one pool
-        if len(pools) < 2:
-            return {"client": client.to_dict_pool()}
-
-        return {"client": client.to_dict(), "pools": [pool.to_dict() for pool in pools]}
+        return {"client": client.to_dict()}
     return {"error": "Unauthorized"}, 401
 
 

@@ -51,6 +51,9 @@ export const getClient = (clientId) =>
       },
     });
     const client = await res.json();
+    if (!client.error) {
+      dispatch(addCurrentClient(client.client));
+    }
     return client;
   };
 

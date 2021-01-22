@@ -60,6 +60,7 @@ export const getClientPools = (clientId) =>
     const pools = await res.json();
 
     if (!pools.error) {
+      //add pools, client info, and associated repairs to the store
       dispatch(addClientPools(pools.pools));
       dispatch(addCurrentClient(pools.pools[0].client));
       pools.pools.forEach((pool) => {
