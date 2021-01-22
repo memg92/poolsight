@@ -120,8 +120,8 @@ def search_query(query):
                 or_(*client_filter)).order_by(Pool.updated_at.desc()).all()
         else:
             # query repair and pool tables using regular single keyword filters
-            repair_data = Repair.query.filter(or_(Repair.title.ilike(f"%{query}%"), Repair.description.ilike(
-                f"%{query}%"))).order_by(Repair.updated_at.desc()).all()
+            repair_data = Repair.query.join(Repair.pool).filter(and_((Pool.user_id == user.id), or_(Repair.title.ilike(f"%{query}%"), Repair.description.ilike(
+                f"%{query}%")))).order_by(Repair.updated_at.desc()).all()
 
             pool_data = Pool.query.join(Pool.client).filter(and_((Client.user_id == user.id), or_(Client.firstname.ilike(f"%{query}%"), Client.lastname.ilike(
                 f"%{query}%"), Client.street.ilike(f"%{query}%"), Client.city.ilike(f"%{query}%")))).order_by(Pool.updated_at.desc()).all()
