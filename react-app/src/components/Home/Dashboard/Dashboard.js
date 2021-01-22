@@ -12,6 +12,9 @@ export default function Dashboard() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (pools.length) {
+      return setLoaded(true);
+    }
     dispatch(getPools(user.id)).then(() => {
       setLoaded(true);
     });

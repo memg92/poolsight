@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteClient } from "../../../store/clients";
 import EditClientForm from "./EditClientForm";
@@ -6,6 +7,7 @@ import EditClientForm from "./EditClientForm";
 export default function ClientSummary({ showClientModal, setShowClientModal }) {
   const dispatch = useDispatch();
   const client = useSelector((state) => state.clientAPI.client);
+  const history = useHistory();
   const [error, setError] = useState("");
 
   const closeModal = () => {
@@ -26,6 +28,7 @@ export default function ClientSummary({ showClientModal, setShowClientModal }) {
       if (!res.ok && res.error) {
         return setError(res.error);
       }
+      history.push("/");
     });
   };
 

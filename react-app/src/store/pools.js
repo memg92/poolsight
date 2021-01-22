@@ -108,6 +108,7 @@ export const createClientPool = (poolDetails) =>
     const pool = await response.json();
     if (!pool.errors) {
       dispatch(addClientPools([pool.pool]));
+      dispatch(getAllPools(pool.pool));
     }
     return pool;
   };
@@ -132,11 +133,12 @@ export const deletePool = (poolId) =>
 const poolsReducer = (state = { pools: [], clientPools: [] }, action) => {
   switch (action.type) {
     case GET_ALL_POOLS:
+      // debugger;
       if (action.pools) {
         if (action.pools.length) {
           return { ...state, pools: [...state.pools, ...action.pools] };
         }
-        return state;
+        return { ...state, pools: [...state.pools, action.pools] };
       }
       return { ...state, pools: [] };
     case ADD_CLIENT_POOLS:

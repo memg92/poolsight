@@ -4,7 +4,7 @@ from flask_login import current_user, login_required
 from app.forms import NewPoolForm
 from itertools import chain
 from sqlalchemy.orm import joinedload
-from sqlalchemy import or_
+from sqlalchemy import or_, and_
 
 pools_routes = Blueprint('pools', __name__)
 
@@ -67,7 +67,7 @@ def create_pool():
         # print('\n\n\n pool:', pool.to_dict(), '\n\n\n')
         db.session.add(pool)
         db.session.commit()
-        return {'pool': pool.to_dict()}
+        return {'pool': pool.to_dict_full()}
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
@@ -115,6 +115,7 @@ def search_query(query):
             # query repair and pool tables using modified filter clauses for multiple keywords
             repair_data = Repair.query.filter(
                 or_(*repair_filter)).order_by(Repair.updated_at.desc()).all()
+
             pool_data = Pool.query.join(Pool.client).filter(
                 or_(*client_filter)).order_by(Pool.updated_at.desc()).all()
         else:
@@ -122,8 +123,8 @@ def search_query(query):
             repair_data = Repair.query.filter(or_(Repair.title.ilike(f"%{query}%"), Repair.description.ilike(
                 f"%{query}%"))).order_by(Repair.updated_at.desc()).all()
 
-            pool_data = Pool.query.join(Pool.client).filter(or_(Client.firstname.ilike(f"%{query}%"), Client.lastname.ilike(
-                f"%{query}%"), Client.street.ilike(f"%{query}%"), Client.city.ilike(f"%{query}%"))).order_by(Pool.updated_at.desc()).all()
+            pool_data = Pool.query.join(Pool.client).filter(and_((Client.user_id == user.id), or_(Client.firstname.ilike(f"%{query}%"), Client.lastname.ilike(
+                f"%{query}%"), Client.street.ilike(f"%{query}%"), Client.city.ilike(f"%{query}%")))).order_by(Pool.updated_at.desc()).all()
 
         data = {}
         if repair_data:

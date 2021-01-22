@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getPools } from "../../store/pools";
 import Suggestions from "./Suggestions";
@@ -11,11 +11,15 @@ export default function SearchForm({ setSearchOpen }) {
   const [searching, setSearching] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
   const location = useLocation();
+  const history = useHistory();
   const dispatch = useDispatch();
 
-  if (!pools.length && location.pathname !== "/") {
-    dispatch(getPools(user.id));
-  }
+  useEffect(() => {
+    if (!pools.length && location.pathname !== "/") {
+      // debugger;
+      dispatch(getPools(user.id));
+    }
+  }, [dispatch]);
 
   //helper function to deal with multiple keywords
   const myIncludes = (target, keywords) => {
@@ -69,6 +73,8 @@ export default function SearchForm({ setSearchOpen }) {
     let res = await fetch(`/api/pools/search/${searchQuery}`);
     let data = await res.json();
     console.log(data);
+    setSearchOpen(false);
+    history.push(`/search/${searchQuery}`, data);
   };
 
   return (
