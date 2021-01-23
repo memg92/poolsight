@@ -114,8 +114,8 @@ def search_query(query):
                 f'%{keyword}%')) for keyword in keywords))
 
             # query repair and pool tables using modified filter clauses for multiple keywords
-            repair_data = Repair.query.filter(
-                or_(*repair_filter)).order_by(Repair.updated_at.desc()).all()
+            repair_data = Repair.query.filter(and_((Pool.user_id == user.id), or_(
+                *repair_filter))).order_by(Repair.updated_at.desc()).all()
 
             pool_data = Pool.query.join(Pool.client).filter(and_((Client.user_id == user.id), or_(
                 *client_filter))).order_by(Pool.updated_at.desc()).all()
