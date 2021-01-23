@@ -10,6 +10,7 @@ import HomeManager from "./components/Home/HomeManager";
 import ClientForm from "./components/Clients/ClientForm/ClientForm";
 import ClientProfile from "./components/Clients/ClientProfile/ClientProfile";
 import Footer from "./components/Footer/Footer";
+import SearchPage from "./components/Search/SearchPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +45,10 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/client/create" exact={true}>
           <ClientForm />
+          <Footer />
+        </ProtectedRoute>
+        <ProtectedRoute path="/search/:query">
+          <SearchPage />
           <Footer />
         </ProtectedRoute>
       </Switch>

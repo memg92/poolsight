@@ -12,17 +12,18 @@ export default function Dashboard() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getPools(user.id)).then((res) => {
-      if (!res.error) {
-        setLoaded(true);
-      }
+    if (pools.length) {
+      return setLoaded(true);
+    }
+    dispatch(getPools(user.id)).then(() => {
+      setLoaded(true);
     });
   }, [dispatch, user.id]);
 
   const days = ["M", "T", "W", "R", "F"];
 
   return loaded ? (
-    <div className="h-screen">
+    <div className="h-screen z-10">
       <div className="p-2 mx-4 mt-6 mb-2 text-3xl text-pnavy font-bold shadow-md rounded-lg">
         My Routes
       </div>

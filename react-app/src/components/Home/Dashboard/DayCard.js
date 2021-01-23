@@ -80,7 +80,7 @@ export default function DayCard({ day, pools }) {
         ></i>
       </div>
       {showTable && (
-        <div className="mx-4">
+        <div className="mx-4 animate-scale-in-ver-top">
           {dayPools.length ? (
             <table className="px-4 w-full table-auto my-2 text-pnavy">
               <thead className="text-left text-ghost text-lg bg-pnavy bg-opacity-90">
@@ -97,7 +97,7 @@ export default function DayCard({ day, pools }) {
               <tbody>
                 {dayPools.map((pool) => {
                   return (
-                    <tr key={pool.id} className="hover:bg-gray-100 rounded">
+                    <tr key={pool.id} className="py-1 hover:bg-ghost rounded">
                       <td className="pl-4">
                         <Link to={`/client/${pool.client.id}`}>
                           {pool.client.firstname}

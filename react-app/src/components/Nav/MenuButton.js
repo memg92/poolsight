@@ -45,7 +45,7 @@ const MenuButton = () => {
   }
 
   return (
-    <div className="flex flex-col absolute z-40 right-5 text-2xl md:text-lg bg-ghost rounded w-36 md:w-32 p-2 justify-start">
+    <div className="flex flex-col animate-scale-in-ver-top absolute right-5 text-2xl md:text-lg bg-ghost rounded w-36 md:w-32 p-2 justify-start">
       {sessionLinks}
     </div>
   );

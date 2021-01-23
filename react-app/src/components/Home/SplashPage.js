@@ -4,9 +4,6 @@ import dashboard from "../../assets/dashboard.mov";
 import repairhistory from "../../assets/repairhistory.mov";
 
 export default function SplashPage() {
-  const video1 = document.querySelector(".myvideo1");
-  const video2 = document.querySelector(".myvideo2");
-
   const playVideo = (e) => {
     e.target.play();
   };

@@ -2,7 +2,7 @@ const colors = require("tailwindcss/colors");
 
 module.exports = {
   purge: {
-    enabled: true,
+    enabled: false,
     content: ["./src/**/*.html", "./src/**/*.js", "./src/**/*.jsx"],
   },
   presets: [],
@@ -70,6 +70,9 @@ module.exports = {
       72: "18rem",
       80: "20rem",
       96: "24rem",
+      100: "26rem",
+      110: "28rem",
+      120: "30rem",
     },
     animation: {
       none: "none",
@@ -77,6 +80,13 @@ module.exports = {
       ping: "ping 1s cubic-bezier(0, 0, 0.2, 1) infinite",
       pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       bounce: "bounce 1s infinite",
+      "scale-in-ver-top":
+        "scale-in-ver-top 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
+      "scale-in-center": "scale-in-center 0.3s ease-in-out both",
+      "scale-in-hor-right":
+        "scale-in-hor-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
+      "scale-out-hor-right":
+        "scale-out-hor-right 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both",
     },
     backgroundColor: (theme) => theme("colors"),
     backgroundImage: {
@@ -422,6 +432,52 @@ module.exports = {
         "50%": {
           transform: "none",
           animationTimingFunction: "cubic-bezier(0,0,0.2,1)",
+        },
+      },
+      "scale-in-ver-top": {
+        "0%": {
+          transform: "scaleY(0)",
+          transformOrigin: "100% 0%",
+          opacity: "1",
+        },
+        "100%": {
+          transform: "scaleY(1)",
+          transformOrigin: "100% 0%",
+          opacity: "1",
+        },
+      },
+      "scale-in-center": {
+        "0%": {
+          transform: "scale(0)",
+          opacity: "1",
+        },
+        "100%": {
+          transform: "scale(1)",
+          opacity: "1",
+        },
+      },
+      "scale-in-hor-right": {
+        "0%": {
+          transform: "scaleX(0)",
+          transformOrigin: "100% 100%",
+          opacity: "1",
+        },
+        "100%": {
+          transform: "scaleX(1)",
+          transformOrigin: "100% 100%",
+          opacity: "1",
+        },
+      },
+      "scale-out-hor-right": {
+        "0%": {
+          transform: "scaleX(1)",
+          transformOrigin: "100% 100%",
+          opacity: "1",
+        },
+        "100%": {
+          transform: "scaleX(0)",
+          transformOrigin: "100% 100%",
+          opacity: "1",
         },
       },
     },

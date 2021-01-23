@@ -37,7 +37,7 @@ export default function Repairs() {
           </h1>
           <div
             onClick={toggleForm}
-            className="text-ghost font-bold p-1 w-28 bg-pnavy bg-opacity-80 hover:bg-opacity-90 cursor-pointer rounded"
+            className="text-ghost font-bold p-1 w-28 text-center bg-pnavy bg-opacity-80 hover:bg-opacity-90 cursor-pointer rounded"
           >
             Add a repair!
           </div>

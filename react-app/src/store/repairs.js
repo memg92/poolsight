@@ -2,6 +2,7 @@ const GET_ALL_REPAIRS = "repairs/get-all-repairs";
 const ADD_CLIENT_REPAIRS = "repairs/add-client-repairs";
 const EDIT_CLIENT_REPAIRS = "repairs/edit-client-repairs";
 const DELETE_CLIENT_REPAIRS = "repairs/delete-client-repairs";
+const RESET_REPAIRS = "repairs/reset-repairs";
 
 export const getAllRepairs = (repairsDetail) => {
   return {
@@ -26,6 +27,11 @@ export const deleteClientRepair = (repairId) => {
   return {
     type: DELETE_CLIENT_REPAIRS,
     clientRepairs: repairId,
+  };
+};
+export const resetRepairs = () => {
+  return {
+    type: RESET_REPAIRS,
   };
 };
 
@@ -125,13 +131,19 @@ export const deleteRepair = (repairId) =>
 const repairsReducer = (state = { repairs: [], clientRepairs: [] }, action) => {
   switch (action.type) {
     case GET_ALL_REPAIRS:
-      return { ...state, repairs: [...action.repairs] };
+      if (action.repairs) {
+        return { ...state, repairs: [...state.repairs, ...action.repairs] };
+      }
+      return { ...state, repairs: [] };
     case ADD_CLIENT_REPAIRS:
-      //spread new data into repairs array
-      return {
-        ...state,
-        clientRepairs: [...state.clientRepairs, ...action.clientRepairs],
-      };
+      if (action.clientRepairs) {
+        //spread new data into repairs array
+        return {
+          ...state,
+          clientRepairs: [...state.clientRepairs, ...action.clientRepairs],
+        };
+      }
+      return { ...state, clientRepairs: [] };
     case EDIT_CLIENT_REPAIRS:
       const index = state.clientRepairs.findIndex(
         (repair) => repair.id === action.clientRepairs[0].id
@@ -158,6 +170,8 @@ const repairsReducer = (state = { repairs: [], clientRepairs: [] }, action) => {
           (repair) => repair.id !== action.clientRepairs
         ),
       };
+    case RESET_REPAIRS:
+      return { repairs: [], clientRepairs: [] };
     default:
       return state;
   }

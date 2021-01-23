@@ -1,8 +1,10 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import Client, Pool, Repair, db
+from app.models import Client, Pool, Repair, Task, db
 from flask_login import current_user, login_required
 from app.forms import NewPoolForm
+from itertools import chain
 from sqlalchemy.orm import joinedload
+from sqlalchemy import or_, and_
 
 pools_routes = Blueprint('pools', __name__)
 
@@ -65,7 +67,7 @@ def create_pool():
         # print('\n\n\n pool:', pool.to_dict(), '\n\n\n')
         db.session.add(pool)
         db.session.commit()
-        return {'pool': pool.to_dict()}
+        return {'pool': pool.to_dict_full()}
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
 
@@ -88,10 +90,59 @@ def get_pools(client_id):
     return {"error": "Unauthorized"}, 401
 
 
+@ pools_routes.route('/search/<query>')
+@ login_required
+def search_query(query):
+    """
+    /api/pools/search/<query> searches pool, client, and repair tables for key words
+    """
+    user = current_user
+    if user.id:
+        # check if query has multiple words
+        if query.find('+') != -1:
+            # split query into multiple keywords
+            keywords = query.split('+')
+            # filters for each word if there are multiple keywords
+            repair_filter = list(chain.from_iterable((Repair.title.ilike(
+                f'%{keyword}%'), Repair.description.ilike(
+                f'%{keyword}%')) for keyword in keywords))
+
+            client_filter = list(chain.from_iterable((Client.firstname.ilike(
+                f'%{keyword}%'), Client.lastname.ilike(
+                f'%{keyword}%'), Client.street.ilike(
+                f'%{keyword}%'), Client.city.ilike(
+                f'%{keyword}%')) for keyword in keywords))
+
+            # query repair and pool tables using modified filter clauses for multiple keywords
+            repair_data = Repair.query.filter(and_((Pool.user_id == user.id), or_(
+                *repair_filter))).order_by(Repair.updated_at.desc()).all()
+
+            pool_data = Pool.query.join(Pool.client).filter(and_((Client.user_id == user.id), or_(
+                *client_filter))).order_by(Pool.updated_at.desc()).all()
+        else:
+            # query repair and pool tables using regular single keyword filters
+            repair_data = Repair.query.join(Repair.pool).filter(and_((Pool.user_id == user.id), or_(Repair.title.ilike(f"%{query}%"), Repair.description.ilike(
+                f"%{query}%")))).order_by(Repair.updated_at.desc()).all()
+
+            pool_data = Pool.query.join(Pool.client).filter(and_((Client.user_id == user.id), or_(Client.firstname.ilike(f"%{query}%"), Client.lastname.ilike(
+                f"%{query}%"), Client.street.ilike(f"%{query}%"), Client.city.ilike(f"%{query}%")))).order_by(Pool.updated_at.desc()).all()
+
+        data = {}
+        if repair_data:
+            data["repairs"] = [repair.to_dict_full() for repair in repair_data]
+        if pool_data:
+            data["pools"] = [pool.to_dict_full() for pool in pool_data]
+        if data:
+            return {"data": data}
+        return {"error": "No matches found"}
+    return {"error": "Unauthorized"}, 401
+
+
 @ pools_routes.route('/<int:pool_id>', methods=["DELETE"])
 @ login_required
 def delete_pool(pool_id):
     pool = Pool.query.get(pool_id)
+    pool_data = pool.to_dict_full()
     user = current_user
     if pool is not None:
         # check if pool belongs to user
@@ -100,6 +151,6 @@ def delete_pool(pool_id):
 
         db.session.delete(pool)
         db.session.commit()
-        return {"deleted": pool_id}
+        return {"deleted": pool_data}
     else:
         return {"error": f'id {pool_id} not found'}

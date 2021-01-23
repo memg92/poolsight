@@ -61,7 +61,7 @@ export default function NewPoolForm({ formOpen, setFormOpen }) {
       </div>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col items-center border-pnavy border-l-4 border-opacity-40 transition duration-200 ease-in-out hover:border-opacity-80 hover:shadow-md hover:bg-gray-50 w-full mb-4"
+        className="flex flex-col animate-scale-in-ver-top items-center border-pnavy border-l-4 border-opacity-40 transition duration-200 ease-in-out hover:border-opacity-80 hover:shadow-md hover:bg-gray-50 w-full mb-4"
       >
         <div className="flex items-center px-4 py-2 w-full">
           <div className="text-lg font-medium mb-0.5">Street:</div>
@@ -107,8 +107,8 @@ export default function NewPoolForm({ formOpen, setFormOpen }) {
               value={propertyType}
               className="form-select text-sm w-36 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
             >
-              <option value="residential">Residential</option>
-              <option value="commercial">Commercial</option>
+              <option value="Residential">Residential</option>
+              <option value="Commercial">Commercial</option>
             </select>
           </div>
           <div className="flex flex-col pr-2">

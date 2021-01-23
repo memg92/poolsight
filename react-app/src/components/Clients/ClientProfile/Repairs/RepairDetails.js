@@ -23,7 +23,7 @@ export default function RepairDetails({ repair }) {
   };
   return (
     <>
-      <div className="details px-6 w-full">
+      <div className="details animate-scale-in-ver-top px-6 w-full">
         <div className="flex items-center py-1 px-2 bg-pnavy bg-opacity-90 text-white rounded">
           <div className="font-medium text-lg pr-2">Pool Address: </div>
           <div>{`${pool.street}, ${pool.city}, ${pool.state}`}</div>

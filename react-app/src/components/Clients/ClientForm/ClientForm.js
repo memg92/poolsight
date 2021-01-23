@@ -203,8 +203,8 @@ export default function ClientForm() {
             value={propertyType}
             className="form-select w-full border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
           >
-            <option value="residential">Residential</option>
-            <option value="commercial">Commercial</option>
+            <option value="Residential">Residential</option>
+            <option value="Commercial">Commercial</option>
           </select>
         </div>
         <div className="flex mx-4 mt-4 justify-between items-center">

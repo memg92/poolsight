@@ -38,3 +38,15 @@ class Repair(db.Model):
             "created_at": self.created_at,
             "updated_at": self.updated_at,
         }
+
+    def to_dict_full(self):
+        return {
+            "id": self.id,
+            "pool_id": self.pool_id,
+            "tasks": [task.to_dict() for task in self.tasks],
+            "pool": self.pool.to_dict_client(),
+            "title": self.title,
+            "description": self.description,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at,
+        }

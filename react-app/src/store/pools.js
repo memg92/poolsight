@@ -1,10 +1,11 @@
 import { addCurrentClient } from "./clients";
-import { addClientRepairs } from "./repairs";
+import { addClientRepairs, deleteClientRepair } from "./repairs";
 import { addClientTasks } from "./tasks";
 
 const GET_ALL_POOLS = "pools/get-all-pools";
 const ADD_CLIENT_POOLS = "pools/add-client-pools";
 const DELETE_CLIENT_POOLS = "pools/delete-client-pools";
+const RESET_POOLS = "pools/reset-pools";
 
 export const getAllPools = (poolsDetail) => {
   return {
@@ -23,6 +24,11 @@ export const deleteClientPool = (poolId) => {
   return {
     type: DELETE_CLIENT_POOLS,
     clientPools: poolId,
+  };
+};
+export const resetPools = () => {
+  return {
+    type: RESET_POOLS,
   };
 };
 
@@ -54,6 +60,7 @@ export const getClientPools = (clientId) =>
     const pools = await res.json();
 
     if (!pools.error) {
+      //add pools, client info, and associated repairs to the store
       dispatch(addClientPools(pools.pools));
       dispatch(addCurrentClient(pools.pools[0].client));
       pools.pools.forEach((pool) => {
@@ -101,6 +108,7 @@ export const createClientPool = (poolDetails) =>
     const pool = await response.json();
     if (!pool.errors) {
       dispatch(addClientPools([pool.pool]));
+      dispatch(getAllPools(pool.pool));
     }
     return pool;
   };
@@ -116,6 +124,8 @@ export const deletePool = (poolId) =>
     const pool = await res.json();
     if (!pool.error) {
       dispatch(deleteClientPool(poolId));
+      let poolRepairs = pool.deleted.repairs;
+      poolRepairs.forEach((repair) => dispatch(deleteClientRepair(repair.id)));
     }
     return pool;
   };
@@ -123,13 +133,14 @@ export const deletePool = (poolId) =>
 const poolsReducer = (state = { pools: [], clientPools: [] }, action) => {
   switch (action.type) {
     case GET_ALL_POOLS:
+      // debugger;
       if (action.pools) {
         if (action.pools.length) {
-          return { ...state, pools: [...action.pools] };
+          return { ...state, pools: [...state.pools, ...action.pools] };
         }
-        return state;
+        return { ...state, pools: [...state.pools, action.pools] };
       }
-      return state;
+      return { ...state, pools: [] };
     case ADD_CLIENT_POOLS:
       if (action.clientPools) {
         if (action.clientPools.length) {
@@ -144,7 +155,7 @@ const poolsReducer = (state = { pools: [], clientPools: [] }, action) => {
           clientPools: [...state.clientPools, action.clientPools],
         };
       }
-      return state;
+      return { ...state, clientPools: [] };
     case DELETE_CLIENT_POOLS:
       //remove pool where poolId does not match ids in the store
       return {
@@ -153,6 +164,8 @@ const poolsReducer = (state = { pools: [], clientPools: [] }, action) => {
           (pool) => pool.id !== action.clientPools
         ),
       };
+    case RESET_POOLS:
+      return { pools: [], clientPools: [] };
     default:
       return state;
   }

@@ -8,6 +8,7 @@ export default function ClientSummary({ showClientModal, setShowClientModal }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const client = useSelector((state) => state.clientAPI.client);
+  const history = useHistory();
   const [error, setError] = useState("");
 
   const closeModal = () => {
@@ -28,7 +29,7 @@ export default function ClientSummary({ showClientModal, setShowClientModal }) {
       if (!res.ok && res.error) {
         return setError(res.error);
       }
-      return history.push("/");
+      history.push("/");
     });
   };
 
@@ -49,18 +50,18 @@ export default function ClientSummary({ showClientModal, setShowClientModal }) {
           <h1 className="text-3xl font-semibold">{`${client.firstname} ${client.lastname}`}</h1>
           <div className="flex">
             <div
-              className="mx-2 hover:underline h-7 cursor-pointer"
+              className="mx-2 h-7 cursor-pointer"
               title="Edit Client"
               onClick={handleEditClick}
             >
-              <i className="fas fa-edit text-xl opacity-50 hover:opacity-100 cursor-pointer"></i>
+              <i className="fas fa-edit text-xl  cursor-pointer"></i>
             </div>
             <div
-              className="mx-2 hover:underline h-7 cursor-pointer"
+              className="mx-2 h-7 cursor-pointer"
               title="Delete Client"
               onClick={handleDelete}
             >
-              <i className="fas fa-trash text-xl opacity-50 hover:opacity-100 cursor-pointer"></i>
+              <i className="fas fa-trash text-xl  cursor-pointer"></i>
             </div>
           </div>
         </div>

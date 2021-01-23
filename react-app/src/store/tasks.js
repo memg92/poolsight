@@ -2,6 +2,7 @@ const GET_ALL_TASKS = "tasks/get-all-tasks";
 const ADD_CLIENT_TASKS = "tasks/add-client-tasks";
 const EDIT_CLIENT_TASK = "tasks/edit-client-task";
 const DELETE_CLIENT_TASKS = "tasks/delete-client-tasks";
+const RESET_TASKS = "tasks/reset-tasks";
 
 export const getAllTasks = (tasksDetail) => {
   return {
@@ -26,6 +27,11 @@ export const deleteClientTask = (taskId) => {
   return {
     type: DELETE_CLIENT_TASKS,
     clientTasks: taskId,
+  };
+};
+export const resetTasks = () => {
+  return {
+    type: RESET_TASKS,
   };
 };
 
@@ -162,6 +168,11 @@ const tasksReducer = (state = { tasks: [], clientTasks: [] }, action) => {
         clientTasks: state.clientTasks.filter(
           (task) => task.id !== action.clientTasks
         ),
+      };
+    case RESET_TASKS:
+      return {
+        tasks: [],
+        clientTasks: [],
       };
     default:
       return state;

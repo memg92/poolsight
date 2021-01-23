@@ -1,3 +1,9 @@
+import { resetClients } from "./clients";
+import { resetPools } from "./pools";
+import { resetRepairs } from "./repairs";
+import { addClientRepairs } from "./repairs";
+import { resetTasks } from "./tasks";
+
 const SET_SESSION = "users/set-session";
 const DROP_SESSION = "users/drop-session";
 
@@ -59,6 +65,10 @@ export const logout = () =>
       },
     });
     await res.json();
+    dispatch(resetPools());
+    dispatch(resetRepairs());
+    dispatch(resetClients());
+    dispatch(resetTasks());
     return dispatch(dropUserSession());
   };
 
