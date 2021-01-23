@@ -6,6 +6,7 @@ import EditClientForm from "./EditClientForm";
 
 export default function ClientSummary({ showClientModal, setShowClientModal }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const client = useSelector((state) => state.clientAPI.client);
   const history = useHistory();
   const [error, setError] = useState("");
