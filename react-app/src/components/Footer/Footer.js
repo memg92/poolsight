@@ -5,14 +5,14 @@ export default function Footer() {
     <div className="bottom-0 w-full">
       <div className="p-2 bg-ghost border-t-2 border-pnavy border-opacity-50 text-pnavy text-opacity-70">
         <div className="flex justify-center pt-2">
-          <div className="w-72 px-6">
+          <div className="w-80 px-1">
             <div className="font-bold text-lg">About poolsight</div>
             <p>
               poolsight is a client-management platform focused on empowering
               business owners in the pool service industry
             </p>
           </div>
-          <div className="flex flex-col px-6">
+          <div className="flex flex-col px-10">
             <div className="font-bold text-lg">Useful Links</div>
             <a
               href="https://github.com/memg92/poolsight"
@@ -29,7 +29,7 @@ export default function Footer() {
               <div>Report a bug</div>
             </a>
           </div>
-          <div className="flex flex-col px-6">
+          <div className="flex flex-col px-10">
             <div className="font-bold text-lg">Contact</div>
             <a
               href="https://mail.google.com/mail/?view=cm&fs=1&to=memg92@gmail.com&su=SUBJECT&body=BODY"
