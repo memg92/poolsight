@@ -83,6 +83,10 @@ module.exports = {
       "scale-in-ver-top":
         "scale-in-ver-top 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
       "scale-in-center": "scale-in-center 0.3s ease-in-out both",
+      "scale-in-hor-right":
+        "scale-in-hor-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
+      "scale-out-hor-right":
+        "scale-out-hor-right 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both",
     },
     backgroundColor: (theme) => theme("colors"),
     backgroundImage: {
@@ -449,6 +453,30 @@ module.exports = {
         },
         "100%": {
           transform: "scale(1)",
+          opacity: "1",
+        },
+      },
+      "scale-in-hor-right": {
+        "0%": {
+          transform: "scaleX(0)",
+          transformOrigin: "100% 100%",
+          opacity: "1",
+        },
+        "100%": {
+          transform: "scaleX(1)",
+          transformOrigin: "100% 100%",
+          opacity: "1",
+        },
+      },
+      "scale-out-hor-right": {
+        "0%": {
+          transform: "scaleX(1)",
+          transformOrigin: "100% 100%",
+          opacity: "1",
+        },
+        "100%": {
+          transform: "scaleX(0)",
+          transformOrigin: "100% 100%",
           opacity: "1",
         },
       },

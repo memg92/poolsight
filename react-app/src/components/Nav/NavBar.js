@@ -54,7 +54,12 @@ const NavBar = () => {
             </div>
           </NavLink>
           <div className="flex items-center justify-end w-full max-w-md">
-            {searchOpen && <SearchForm setSearchOpen={setSearchOpen} />}
+            {searchOpen && (
+              <SearchForm
+                searchOpen={searchOpen}
+                setSearchOpen={setSearchOpen}
+              />
+            )}
             {user && (
               <i
                 onClick={openSearch}

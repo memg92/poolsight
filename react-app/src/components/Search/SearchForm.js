@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getPools } from "../../store/pools";
 import Suggestions from "./Suggestions";
 
-export default function SearchForm({ setSearchOpen }) {
+export default function SearchForm({ searchOpen, setSearchOpen }) {
   const pools = useSelector((state) => state.poolAPI.pools);
   const user = useSelector((state) => state.session.user);
   const [searchInput, setSearchInput] = useState("");
@@ -79,7 +79,10 @@ export default function SearchForm({ setSearchOpen }) {
   };
 
   return (
-    <form className="relative z-10 w-full mx-2" onSubmit={handleSubmit}>
+    <form
+      className={"relative z-10 w-full mx-2 animate-scale-in-hor-right"}
+      onSubmit={handleSubmit}
+    >
       <input
         type="text"
         placeholder="Search client..."

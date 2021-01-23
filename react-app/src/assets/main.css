@@ -30707,6 +30707,34 @@ video {
   }
 }
 
+@keyframes scale-in-hor-right {
+  0% {
+    transform: scaleX(0);
+    transform-origin: 100% 100%;
+    opacity: 1;
+  }
+
+  100% {
+    transform: scaleX(1);
+    transform-origin: 100% 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes scale-out-hor-right {
+  0% {
+    transform: scaleX(1);
+    transform-origin: 100% 100%;
+    opacity: 1;
+  }
+
+  100% {
+    transform: scaleX(0);
+    transform-origin: 100% 100%;
+    opacity: 1;
+  }
+}
+
 .animate-none {
   animation: none;
 }
@@ -30733,6 +30761,14 @@ video {
 
 .animate-scale-in-center {
   animation: scale-in-center 0.3s ease-in-out both;
+}
+
+.animate-scale-in-hor-right {
+  animation: scale-in-hor-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.animate-scale-out-hor-right {
+  animation: scale-out-hor-right 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
 
 @media (min-width: 640px) {
@@ -60671,6 +60707,14 @@ video {
 
   .sm\:animate-scale-in-center {
     animation: scale-in-center 0.3s ease-in-out both;
+  }
+
+  .sm\:animate-scale-in-hor-right {
+    animation: scale-in-hor-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  }
+
+  .sm\:animate-scale-out-hor-right {
+    animation: scale-out-hor-right 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
   }
 }
 
@@ -90611,6 +90655,14 @@ video {
   .md\:animate-scale-in-center {
     animation: scale-in-center 0.3s ease-in-out both;
   }
+
+  .md\:animate-scale-in-hor-right {
+    animation: scale-in-hor-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  }
+
+  .md\:animate-scale-out-hor-right {
+    animation: scale-out-hor-right 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -120549,6 +120601,14 @@ video {
 
   .lg\:animate-scale-in-center {
     animation: scale-in-center 0.3s ease-in-out both;
+  }
+
+  .lg\:animate-scale-in-hor-right {
+    animation: scale-in-hor-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  }
+
+  .lg\:animate-scale-out-hor-right {
+    animation: scale-out-hor-right 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
   }
 }
 
@@ -150489,6 +150549,14 @@ video {
   .xl\:animate-scale-in-center {
     animation: scale-in-center 0.3s ease-in-out both;
   }
+
+  .xl\:animate-scale-in-hor-right {
+    animation: scale-in-hor-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  }
+
+  .xl\:animate-scale-out-hor-right {
+    animation: scale-out-hor-right 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  }
 }
 
 @media (min-width: 1536px) {
@@ -180427,5 +180495,13 @@ video {
 
   .\32xl\:animate-scale-in-center {
     animation: scale-in-center 0.3s ease-in-out both;
+  }
+
+  .\32xl\:animate-scale-in-hor-right {
+    animation: scale-in-hor-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  }
+
+  .\32xl\:animate-scale-out-hor-right {
+    animation: scale-out-hor-right 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
   }
 }
