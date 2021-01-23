@@ -1,4 +1,5 @@
 const GET_ALL_REPAIRS = "repairs/get-all-repairs";
+const SET_CLIENT_REPAIRS = "repairs/set-client-repairs";
 const ADD_CLIENT_REPAIRS = "repairs/add-client-repairs";
 const EDIT_CLIENT_REPAIRS = "repairs/edit-client-repairs";
 const DELETE_CLIENT_REPAIRS = "repairs/delete-client-repairs";
@@ -11,6 +12,12 @@ export const getAllRepairs = (repairsDetail) => {
   };
 };
 
+export const setClientRepairs = (repairData) => {
+  return {
+    type: SET_CLIENT_REPAIRS,
+    clientRepairs: repairData,
+  };
+};
 export const addClientRepairs = (repairData) => {
   return {
     type: ADD_CLIENT_REPAIRS,
@@ -135,6 +142,15 @@ const repairsReducer = (state = { repairs: [], clientRepairs: [] }, action) => {
         return { ...state, repairs: [...state.repairs, ...action.repairs] };
       }
       return { ...state, repairs: [] };
+    case SET_CLIENT_REPAIRS:
+      if (action.clientRepairs) {
+        //spread new data into repairs array
+        return {
+          ...state,
+          clientRepairs: [...action.clientRepairs],
+        };
+      }
+      return { ...state, clientRepairs: [] };
     case ADD_CLIENT_REPAIRS:
       if (action.clientRepairs) {
         //spread new data into repairs array

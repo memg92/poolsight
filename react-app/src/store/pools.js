@@ -1,9 +1,10 @@
 import { addCurrentClient } from "./clients";
-import { addClientRepairs, deleteClientRepair } from "./repairs";
+import { setClientRepairs, deleteClientRepair } from "./repairs";
 import { addClientTasks } from "./tasks";
 
 const GET_ALL_POOLS = "pools/get-all-pools";
 const ADD_CLIENT_POOLS = "pools/add-client-pools";
+const SET_CLIENT_POOLS = "pools/set-client-pools";
 const DELETE_CLIENT_POOLS = "pools/delete-client-pools";
 const RESET_POOLS = "pools/reset-pools";
 
@@ -17,6 +18,12 @@ export const getAllPools = (poolsDetail) => {
 export const addClientPools = (poolData) => {
   return {
     type: ADD_CLIENT_POOLS,
+    clientPools: poolData,
+  };
+};
+export const setClientPools = (poolData) => {
+  return {
+    type: SET_CLIENT_POOLS,
     clientPools: poolData,
   };
 };
@@ -61,10 +68,10 @@ export const getClientPools = (clientId) =>
 
     if (!pools.error) {
       //add pools, client info, and associated repairs to the store
-      dispatch(addClientPools(pools.pools));
+      dispatch(setClientPools(pools.pools));
       dispatch(addCurrentClient(pools.pools[0].client));
       pools.pools.forEach((pool) => {
-        dispatch(addClientRepairs(pool.repairs));
+        dispatch(setClientRepairs(pool.repairs));
         pool.repairs.forEach((repair) => {
           dispatch(addClientTasks(repair.tasks));
         });
@@ -141,6 +148,21 @@ const poolsReducer = (state = { pools: [], clientPools: [] }, action) => {
         return { ...state, pools: [...state.pools, action.pools] };
       }
       return { ...state, pools: [] };
+    case SET_CLIENT_POOLS:
+      if (action.clientPools) {
+        if (action.clientPools.length) {
+          //spread new data into pools array
+          return {
+            ...state,
+            clientPools: [...action.clientPools],
+          };
+        }
+        return {
+          ...state,
+          clientPools: [action.clientPools],
+        };
+      }
+      return { ...state, clientPools: [] };
     case ADD_CLIENT_POOLS:
       if (action.clientPools) {
         if (action.clientPools.length) {

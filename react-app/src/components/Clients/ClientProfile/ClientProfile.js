@@ -7,7 +7,6 @@ import Repairs from "./Repairs/Repairs";
 import { getClientPools } from "../../../store/pools";
 import LoadingPools from "./Pools/LoadingPools";
 import LoadingClient from "./LoadingClient";
-import MultiErrorHandler from "../../Errors/MultiErrorHandler";
 import { getClient } from "../../../store/clients";
 
 export default function ClientProfile() {
