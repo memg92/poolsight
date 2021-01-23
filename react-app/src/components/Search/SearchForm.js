@@ -73,7 +73,6 @@ export default function SearchForm({ searchOpen, setSearchOpen }) {
     let searchQuery = searchInput.replace(/\s/g, "+");
     let res = await fetch(`/api/pools/search/${searchQuery}`);
     let data = await res.json();
-    console.log(data);
     setSearchOpen(false);
     history.push(`/search/${searchQuery}`, data);
   };
