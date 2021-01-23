@@ -46,6 +46,7 @@ export default function SearchForm({ setSearchOpen }) {
       : e.target.value.toLowerCase();
 
     let results;
+    //if search input is an array (multi-word), filter results using custom function
     if (Array.isArray(searchInputs)) {
       results = pools.filter(
         ({ client }) =>
@@ -63,7 +64,7 @@ export default function SearchForm({ setSearchOpen }) {
           client.city.toLowerCase().includes(searchInputs)
       );
     }
-    // console.log(results, searchInputs);
+    // set the suggestions to the result array to pass to Suggestions component
     setSuggestions(results);
   };
 

@@ -2,10 +2,10 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <>
+    <div className="absolute bottom-0 w-full h-56">
       <div className="p-2 bg-ghost border-t-2 border-pnavy border-opacity-50 text-pnavy text-opacity-70">
         <div className="flex justify-center pt-2">
-          <div className=" w-72 px-6">
+          <div className="w-72 px-6">
             <div className="font-bold text-lg">About poolsight</div>
             <p>
               poolsight is a client-management platform focused on empowering
@@ -61,6 +61,6 @@ export default function Footer() {
       <div className="p-2 text-pnavy text-opacity-70 bg-ghost border-t-2">
         poolsight © 2020
       </div>
-    </>
+    </div>
   );
 }

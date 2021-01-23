@@ -106,6 +106,7 @@ def search_query(query):
             repair_filter = list(chain.from_iterable((Repair.title.ilike(
                 f'%{keyword}%'), Repair.description.ilike(
                 f'%{keyword}%')) for keyword in keywords))
+
             client_filter = list(chain.from_iterable((Client.firstname.ilike(
                 f'%{keyword}%'), Client.lastname.ilike(
                 f'%{keyword}%'), Client.street.ilike(

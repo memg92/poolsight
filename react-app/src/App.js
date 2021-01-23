@@ -29,26 +29,32 @@ function App() {
       <Switch>
         <Route path="/" exact={true}>
           {loaded && <HomeManager />}
+          <div className="pb-56"></div>
           <Footer />
         </Route>
         <Route path="/login" exact={true}>
           <LoginForm />
+          <div className="pb-56"></div>
           <Footer />
         </Route>
         <Route path="/signup" exact={true}>
           <SignUpForm />
+          <div className="pb-56"></div>
           <Footer />
         </Route>
         <ProtectedRoute path="/client/:id(\d+)" exact={true}>
           <ClientProfile />
+          <div className="pb-56"></div>
           <Footer />
         </ProtectedRoute>
         <ProtectedRoute path="/client/create" exact={true}>
           <ClientForm />
+          <div className="pb-56"></div>
           <Footer />
         </ProtectedRoute>
         <ProtectedRoute path="/search/:query">
           <SearchPage />
+          <div className="pb-56"></div>
           <Footer />
         </ProtectedRoute>
       </Switch>
