@@ -46,7 +46,7 @@ const NavBar = () => {
 
   return (
     <>
-      <nav className="bg-pnavy sticky top-0 shadow-md">
+      <nav className="bg-pnavy z-40 sticky top-0 shadow-md">
         <div className="flex py-2 justify-between h-full">
           <NavLink to="/" exact={true} activeClassName="active">
             <div className="text-pyellow mx-4 p-2 text-4xl md:text-3xl">

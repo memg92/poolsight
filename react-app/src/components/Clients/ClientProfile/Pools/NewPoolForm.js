@@ -61,7 +61,7 @@ export default function NewPoolForm({ formOpen, setFormOpen }) {
       </div>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col items-center border-pnavy border-l-4 border-opacity-40 transition duration-200 ease-in-out hover:border-opacity-80 hover:shadow-md hover:bg-gray-50 w-full mb-4"
+        className="flex flex-col animate-scale-in-ver-top items-center border-pnavy border-l-4 border-opacity-40 transition duration-200 ease-in-out hover:border-opacity-80 hover:shadow-md hover:bg-gray-50 w-full mb-4"
       >
         <div className="flex items-center px-4 py-2 w-full">
           <div className="text-lg font-medium mb-0.5">Street:</div>

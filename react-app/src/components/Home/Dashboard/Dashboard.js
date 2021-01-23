@@ -23,7 +23,7 @@ export default function Dashboard() {
   const days = ["M", "T", "W", "R", "F"];
 
   return loaded ? (
-    <div className="h-screen">
+    <div className="h-screen z-10">
       <div className="p-2 mx-4 mt-6 mb-2 text-3xl text-pnavy font-bold shadow-md rounded-lg">
         My Routes
       </div>

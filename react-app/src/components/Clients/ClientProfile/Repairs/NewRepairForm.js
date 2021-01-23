@@ -36,7 +36,7 @@ export default function NewRepairForm({ formOpen, setFormOpen }) {
       </div>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col border-pnavy border-l-4 border-opacity-40 transition duration-200 ease-in-out hover:border-opacity-80 hover:shadow-md hover:bg-gray-50
+        className="flex flex-col animate-scale-in-ver-top border-pnavy border-l-4 border-opacity-40 transition duration-200 ease-in-out hover:border-opacity-80 hover:shadow-md hover:bg-gray-50
       mb-4"
       >
         <div className="flex px-4 py-2 w-full">

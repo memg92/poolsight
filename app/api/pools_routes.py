@@ -117,8 +117,8 @@ def search_query(query):
             repair_data = Repair.query.filter(
                 or_(*repair_filter)).order_by(Repair.updated_at.desc()).all()
 
-            pool_data = Pool.query.join(Pool.client).filter(
-                or_(*client_filter)).order_by(Pool.updated_at.desc()).all()
+            pool_data = Pool.query.join(Pool.client).filter(and_((Client.user_id == user.id), or_(
+                *client_filter))).order_by(Pool.updated_at.desc()).all()
         else:
             # query repair and pool tables using regular single keyword filters
             repair_data = Repair.query.join(Repair.pool).filter(and_((Pool.user_id == user.id), or_(Repair.title.ilike(f"%{query}%"), Repair.description.ilike(

@@ -6,9 +6,9 @@ export default function SearchClientCard({ pool }) {
   const client = pool.client;
   return (
     <NavLink to={`/client/${client.id}`}>
-      <div className="flex pb-1 px-4 hover:bg-ghost rounded">
+      <div className="flex py-1 px-2 hover:bg-ghost border-2 border-transparent hover:border-gray-200 rounded">
         <div className="font-bold w-44">{`${client.firstname} ${client.lastname}`}</div>
-        <div className="w-96">{`${pool.street}, ${pool.city}`}</div>
+        <div className="w-120">{`${pool.street}, ${pool.city}`}</div>
         <div className="italic w-64">{`Filter Changed: ${dateFormatter(
           pool.filter_changed
         )}`}</div>

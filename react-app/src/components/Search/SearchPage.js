@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams, useLocation } from "react-router-dom";
 import SearchClientCard from "./SearchClientCard";
+import SearchRepairCard from "./SearchRepairCard";
 
 export default function SearchPage() {
   const { query } = useParams();
@@ -32,7 +33,7 @@ export default function SearchPage() {
         </div>
         {data?.repairs ? (
           data.repairs.map((repair) => {
-            return <div key={repair.id}>{repair.title}</div>;
+            return <SearchRepairCard key={repair.id} repair={repair} />;
           })
         ) : (
           <div className="px-2">No repairs found...</div>
