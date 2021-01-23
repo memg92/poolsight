@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { dateFormatter } from "../../../services/utils";
+import PoolCard from "./PoolCard";
 
 export default function DayCard({ day, pools }) {
   const [showTable, setShowTable] = useState(false);
@@ -96,35 +97,7 @@ export default function DayCard({ day, pools }) {
               </thead>
               <tbody>
                 {dayPools.map((pool) => {
-                  return (
-                    <tr key={pool.id} className="py-1 hover:bg-ghost rounded">
-                      <td className="pl-4">
-                        <Link to={`/client/${pool.client.id}`}>
-                          {pool.client.firstname}
-                        </Link>
-                      </td>
-                      <td>
-                        <Link to={`/client/${pool.client.id}`}>
-                          {pool.client.lastname}
-                        </Link>
-                      </td>
-                      <td>
-                        <Link to={`/client/${pool.client.id}`}>
-                          {pool.street}
-                        </Link>
-                      </td>
-                      <td>
-                        <Link to={`/client/${pool.client.id}`}>
-                          {pool.city}
-                        </Link>
-                      </td>
-                      <td>
-                        <Link to={`/client/${pool.client.id}`}>
-                          {dateFormatter(pool.filter_changed)}
-                        </Link>
-                      </td>
-                    </tr>
-                  );
+                  return <PoolCard key={pool.id} pool={pool} />;
                 })}
               </tbody>
             </table>

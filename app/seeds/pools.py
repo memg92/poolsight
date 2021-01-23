@@ -10,7 +10,6 @@ def seed_pools():
         client = Client.query.first()
         user = User.query.first()
     except:
-        client = {id: 1}
         user = {id: 1}
 
     for i in range(10):
@@ -25,14 +24,15 @@ def seed_pools():
             monthly_rate=80,
             service_day="M",
             filter_changed=fake.date_between(
-                start_date='-5y', end_date='today'),
+                start_date='-1y', end_date='today'),
             created_at=fake.date_time(),
-            updated_at=fake.date_time(),
+            updated_at=fake.date_between(
+                start_date='-1y', end_date='today'),
         )
         db.session.add(pool)
         db.session.commit()
 
-    for i in range(11, 20):
+    for i in range(10, 20):
         pool = Pool(
             user_id=user.id,
             client_id=i + client.id,
@@ -44,14 +44,15 @@ def seed_pools():
             monthly_rate=80,
             service_day="T",
             filter_changed=fake.date_between(
-                start_date='-5y', end_date='today'),
+                start_date='-1y', end_date='today'),
             created_at=fake.date_time(),
-            updated_at=fake.date_time(),
+            updated_at=fake.date_between(
+                start_date='-1y', end_date='today'),
         )
         db.session.add(pool)
         db.session.commit()
 
-    for i in range(21, 30):
+    for i in range(20, 30):
         pool = Pool(
             user_id=user.id,
             client_id=i + client.id,
@@ -63,14 +64,15 @@ def seed_pools():
             monthly_rate=80,
             service_day="W",
             filter_changed=fake.date_between(
-                start_date='-5y', end_date='today'),
+                start_date='-1y', end_date='today'),
             created_at=fake.date_time(),
-            updated_at=fake.date_time(),
+            updated_at=fake.date_between(
+                start_date='-1y', end_date='today'),
         )
         db.session.add(pool)
         db.session.commit()
 
-    for i in range(31, 40):
+    for i in range(30, 40):
         pool = Pool(
             user_id=user.id,
             client_id=i + client.id,
@@ -82,14 +84,15 @@ def seed_pools():
             monthly_rate=85,
             service_day="R",
             filter_changed=fake.date_between(
-                start_date='-5y', end_date='today'),
+                start_date='-1y', end_date='today'),
             created_at=fake.date_time(),
-            updated_at=fake.date_time(),
+            updated_at=fake.date_between(
+                start_date='-1y', end_date='today'),
         )
         db.session.add(pool)
         db.session.commit()
 
-    for i in range(41, 50):
+    for i in range(40, 50):
         pool = Pool(
             user_id=user.id,
             client_id=i + client.id,
@@ -101,9 +104,10 @@ def seed_pools():
             monthly_rate=75,
             service_day="F",
             filter_changed=fake.date_between(
-                start_date='-5y', end_date='today'),
+                start_date='-1y', end_date='today'),
             created_at=fake.date_time(),
-            updated_at=fake.date_time(),
+            updated_at=fake.date_between(
+                start_date='-1y', end_date='today'),
         )
         db.session.add(pool)
         db.session.commit()

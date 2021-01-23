@@ -17,9 +17,9 @@ def seed_repairs():
             title='Underwater Lights',
             description='Client reported broken lights. Replacing with new ones.',
             created_at=fake.date_between(
-                start_date='-3y', end_date='today'),
+                start_date='-3y', end_date='-1y'),
             updated_at=fake.date_between(
-                start_date='-3y', end_date='today'),
+                start_date='-1y', end_date='today'),
         )
         db.session.add(repair)
         db.session.commit()
@@ -30,9 +30,9 @@ def seed_repairs():
             title='Underwater Lights',
             description='Client reported broken lights. Replacing with new ones.',
             created_at=fake.date_between(
-                start_date='-3y', end_date='today'),
+                start_date='-3y', end_date='-1y'),
             updated_at=fake.date_between(
-                start_date='-3y', end_date='today'),
+                start_date='-1y', end_date='today'),
 
         )
         db.session.add(repair)
@@ -44,9 +44,9 @@ def seed_repairs():
             title='Underwater Lights',
             description='Client reported broken lights. Replacing with new ones.',
             created_at=fake.date_between(
-                start_date='-3y', end_date='today'),
+                start_date='-3y', end_date='-1y'),
             updated_at=fake.date_between(
-                start_date='-3y', end_date='today'),
+                start_date='-1y', end_date='today'),
 
         )
         db.session.add(repair)
@@ -58,9 +58,9 @@ def seed_repairs():
             title='Underwater Lights',
             description='Client reported broken lights. Replacing with new ones.',
             created_at=fake.date_between(
-                start_date='-3y', end_date='today'),
+                start_date='-3y', end_date='-1y'),
             updated_at=fake.date_between(
-                start_date='-3y', end_date='today'),
+                start_date='-1y', end_date='today'),
 
         )
         db.session.add(repair)

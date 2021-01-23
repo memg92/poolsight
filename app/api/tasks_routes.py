@@ -42,7 +42,6 @@ def create_task():
             task = Task(
                 repair_id=form.data['repairId'],
                 title=form.data['title'],
-                category=form.data['category'],
                 rate=form.data['rate'],
                 cost=form.data['cost'],
                 description=form.data['description'],
@@ -82,10 +81,10 @@ def edit_task(task_id):
     # print(data)
     if task:
         task.title = data['title']
-        task.category = data['category']
         task.rate = data['rate']
         task.cost = data['cost']
         task.description = data['description']
+        task.pending = data['pending']
         task.updated_at = datetime.now()
         db.session.commit()
         return task.to_dict()

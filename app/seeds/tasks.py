@@ -15,10 +15,10 @@ def seed_tasks():
         task = Task(
             repair_id=i + repair.id,
             title='New Lights',
-            category='Lights',
             rate='100',
             cost='60',
             description='Replaced lights, charging cost plus',
+            pending=True,
             created_at=fake.date_between(
                 start_date='-1y', end_date='today'),
             updated_at=fake.date_time(),

@@ -31,7 +31,6 @@ export default function TaskCard({ task, setShowTaskModal, setEditTaskId }) {
   return (
     <tr className="hover:bg-gray-100 text-sm border-b-2 border-opacity-70 border-gray-100 rounded">
       <td className="pl-2 pr-1 py-1">{task.title}</td>
-      <td className="px-1 py-1">{task.category}</td>
       <td className="px-1 py-1">{task.description}</td>
       <td className="px-1 py-1 text-center">{`$${task.rate}`}</td>
       <td className="px-1 py-1 text-center">{`$${task.cost}`}</td>

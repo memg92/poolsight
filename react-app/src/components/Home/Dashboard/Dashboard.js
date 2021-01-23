@@ -15,10 +15,10 @@ export default function Dashboard() {
     if (pools.length) {
       return setLoaded(true);
     }
-    dispatch(getPools(user.id)).then(() => {
+    dispatch(getPools()).then(() => {
       setLoaded(true);
     });
-  }, [dispatch, user.id]);
+  }, [dispatch]);
 
   const days = ["M", "T", "W", "R", "F"];
 

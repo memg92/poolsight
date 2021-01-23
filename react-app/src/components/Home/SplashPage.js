@@ -20,7 +20,7 @@ export default function SplashPage() {
           </h1>
           <NavLink
             to="/signup"
-            className="p-2 hover:bg-pnavy hover:bg-opacity-80 underline rounded-lg"
+            className="p-2 text-gray-200 hover:bg-pnavy hover:bg-opacity-80 underline rounded-lg"
           >
             Learn More
           </NavLink>
@@ -58,7 +58,7 @@ export default function SplashPage() {
           </h1>
           <NavLink
             to="/signup"
-            className="p-2 hover:bg-pnavy hover:bg-opacity-80 underline rounded-lg"
+            className="p-2 text-gray-200 hover:bg-pnavy hover:bg-opacity-80 underline rounded-lg"
           >
             Learn More
           </NavLink>

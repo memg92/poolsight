@@ -71,7 +71,7 @@ export const getClientTasks = (clientId) =>
 
 export const createClientTask = (taskDetails) =>
   async function (dispatch) {
-    const [repairId, title, category, rate, cost, description] = taskDetails;
+    const [repairId, title, rate, cost, description] = taskDetails;
 
     const response = await fetch("/api/tasks", {
       method: "POST",
@@ -81,7 +81,6 @@ export const createClientTask = (taskDetails) =>
       body: JSON.stringify({
         repairId,
         title,
-        category,
         rate,
         cost,
         description,
@@ -97,7 +96,7 @@ export const createClientTask = (taskDetails) =>
 
 export const editTask = (...taskDetails) =>
   async function (dispatch) {
-    const [taskId, title, category, rate, cost, description] = taskDetails;
+    const [taskId, title, rate, cost, description, pending] = taskDetails;
     const response = await fetch(`/api/tasks/${taskId}`, {
       method: "PUT",
       headers: {
@@ -105,10 +104,10 @@ export const editTask = (...taskDetails) =>
       },
       body: JSON.stringify({
         title,
-        category,
         rate,
         cost,
         description,
+        pending,
       }),
     });
     const task = await response.json();

@@ -38,10 +38,10 @@ export default function RepairDetails({ repair }) {
               <thead className="text-left border-b-2 border-pnavy border-opacity-50 bg-pblue bg-opacity-30">
                 <tr>
                   <th className="pl-2 font-normal rounded-tl w-32">Tasks</th>
-                  <th className="font-normal w-36">Category</th>
                   <th className="font-normal w-64">Description</th>
                   <th className="font-normal w-16 text-center">Rate</th>
                   <th className="font-normal w-16 text-center">Costs</th>
+                  <th className="font-normal w-16">Pending</th>
                   <th className="font-normal w-10 text-center">Edit</th>
                   <th className="rounded-tr font-normal w-10 text-center">
                     Delete
@@ -65,14 +65,6 @@ export default function RepairDetails({ repair }) {
                 )}
               </tbody>
             </table>
-            {showTaskModal && (
-              <EditTaskForm
-                tasks={tasks}
-                setShowTaskModal={setShowTaskModal}
-                editTaskId={editTaskId}
-                setEditTaskId={setEditTaskId}
-              />
-            )}
           </div>
           <div
             className="flex justify-center items-center text-sm font-bold w-40 cursor-pointer hover:bg-pblue hover:bg-opacity-50 transform ease-in-out duration-200 rounded"
@@ -92,6 +84,14 @@ export default function RepairDetails({ repair }) {
           )}
         </div>
       </div>
+      {editTaskId && (
+        <EditTaskForm
+          tasks={tasks}
+          showTaskModal={showTaskModal}
+          setShowTaskModal={setShowTaskModal}
+          editTaskId={editTaskId}
+        />
+      )}
     </>
   );
 }
