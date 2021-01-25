@@ -41,7 +41,7 @@ export default function RepairDetails({ repair }) {
                   <th className="font-normal w-64">Description</th>
                   <th className="font-normal w-16 text-center">Rate</th>
                   <th className="font-normal w-16 text-center">Costs</th>
-                  <th className="font-normal w-16">Pending</th>
+                  <th className="font-normal w-16 text-center">Complete</th>
                   <th className="font-normal w-10 text-center">Edit</th>
                   <th className="rounded-tr font-normal w-10 text-center">
                     Delete

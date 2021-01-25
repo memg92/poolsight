@@ -13,4 +13,4 @@ class NewTaskForm(FlaskForm):
         DataRequired(), NumberRange(min=0, message="Cost cannot be negative")])
     description = StringField('description', validators=[
         DataRequired()])
-    pending = BooleanField('pending')
+    complete = BooleanField('complete')

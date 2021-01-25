@@ -96,7 +96,7 @@ export const createClientTask = (taskDetails) =>
 
 export const editTask = (...taskDetails) =>
   async function (dispatch) {
-    const [taskId, title, rate, cost, description, pending] = taskDetails;
+    const [taskId, title, rate, cost, description, complete] = taskDetails;
     const response = await fetch(`/api/tasks/${taskId}`, {
       method: "PUT",
       headers: {
@@ -107,7 +107,7 @@ export const editTask = (...taskDetails) =>
         rate,
         cost,
         description,
-        pending,
+        complete,
       }),
     });
     const task = await response.json();

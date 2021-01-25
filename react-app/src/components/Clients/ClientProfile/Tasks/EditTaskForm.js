@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { editTask } from "../../../../store/tasks";
 import { useDispatch } from "react-redux";
 
@@ -9,15 +9,14 @@ export default function EditTaskForm({
   editTaskId,
 }) {
   const [task] = tasks.filter((task) => task.id === editTaskId);
-  console.log("tasks:", tasks);
-  console.log("tasks ids:", editTaskId);
-  console.log("task and title:", task, task?.title);
+
   const [error, setError] = useState("");
-  const [title, setTitle] = useState(task?.title);
-  const [rate, setRate] = useState(task?.rate);
-  const [cost, setCost] = useState(task?.cost);
-  const [description, setDescription] = useState(task?.description);
-  const [pending, setPending] = useState(task?.pending);
+  const [title, setTitle] = useState(task.title);
+  const [rate, setRate] = useState(task.rate);
+  const [cost, setCost] = useState(task.cost);
+  const [description, setDescription] = useState(task.description);
+  const [complete, setComplete] = useState(task.complete);
+  const completeField = useRef();
 
   const dispatch = useDispatch();
 
@@ -32,9 +31,12 @@ export default function EditTaskForm({
 
   const handleEditSubmit = async (e) => {
     e.preventDefault();
+    //get check status from checkbox
+    const completeChecked = completeField.current.checked;
+    setComplete(completeChecked); //update complete state
 
     return dispatch(
-      editTask(task.id, title, rate, cost, description, pending)
+      editTask(task.id, title, rate, cost, description, completeChecked)
     ).then((res) => {
       if (!res.ok && res.error) {
         return setError(res.error);
@@ -86,21 +88,21 @@ export default function EditTaskForm({
                   />
                 </div>
               </div>
-              <div className="flex items-center w-full mb-4 ml-1">
-                <div className="mr-2">Pending</div>
-                <input
-                  type="checkbox"
-                  className="form-checkbox border-2 border-gray-200text-sm rounded"
-                  value={pending}
-                  onChange={(e) => setPending(e.target.value)}
-                />
-              </div>
               <div className="flex flex-col w-full ml-1">
                 <div className="">Description</div>
                 <textarea
                   className="form-textarea text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
+                />
+              </div>
+              <div className="flex items-center w-full mb-4 ml-1">
+                <div className="mr-2">Completed</div>
+                <input
+                  type="checkbox"
+                  className="form-checkbox border-2 border-gray-200text-sm rounded"
+                  ref={completeField}
+                  defaultChecked={complete}
                 />
               </div>
               <button

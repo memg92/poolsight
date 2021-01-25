@@ -84,7 +84,7 @@ def edit_task(task_id):
         task.rate = data['rate']
         task.cost = data['cost']
         task.description = data['description']
-        task.pending = data['pending']
+        task.complete = data['complete']
         task.updated_at = datetime.now()
         db.session.commit()
         return task.to_dict()

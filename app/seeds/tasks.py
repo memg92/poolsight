@@ -18,7 +18,7 @@ def seed_tasks():
             rate='100',
             cost='60',
             description='Replaced lights, charging cost plus',
-            pending=True,
+            complete=False,
             created_at=fake.date_between(
                 start_date='-1y', end_date='today'),
             updated_at=fake.date_time(),

@@ -12,7 +12,7 @@ class Task(db.Model):
     rate = db.Column(db.Integer, nullable=False)
     cost = db.Column(db.Integer, nullable=False)
     description = db.Column(db.Text)
-    pending = db.Column(db.Boolean, nullable=False, default=True)
+    complete = db.Column(db.Boolean, nullable=False, default=True)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
@@ -27,7 +27,7 @@ class Task(db.Model):
             "description": self.description,
             "rate": self.rate,
             "cost": self.cost,
-            "pending": self.pending,
+            "complete": self.complete,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
         }
