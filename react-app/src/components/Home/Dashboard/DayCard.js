@@ -86,10 +86,7 @@ export default function DayCard({ day, pools }) {
             <table className="px-4 w-full table-auto my-2 text-pnavy">
               <thead className="text-left text-ghost text-lg bg-pnavy bg-opacity-90">
                 <tr>
-                  <th className="pl-4 py-1 font-normal rounded-l">
-                    First Name
-                  </th>
-                  <th className="font-normal">Last Name</th>
+                  <th className="pl-4 py-1 font-normal rounded-l">Name</th>
                   <th className="font-normal">Street</th>
                   <th className="font-normal">City</th>
                   <th className="rounded-r font-normal">Filter Changed</th>

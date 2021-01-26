@@ -58,7 +58,7 @@ export default function TaskCard({ task, setShowTaskModal, setEditTaskId }) {
           onClick={handleCompleteClick}
           className={`${
             task.complete ? "fas fa-check-square" : "far fa-square"
-          } opacity-50 hover:opacity-100 cursor-pointer`}
+          } cursor-pointer`}
         ></i>
       </td>
       <td className="pr-2 pl-1 py-1 text-center">

@@ -12,7 +12,7 @@ class Task(db.Model):
     rate = db.Column(db.Integer, nullable=False)
     cost = db.Column(db.Integer, nullable=False)
     description = db.Column(db.Text)
-    complete = db.Column(db.Boolean, nullable=False, default=True)
+    complete = db.Column(db.Boolean, nullable=False, default=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
