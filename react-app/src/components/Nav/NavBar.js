@@ -49,7 +49,7 @@ const NavBar = () => {
       <nav className="bg-pnavy z-40 sticky top-0 shadow-md">
         <div className="flex py-2 justify-between h-full">
           <NavLink to="/" exact={true} activeClassName="active">
-            <div className="text-pyellow font-sans-source italic mx-4 p-2 text-4xl md:text-3xl">
+            <div className="text-pyellow font-sans-source mx-4 p-2 text-4xl md:text-3xl">
               poolsight
             </div>
           </NavLink>

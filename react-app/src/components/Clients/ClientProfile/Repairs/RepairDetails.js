@@ -67,7 +67,7 @@ export default function RepairDetails({ repair }) {
             </table>
           </div>
           <div
-            className="flex justify-center items-center text-sm font-bold w-40 cursor-pointer hover:bg-pblue hover:bg-opacity-50 transform ease-in-out duration-200 rounded"
+            className="flex py-1 justify-center items-center text-sm font-bold w-40 cursor-pointer hover:bg-pnavy hover:text-ghost hover:bg-opacity-90 transform ease-in-out duration-200 rounded"
             onClick={toggleForm}
           >
             <i

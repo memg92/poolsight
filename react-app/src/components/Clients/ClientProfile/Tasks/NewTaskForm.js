@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createClientTask } from "../../../../store/tasks";
+import MultiErrorHandler from "../../../Errors/MultiErrorHandler";
 
 export default function NewTaskForm({ repair, setFormOpen }) {
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState("");
   const [title, setTitle] = useState("");
   const [rate, setRate] = useState("");
   const [cost, setCost] = useState("");
@@ -17,7 +18,7 @@ export default function NewTaskForm({ repair, setFormOpen }) {
       createClientTask([repair.id, title, rate, cost, description])
     ).then((res) => {
       if (!res.ok && res.errors) {
-        setError(res.errors);
+        return setErrors(res.errors);
       }
 
       setFormOpen(false);
@@ -30,6 +31,7 @@ export default function NewTaskForm({ repair, setFormOpen }) {
       className="flex flex-col animate-scale-in-ver-top transition duration-200 ease-in-out hover:border-opacity-80 hover:shadow-md hover:bg-gray-100
       mb-4"
     >
+      {errors && <MultiErrorHandler errors={errors} />}
       <div className="flex flex-col px-4 py-2 w-full">
         <div className="font-bold py-2">New Task</div>
         <div className="flex flex-col">

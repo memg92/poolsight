@@ -11,10 +11,9 @@ export default function PoolCard({ pool }) {
       let repair = repairs[i];
       let tasks = repair.tasks;
       for (let j = 0; j < tasks.length; j++) {
-        let task = tasks[i];
+        let task = tasks[j];
         if (!task.complete) {
-          setTaskPending(true);
-          return;
+          return setTaskPending(true);
         }
       }
     }
