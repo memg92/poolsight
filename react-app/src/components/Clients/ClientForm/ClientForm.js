@@ -83,7 +83,7 @@ export default function ClientForm() {
       </div>
       <form
         onSubmit={createClient}
-        className="flex flex-col max-w-lg w-full shadow-lg justify-center bg-white"
+        className="flex flex-col text-pnavy max-w-lg w-full shadow-lg justify-center bg-white"
       >
         <div className="p-3 text-2xl">New Client</div>
         <div className="flex">

@@ -2,15 +2,15 @@ import { addCurrentClient } from "./clients";
 import { setClientRepairs, deleteClientRepair } from "./repairs";
 import { addClientTasks } from "./tasks";
 
-const GET_ALL_POOLS = "pools/get-all-pools";
+const SET_ALL_POOLS = "pools/set-all-pools";
 const ADD_CLIENT_POOLS = "pools/add-client-pools";
 const SET_CLIENT_POOLS = "pools/set-client-pools";
 const DELETE_CLIENT_POOLS = "pools/delete-client-pools";
 const RESET_POOLS = "pools/reset-pools";
 
-export const getAllPools = (poolsDetail) => {
+export const setAllPools = (poolsDetail) => {
   return {
-    type: GET_ALL_POOLS,
+    type: SET_ALL_POOLS,
     pools: poolsDetail,
   };
 };
@@ -49,9 +49,9 @@ export const getPools = () =>
     //expected res = {pools: [...]}
     const pools = await res.json();
     if (!pools.error) {
-      dispatch(getAllPools([...pools.pools]));
+      dispatch(setAllPools([...pools.pools]));
     } else {
-      dispatch(getAllPools(null));
+      dispatch(setAllPools(null));
     }
     return pools;
   };
@@ -115,7 +115,7 @@ export const createClientPool = (poolDetails) =>
     const pool = await response.json();
     if (!pool.errors) {
       dispatch(addClientPools([pool.pool]));
-      dispatch(getAllPools(pool.pool));
+      dispatch(setAllPools(pool.pool));
     }
     return pool;
   };
@@ -139,13 +139,13 @@ export const deletePool = (poolId) =>
 
 const poolsReducer = (state = { pools: [], clientPools: [] }, action) => {
   switch (action.type) {
-    case GET_ALL_POOLS:
+    case SET_ALL_POOLS:
       // debugger;
       if (action.pools) {
         if (action.pools.length) {
-          return { ...state, pools: [...state.pools, ...action.pools] };
+          return { ...state, pools: [...action.pools] };
         }
-        return { ...state, pools: [...state.pools, action.pools] };
+        return { ...state, pools: action.pools };
       }
       return { ...state, pools: [] };
     case SET_CLIENT_POOLS:
