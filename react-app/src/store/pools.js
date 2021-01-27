@@ -91,7 +91,7 @@ export const createClientPool = (poolDetails) =>
       propertyType,
       monthlyRate,
       serviceDay,
-      filterChanged,
+      filterCleaned,
     ] = poolDetails;
 
     const response = await fetch("/api/pools", {
@@ -108,7 +108,7 @@ export const createClientPool = (poolDetails) =>
         propertyType,
         monthlyRate,
         serviceDay,
-        filterChanged,
+        filterCleaned,
       }),
     });
     //expected res = {pool: {...}}

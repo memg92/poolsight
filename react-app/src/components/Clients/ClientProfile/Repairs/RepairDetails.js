@@ -84,7 +84,7 @@ export default function RepairDetails({ repair }) {
           )}
         </div>
       </div>
-      {editTaskId && (
+      {showTaskModal && (
         <EditTaskForm
           tasks={tasks}
           showTaskModal={showTaskModal}

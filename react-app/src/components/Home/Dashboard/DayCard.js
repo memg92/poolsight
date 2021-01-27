@@ -89,7 +89,7 @@ export default function DayCard({ day, pools }) {
                   <th className="pl-4 py-1 font-normal rounded-l">Name</th>
                   <th className="font-normal">Street</th>
                   <th className="font-normal">City</th>
-                  <th className="rounded-r font-normal">Filter Changed</th>
+                  <th className="rounded-r font-normal">Filter Cleaned</th>
                 </tr>
               </thead>
               <tbody>

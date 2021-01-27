@@ -11,7 +11,6 @@ import { getClient } from "../../../store/clients";
 
 export default function ClientProfile() {
   const [loaded, setLoaded] = useState(false);
-  const [showClientModal, setShowClientModal] = useState(false);
   const params = useParams();
   const clientId = params.id;
   const dispatch = useDispatch();
@@ -19,20 +18,18 @@ export default function ClientProfile() {
   useEffect(() => {
     dispatch(getClientPools(clientId)).then((res) => {
       if (res.error) {
-        dispatch(getClient(clientId)).then(() => setLoaded(true));
+        dispatch(getClient(clientId)).then(() => {
+          setLoaded(true);
+        });
       }
       setLoaded(true);
     });
-  }, [dispatch, clientId]);
+  }, [dispatch]);
 
   return loaded ? (
     <div className="h-full mb-10">
       <div className="flex flex-col items-center mx-auto max-w-4xl">
-        <ClientSummary
-          showClientModal={showClientModal}
-          setShowClientModal={setShowClientModal}
-        />
-
+        <ClientSummary />
         <Pools />
         <Repairs />
       </div>

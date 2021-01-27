@@ -16,7 +16,7 @@ class Pool(db.Model):
     property_type = db.Column(db.String, nullable=False, default="Residential")
     monthly_rate = db.Column(db.Integer, nullable=False)
     service_day = db.Column(db.String(1), nullable=False)
-    filter_changed = db.Column(db.Date)
+    filter_cleaned = db.Column(db.Date)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
@@ -40,7 +40,7 @@ class Pool(db.Model):
             "property_type": self.property_type,
             "monthly_rate": self.monthly_rate,
             "service_day": self.service_day,
-            "filter_changed": self.filter_changed,
+            "filter_cleaned": self.filter_cleaned,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
         }
@@ -57,7 +57,7 @@ class Pool(db.Model):
             "property_type": self.property_type,
             "monthly_rate": self.monthly_rate,
             "service_day": self.service_day,
-            "filter_changed": self.filter_changed,
+            "filter_cleaned": self.filter_cleaned,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
             "client": self.client.to_dict(),
@@ -75,7 +75,7 @@ class Pool(db.Model):
             "property_type": self.property_type,
             "monthly_rate": self.monthly_rate,
             "service_day": self.service_day,
-            "filter_changed": self.filter_changed,
+            "filter_cleaned": self.filter_cleaned,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
             "client": self.client.to_dict(),

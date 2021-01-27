@@ -15,13 +15,25 @@ export default function EditRepairForm({
   const dispatch = useDispatch();
 
   useEffect(() => {
+    //helper function to close modal
+    const closeModal = () => {
+      setShowRepairModal(false);
+    };
+
+    //listen outside for clicks to close modal
+    document.addEventListener("click", closeModal);
+
+    //prevent modal from closing when user clicks inside modal elements
     const modal = document.querySelector(".modal");
     if (modal) {
       modal.addEventListener("click", (e) => {
         e.stopPropagation();
       });
     }
-  }, [showRepairModal]);
+
+    //cleanup func: remove event listeners
+    return () => document.removeEventListener("click", closeModal);
+  }, []);
 
   const handleEditSubmit = async (e) => {
     e.preventDefault();

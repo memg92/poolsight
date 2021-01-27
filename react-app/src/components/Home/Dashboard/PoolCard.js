@@ -19,7 +19,7 @@ export default function PoolCard({ pool }) {
       }
     }
   }
-  console.log(taskPending);
+
   return (
     <tr className="py-1 hover:bg-ghost">
       <td className="pl-4 relative rounded-l">
@@ -50,7 +50,7 @@ export default function PoolCard({ pool }) {
       </td>
       <td className="rounded-r">
         <Link to={`/client/${pool.client.id}`}>
-          {dateFormatter(pool.filter_changed)}
+          {dateFormatter(pool.filter_cleaned)}
         </Link>
       </td>
     </tr>

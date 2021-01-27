@@ -1,8 +1,8 @@
-"""dropped db and remigrating all tables
+"""remigrating tables with change in filter column (changed to cleaned)
 
-Revision ID: a78b3571e6e4
+Revision ID: 544e179c031c
 Revises: 
-Create Date: 2021-01-15 21:18:31.210113
+Create Date: 2021-01-26 19:10:05.504192
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'a78b3571e6e4'
+revision = '544e179c031c'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -56,7 +56,7 @@ def upgrade():
     sa.Column('property_type', sa.String(), nullable=False),
     sa.Column('monthly_rate', sa.Integer(), nullable=False),
     sa.Column('service_day', sa.String(length=1), nullable=False),
-    sa.Column('filter_changed', sa.Date(), nullable=True),
+    sa.Column('filter_cleaned', sa.Date(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['client_id'], ['clients.id'], ),
@@ -91,10 +91,10 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('repair_id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=100), nullable=False),
-    sa.Column('category', sa.String(), nullable=False),
     sa.Column('rate', sa.Integer(), nullable=False),
     sa.Column('cost', sa.Integer(), nullable=False),
     sa.Column('description', sa.Text(), nullable=True),
+    sa.Column('complete', sa.Boolean(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['repair_id'], ['repairs.id'], ),

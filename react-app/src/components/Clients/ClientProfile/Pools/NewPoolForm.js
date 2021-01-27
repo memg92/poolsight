@@ -12,7 +12,7 @@ export default function NewPoolForm({ formOpen, setFormOpen }) {
   const [propertyType, setPropertyType] = useState("Residential");
   const [serviceDay, setServiceDay] = useState("M");
   const [monthlyRate, setMonthlyRate] = useState("");
-  const [filterChanged, setFilterChanged] = useState("");
+  const [filterCleaned, setFilterCleaned] = useState("");
   const client = useSelector((state) => state.clientAPI.client);
   const dispatch = useDispatch();
 
@@ -29,7 +29,7 @@ export default function NewPoolForm({ formOpen, setFormOpen }) {
         propertyType,
         monthlyRate,
         serviceDay,
-        filterChanged,
+        filterCleaned,
       ])
     ).then((res) => {
       if (!res.ok && res.errors) {
@@ -136,12 +136,12 @@ export default function NewPoolForm({ formOpen, setFormOpen }) {
             />
           </div>
           <div className="flex flex-col w-44 pr-2">
-            <div className="font-medium mb-0.5">Filter Changed</div>
+            <div className="font-medium mb-0.5">Filter Cleaned</div>
             <input
               type="date"
-              onChange={(e) => setFilterChanged(e.target.value)}
+              onChange={(e) => setFilterCleaned(e.target.value)}
               placeholder="mm/dd/yyyy"
-              value={filterChanged}
+              value={filterCleaned}
               className="form-input text-sm border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
             />
           </div>

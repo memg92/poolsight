@@ -61,7 +61,7 @@ def create_pool():
             property_type=form.data['propertyType'],
             monthly_rate=form.data['monthlyRate'],
             service_day=form.data['serviceDay'],
-            filter_changed=form.data['filterChanged'],
+            filter_cleaned=form.data['filterCleaned'],
         )
         # print('\n\n\n pool:', pool.to_dict(), '\n\n\n')
         db.session.add(pool)

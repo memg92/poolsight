@@ -11,7 +11,7 @@ def seed_repairs():
     except:
         pool = {id: 1}
 
-    for i in range(10):
+    for i in range(15):
         repair = Repair(
             pool_id=i + pool.id,
             title='Underwater Lights',
@@ -22,50 +22,29 @@ def seed_repairs():
                 start_date='-1y', end_date='today'),
         )
         db.session.add(repair)
-        db.session.commit()
-
-    for i in range(11, 20):
+    for i in range(15, 30):
         repair = Repair(
             pool_id=i + pool.id,
-            title='Underwater Lights',
-            description='Client reported broken lights. Replacing with new ones.',
+            title='Changed Filter',
+            description='Routine filter change (6 months).',
             created_at=fake.date_between(
-                start_date='-3y', end_date='-1y'),
+                start_date='-1y', end_date='-1y'),
             updated_at=fake.date_between(
-                start_date='-1y', end_date='today'),
-
+                start_date='-1m', end_date='today'),
         )
         db.session.add(repair)
-        db.session.commit()
-
-    for i in range(21, 30):
+    for i in range(30, 45):
         repair = Repair(
             pool_id=i + pool.id,
-            title='Underwater Lights',
-            description='Client reported broken lights. Replacing with new ones.',
+            title='Leak Detection',
+            description='Fixing leak found in the main drain',
             created_at=fake.date_between(
-                start_date='-3y', end_date='-1y'),
+                start_date='-2y', end_date='-1y'),
             updated_at=fake.date_between(
                 start_date='-1y', end_date='today'),
-
         )
         db.session.add(repair)
-        db.session.commit()
-
-    for i in range(31, 40):
-        repair = Repair(
-            pool_id=i + pool.id,
-            title='Underwater Lights',
-            description='Client reported broken lights. Replacing with new ones.',
-            created_at=fake.date_between(
-                start_date='-3y', end_date='-1y'),
-            updated_at=fake.date_between(
-                start_date='-1y', end_date='today'),
-
-        )
-        db.session.add(repair)
-        db.session.commit()
-
+    db.session.commit()
 
 # Uses a raw SQL query to TRUNCATE the repairs table.
 # SQLAlchemy doesn't have a built in function to do this

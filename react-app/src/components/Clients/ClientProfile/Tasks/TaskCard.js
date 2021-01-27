@@ -6,15 +6,10 @@ export default function TaskCard({ task, setShowTaskModal, setEditTaskId }) {
   const [error, setError] = useState("");
   const dispatch = useDispatch();
 
-  const closeModal = () => {
-    setShowTaskModal(false);
-    document.removeEventListener("click", closeModal);
-  };
-
   const handleCompleteClick = async (e) => {
     e.preventDefault();
     const newTaskStatus = task.complete ? false : true;
-    let res = await dispatch(
+    dispatch(
       editTask(
         task.id,
         task.title,
@@ -24,17 +19,12 @@ export default function TaskCard({ task, setShowTaskModal, setEditTaskId }) {
         newTaskStatus
       )
     );
-
-    if (!res.ok && res.error) {
-      return alert(res.error);
-    }
   };
 
   const handleEditClick = (e) => {
     e.preventDefault();
     setEditTaskId(task.id);
     setShowTaskModal(true);
-    return document.addEventListener("click", closeModal);
   };
 
   const handleDelete = async (e) => {

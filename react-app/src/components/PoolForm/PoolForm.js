@@ -157,14 +157,14 @@ export default function ClientForm() {
         </div>
         <div className="flex items-center">
           <span className="w-full ml-4 pl-4 pt-4">
-            Date Filter Last Changed:
+            Date Filter Last Cleaned:
           </span>
           <input
             className="form-input w-full mr-4 mt-4 border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
             type="date"
             placeholder="MM/DD/YYYY (Optional)"
-            onChange={(e) => setFilterChanged(e.target.value)}
-            value={filterChanged}
+            onChange={(e) => setFilterCleaned(e.target.value)}
+            value={filterCleaned}
           />
         </div>
 

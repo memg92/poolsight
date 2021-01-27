@@ -11844,6 +11844,10 @@ video {
   font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
+.font-sans-source {
+  font-family: Source Sans Pro, sans-serif;
+}
+
 .font-mono {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
@@ -41888,6 +41892,10 @@ video {
     font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   }
 
+  .sm\:font-sans-source {
+    font-family: Source Sans Pro, sans-serif;
+  }
+
   .sm\:font-mono {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
@@ -71833,6 +71841,10 @@ video {
 
   .md\:font-serif {
     font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  }
+
+  .md\:font-sans-source {
+    font-family: Source Sans Pro, sans-serif;
   }
 
   .md\:font-mono {
@@ -101782,6 +101794,10 @@ video {
     font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   }
 
+  .lg\:font-sans-source {
+    font-family: Source Sans Pro, sans-serif;
+  }
+
   .lg\:font-mono {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
@@ -131729,6 +131745,10 @@ video {
     font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   }
 
+  .xl\:font-sans-source {
+    font-family: Source Sans Pro, sans-serif;
+  }
+
   .xl\:font-mono {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
@@ -161674,6 +161694,10 @@ video {
 
   .\32xl\:font-serif {
     font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  }
+
+  .\32xl\:font-sans-source {
+    font-family: Source Sans Pro, sans-serif;
   }
 
   .\32xl\:font-mono {

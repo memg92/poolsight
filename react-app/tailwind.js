@@ -203,6 +203,7 @@ module.exports = {
         "Times",
         "serif",
       ],
+      "sans-source": ["Source Sans Pro", "sans-serif"],
       mono: [
         "ui-monospace",
         "SFMono-Regular",

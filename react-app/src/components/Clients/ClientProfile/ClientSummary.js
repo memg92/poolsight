@@ -1,24 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteClient } from "../../../store/clients";
 import EditClientForm from "./EditClientForm";
 
-export default function ClientSummary({ showClientModal, setShowClientModal }) {
-  const dispatch = useDispatch();
+export default function ClientSummary() {
+  const [error, setError] = useState("");
+  const [showClientModal, setShowClientModal] = useState(false);
   const history = useHistory();
   const client = useSelector((state) => state.clientAPI.client);
-  const [error, setError] = useState("");
-
-  const closeModal = () => {
-    setShowClientModal(false);
-    document.removeEventListener("click", closeModal);
-  };
+  const dispatch = useDispatch();
 
   const handleEditClick = (e) => {
     // e.stopPropagation();
     setShowClientModal(true);
-    return document.addEventListener("click", closeModal);
   };
 
   const handleDelete = async (e) => {
@@ -83,10 +78,12 @@ export default function ClientSummary({ showClientModal, setShowClientModal }) {
             </div>
           </div>
         </div>
-        <EditClientForm
-          showClientModal={showClientModal}
-          setShowClientModal={setShowClientModal}
-        />
+        {showClientModal && (
+          <EditClientForm
+            showClientModal={showClientModal}
+            setShowClientModal={setShowClientModal}
+          />
+        )}
       </div>
     )
   );

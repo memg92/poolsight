@@ -21,4 +21,4 @@ class NewPoolForm(FlaskForm):
         DataRequired()])
     serviceDay = SelectField('service_day', validators=[
         DataRequired()], choices=['M', 'T', 'W', 'R', 'F'])
-    filterChanged = DateField('filter_changed')
+    filterCleaned = DateField('filter_cleaned')

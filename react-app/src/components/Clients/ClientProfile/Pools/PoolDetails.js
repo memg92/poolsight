@@ -49,9 +49,9 @@ export default function PoolDetails({ pool, setPoolDeleted }) {
           <div className="text-sm pb-2">{`$${pool.monthly_rate}`}</div>
         </div>
         <div className="flex flex-col pr-2">
-          <div className="w-full font-medium mb-0.5">Filter Changed</div>
+          <div className="w-full font-medium mb-0.5">Filter Cleaned</div>
           <div className="text-sm pb-2">
-            {dateFormatter(pool.filter_changed)}
+            {dateFormatter(pool.filter_cleaned)}
           </div>
         </div>
       </div>

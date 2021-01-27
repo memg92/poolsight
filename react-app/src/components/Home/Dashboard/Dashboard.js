@@ -12,12 +12,13 @@ export default function Dashboard() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (pools.length) {
-      return setLoaded(true);
+    let isMounted = true;
+    if (isMounted) {
+      dispatch(getPools()).then(() => {
+        setLoaded(true);
+      });
     }
-    dispatch(getPools()).then(() => {
-      setLoaded(true);
-    });
+    return () => (isMounted = false);
   }, [dispatch]);
 
   const days = ["M", "T", "W", "R", "F"];

@@ -22,7 +22,7 @@ export default function ClientForm() {
   const [propertyType, setPropertyType] = useState("Residential");
   const [serviceDay, setServiceDay] = useState("M");
   const [monthlyRate, setMonthlyRate] = useState("");
-  const [filterChanged, setFilterChanged] = useState("");
+  const [filterCleaned, setFilterCleaned] = useState("");
   const [checked, setChecked] = useState(false);
 
   const history = useHistory();
@@ -49,7 +49,7 @@ export default function ClientForm() {
             propertyType,
             monthlyRate,
             serviceDay,
-            filterChanged,
+            filterCleaned,
           ])
         ).then((res) => {
           if (!res.ok && res.errors) {
@@ -234,13 +234,13 @@ export default function ClientForm() {
           </div>
         </div>
         <div className="flex items-center mx-4 mt-4">
-          <div className="font-medium w-60 mr-1">Date Filter Changed</div>
+          <div className="font-medium w-60 mr-1">Date Filter Cleaned</div>
           <input
             type="date"
-            onChange={(e) => setFilterChanged(e.target.value)}
+            onChange={(e) => setFilterCleaned(e.target.value)}
             placeholder="mm/dd/yyyy"
-            name="filterChanged"
-            value={filterChanged}
+            name="filterCleaned"
+            value={filterCleaned}
             className="form-input w-full border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 rounded"
           />
         </div>

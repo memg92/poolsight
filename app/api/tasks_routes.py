@@ -47,6 +47,7 @@ def create_task():
                 description=form.data['description'],
             )
             # print('\n\n\n task:', task.to_dict(), '\n\n\n')
+            repair.updated_at = datetime.now()
             db.session.add(task)
             db.session.commit()
             return {'task': task.to_dict()}
@@ -78,6 +79,7 @@ def create_task():
 def edit_task(task_id):
     data = request.get_json()
     task = Task.query.get(task_id)
+    repair = Repair.query.get(task.repair_id)
     # print(data)
     if task:
         task.title = data['title']
@@ -86,6 +88,7 @@ def edit_task(task_id):
         task.description = data['description']
         task.complete = data['complete']
         task.updated_at = datetime.now()
+        repair.updated_at = datetime.now()
         db.session.commit()
         return task.to_dict()
     return {'error': 'task not found'}, 400
