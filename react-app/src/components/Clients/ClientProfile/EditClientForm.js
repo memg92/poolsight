@@ -68,9 +68,9 @@ export default function EditClientForm({
 
   return (
     showClientModal && (
-      <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50">
+      <div className="fixed z-40 top-0 left-0 w-full h-full bg-black bg-opacity-50">
         <div className="mt-20 mx-auto max-w-xl shadow-lg">
-          <div className="modal animate-scale-in-center bg-ghost flex flex-col justify-center rounded-lg px-6 py-4 w-full">
+          <div className="modal z-40 animate-scale-in-center bg-ghost flex flex-col justify-center rounded-lg px-6 py-4 w-full">
             <form
               className="flex flex-col w-full text-pnavy text-opacity-90"
               onSubmit={handleEditSubmit}
@@ -84,9 +84,9 @@ export default function EditClientForm({
                   <input
                     className="form-input text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 "
                     type="text"
-                    required
                     value={firstname}
                     onChange={(e) => setFirstname(e.target.value)}
+                    required
                   />
                 </div>
                 <div className="flex flex-col w-full ml-1">
@@ -94,9 +94,9 @@ export default function EditClientForm({
                   <input
                     className="form-input text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50"
                     type="text"
-                    required
                     value={lastname}
                     onChange={(e) => setLastname(e.target.value)}
+                    required
                   />
                 </div>
               </div>
@@ -104,9 +104,9 @@ export default function EditClientForm({
               <input
                 className="form-input text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50"
                 type="text"
-                required
                 value={street}
                 onChange={(e) => setStreet(e.target.value)}
+                required
               />
 
               <div className="flex">
@@ -115,9 +115,9 @@ export default function EditClientForm({
                   <input
                     className="form-input text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50"
                     type="text"
-                    required
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
+                    required
                   />
                 </div>
                 <div className="flex flex-col w-full ml-1">
@@ -125,9 +125,9 @@ export default function EditClientForm({
                   <select
                     className="form-select text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50"
                     type="text"
-                    required
                     value={state}
                     onChange={(e) => setState(e.target.value)}
+                    required
                   >
                     <StateOptions />
                   </select>
@@ -139,9 +139,9 @@ export default function EditClientForm({
                   <input
                     className="form-input text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50"
                     type="email"
-                    required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    required
                   />
                 </div>
                 <div className="flex flex-col w-full ml-1">
@@ -149,9 +149,9 @@ export default function EditClientForm({
                   <input
                     className="form-input text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50"
                     type="text"
-                    required
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
+                    required
                   />
                 </div>
               </div>

@@ -546,9 +546,9 @@ video {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 800px) {
   .container {
-    max-width: 768px;
+    max-width: 800px;
   }
 }
 
@@ -14796,7 +14796,7 @@ video {
 }
 
 .max-w-screen-md {
-  max-width: 768px;
+  max-width: 800px;
 }
 
 .max-w-screen-lg {
@@ -30786,9 +30786,9 @@ video {
     }
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 800px) {
     .sm\:container {
-      max-width: 768px;
+      max-width: 800px;
     }
   }
 
@@ -44844,7 +44844,7 @@ video {
   }
 
   .sm\:max-w-screen-md {
-    max-width: 768px;
+    max-width: 800px;
   }
 
   .sm\:max-w-screen-lg {
@@ -60726,7 +60726,7 @@ video {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 800px) {
   .md\:container {
     width: 100%;
   }
@@ -60737,9 +60737,9 @@ video {
     }
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 800px) {
     .md\:container {
-      max-width: 768px;
+      max-width: 800px;
     }
   }
 
@@ -74795,7 +74795,7 @@ video {
   }
 
   .md\:max-w-screen-md {
-    max-width: 768px;
+    max-width: 800px;
   }
 
   .md\:max-w-screen-lg {
@@ -90688,9 +90688,9 @@ video {
     }
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 800px) {
     .lg\:container {
-      max-width: 768px;
+      max-width: 800px;
     }
   }
 
@@ -104746,7 +104746,7 @@ video {
   }
 
   .lg\:max-w-screen-md {
-    max-width: 768px;
+    max-width: 800px;
   }
 
   .lg\:max-w-screen-lg {
@@ -120639,9 +120639,9 @@ video {
     }
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 800px) {
     .xl\:container {
-      max-width: 768px;
+      max-width: 800px;
     }
   }
 
@@ -134697,7 +134697,7 @@ video {
   }
 
   .xl\:max-w-screen-md {
-    max-width: 768px;
+    max-width: 800px;
   }
 
   .xl\:max-w-screen-lg {
@@ -150590,9 +150590,9 @@ video {
     }
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 800px) {
     .\32xl\:container {
-      max-width: 768px;
+      max-width: 800px;
     }
   }
 
@@ -164648,7 +164648,7 @@ video {
   }
 
   .\32xl\:max-w-screen-md {
-    max-width: 768px;
+    max-width: 800px;
   }
 
   .\32xl\:max-w-screen-lg {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { editTask } from "../../../../store/tasks";
 import { useDispatch } from "react-redux";
+import ErrorHandler from "../../../Errors/ErrorHandler";
 
 export default function EditTaskForm({
   tasks,
@@ -64,9 +65,10 @@ export default function EditTaskForm({
 
   return (
     showTaskModal && (
-      <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50">
+      <div className="fixed z-40 top-0 left-0 w-full h-full bg-black bg-opacity-50">
         <div className="mt-20 mx-auto max-w-xl shadow-lg">
           <div className="modal animate-scale-in-center bg-ghost flex flex-col justify-center rounded-lg px-6 py-4 w-full">
+            {error && <ErrorHandler error={error} />}
             <form
               className="flex flex-col w-full text-pnavy text-opacity-90"
               onSubmit={handleEditSubmit}
@@ -82,6 +84,7 @@ export default function EditTaskForm({
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
+                    required
                   />
                 </div>
               </div>

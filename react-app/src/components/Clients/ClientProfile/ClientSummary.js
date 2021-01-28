@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteClient } from "../../../store/clients";
@@ -48,14 +48,14 @@ export default function ClientSummary() {
               title="Edit Client"
               onClick={handleEditClick}
             >
-              <i className="fas fa-edit text-xl  cursor-pointer"></i>
+              <i className="fas fa-edit text-xl cursor-pointer"></i>
             </div>
             <div
               className="mx-2 h-7 cursor-pointer"
               title="Delete Client"
               onClick={handleDelete}
             >
-              <i className="fas fa-trash text-xl  cursor-pointer"></i>
+              <i className="fas fa-trash text-xl cursor-pointer"></i>
             </div>
           </div>
         </div>
@@ -67,14 +67,17 @@ export default function ClientSummary() {
           <div className="flex flex-col px-4 py-2 w-full">
             <div className="text-lg font-medium mb-0.5">Contact</div>
             <div className="flex flex-col">
-              <div className="flex items-center">
+              <a
+                className="flex items-center pb-2"
+                href={`mailto:${client.email}`}
+              >
                 <i className="fas fa-envelope pr-2"></i>
                 <div className="text-sm">{client.email}</div>
-              </div>
-              <div className="flex items-center">
+              </a>
+              <a className="flex items-center" href={`tel:${client.phone}`}>
                 <i className="fas fa-phone pr-2"></i>
                 <div className="text-sm">{client.phone}</div>
-              </div>
+              </a>
             </div>
           </div>
         </div>

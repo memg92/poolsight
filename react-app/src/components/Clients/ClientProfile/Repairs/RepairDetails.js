@@ -4,7 +4,7 @@ import TaskCard from "../Tasks/TaskCard";
 import NewTaskForm from "../Tasks/NewTaskForm";
 import EditTaskForm from "../Tasks/EditTaskForm";
 
-export default function RepairDetails({ repair }) {
+export default function RepairDetails({ repair, setShowDetails }) {
   const [formOpen, setFormOpen] = useState(false);
   const [showTaskModal, setShowTaskModal] = useState(false);
   const taskState = useSelector((state) => state.taskAPI.clientTasks);
@@ -21,9 +21,10 @@ export default function RepairDetails({ repair }) {
     }
     setFormOpen(true);
   };
-  return (
+
+  return pool ? (
     <>
-      <div className="details animate-scale-in-ver-top px-6 w-full">
+      <div className="details  animate-scale-in-ver-top px-6 w-full">
         <div className="flex items-center py-1 px-2 bg-pnavy bg-opacity-90 text-white rounded">
           <div className="font-medium text-lg pr-2">Pool Address: </div>
           <div>{`${pool.street}, ${pool.city}, ${pool.state}`}</div>
@@ -67,7 +68,7 @@ export default function RepairDetails({ repair }) {
             </table>
           </div>
           <div
-            className="flex py-1 justify-center items-center text-sm font-bold w-40 cursor-pointer hover:bg-pnavy hover:text-ghost hover:bg-opacity-90 transform ease-in-out duration-200 rounded"
+            className="flex py-1 justify-center items-center text-sm font-bold w-40 cursor-pointer hover:bg-pnavy hover:text-ghost hover:bg-opacity-90 transition-all ease-in-out duration-300 rounded"
             onClick={toggleForm}
           >
             <i
@@ -93,5 +94,7 @@ export default function RepairDetails({ repair }) {
         />
       )}
     </>
+  ) : (
+    <></>
   );
 }

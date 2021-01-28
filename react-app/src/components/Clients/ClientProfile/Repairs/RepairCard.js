@@ -64,7 +64,9 @@ export default function RepairCard({ repair }) {
             ></i>
           </div>
         </div>
-        {showDetails && <RepairDetails repair={repair} />}
+        {showDetails && (
+          <RepairDetails repair={repair} setShowDetails={setShowDetails} />
+        )}
       </div>
       {showRepairModal && (
         <EditRepairForm

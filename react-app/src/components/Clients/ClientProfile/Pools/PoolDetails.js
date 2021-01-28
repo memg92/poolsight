@@ -17,14 +17,32 @@ export default function PoolDetails({ pool, setPoolDeleted }) {
   const handleDelete = (e) => {
     return dispatch(deletePool(pool.id));
   };
+  const handleAddressClick = (e) => {
+    e.preventDefault();
+
+    let address = `${pool.street}, ${pool.city}, ${pool.state}`;
+    address.replace(" ", "+");
+    address.replace(",", "%2C");
+    return window.open(
+      `https://www.google.com/maps/dir/?api=1&destination=${address}`
+    );
+  };
 
   return (
     <div className="flex flex-col border-pnavy border-l-4 border-opacity-40 transition duration-200 ease-in-out hover:border-opacity-80 hover:shadow-md hover:bg-gray-50 w-full mb-4">
       <div className="flex justify-between w-full px-4 pt-1  items-center pb-2">
-        <div className="flex items-center  ">
-          <div className="text-lg font-medium mb-0.5">Address:</div>
-          <div className="pl-2">{`${pool.street},`}</div>
-          <div className="pl-1">{`${pool.city}, ${pool.state}`}</div>
+        <div className="flex py-2">
+          <a className="flex items-center">
+            <div className="text-lg font-medium mb-0.5">Address:</div>
+            <div className="pl-2">{`${pool.street},`}</div>
+            <div className="pl-1">{`${pool.city}, ${pool.state}`}</div>
+          </a>
+          <button
+            className="ml-5 bg-pnavy text-white p-1 text-sm rounded hover:opacity-80 transition-opacity ease-in-out duration-300"
+            onClick={handleAddressClick}
+          >
+            Get Directions
+          </button>
         </div>
         <i
           onClick={handleDelete}

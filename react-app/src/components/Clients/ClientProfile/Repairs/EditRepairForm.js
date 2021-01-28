@@ -67,6 +67,7 @@ export default function EditRepairForm({
                     type="text"
                     value={title}
                     onChange={(e) => setPoolId(e.target.value)}
+                    required
                   >
                     {pools.map((pool) => {
                       return (
@@ -85,6 +86,7 @@ export default function EditRepairForm({
                       type="text"
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
+                      required
                     />
                   </div>
                   <div className="flex flex-col w-full ml-1">

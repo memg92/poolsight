@@ -81,6 +81,8 @@ def edit_task(task_id):
     task = Task.query.get(task_id)
     repair = Repair.query.get(task.repair_id)
     # print(data)
+    if not data['title']:
+        return {'error': 'please include a title'}
     if task:
         task.title = data['title']
         task.rate = data['rate']

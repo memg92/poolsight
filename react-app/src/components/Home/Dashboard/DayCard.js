@@ -66,7 +66,7 @@ export default function DayCard({ day, pools }) {
   const dayPools = pools.filter((client) => client.service_day === day);
 
   return (
-    <div>
+    <>
       <div
         onClick={openTable}
         className="flex h-12 items-center justify-between cursor-pointer bg-pblue mx-4 my-0.5 shadow-lg hover:bg-opacity-80 rounded"
@@ -113,6 +113,6 @@ export default function DayCard({ day, pools }) {
           )}
         </div>
       )}
-    </div>
+    </>
   );
 }

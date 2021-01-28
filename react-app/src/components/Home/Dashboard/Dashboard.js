@@ -25,16 +25,18 @@ export default function Dashboard() {
 
   return loaded ? (
     <div className="h-screen z-10">
-      <div className="p-2 mx-4 mt-6 mb-2 text-3xl text-pnavy font-bold shadow-md rounded-lg">
+      <div className="p-2 lg:mx-4 mt-6 mb-3 text-4xl lg:text-3xl text-pnavy font-bold shadow-md lg:rounded-lg">
         My Routes
       </div>
-      {days.map((day) => {
-        return <DayCard day={day} key={day} pools={pools} />;
-      })}
+      <div>
+        {days.map((day) => {
+          return <DayCard day={day} key={day} pools={pools} />;
+        })}
+      </div>
     </div>
   ) : (
     <div className="h-screen">
-      <div className="p-2 mx-4 mt-6 mb-2 text-3xl text-pnavy font-bold shadow-sm">
+      <div className="p-2 lg:mx-4 mt-6 mb-3 text-4xl lg:text-3xl text-pnavy font-bold shadow-sm lg:rounded-lg">
         My Routes
       </div>
       <div className="flex flex-col items-center mt-20 text-pnavy text-4xl">

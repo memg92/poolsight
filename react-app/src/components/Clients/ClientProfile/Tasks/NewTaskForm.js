@@ -81,7 +81,7 @@ export default function NewTaskForm({ repair, setFormOpen }) {
         />
       </div>
       <button
-        className="mb-2 mx-4 w-36 self-center bg-pnavy text-white px-6 py-1.5 rounded hover:opacity-90"
+        className="mb-2 mx-4 w-36 self-center bg-pnavy text-white px-6 py-1.5 rounded opacity-75 hover:opacity-90 transition-opacity ease-in-out duration-300"
         type="submit"
       >
         Add Task
