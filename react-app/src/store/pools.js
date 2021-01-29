@@ -1,5 +1,5 @@
 import { addCurrentClient } from "./clients";
-import { setClientRepairs, deleteClientRepair } from "./repairs";
+import { setClientRepairs, deleteClientRepair, resetRepairs } from "./repairs";
 import { addClientTasks } from "./tasks";
 
 const SET_ALL_POOLS = "pools/set-all-pools";
@@ -70,14 +70,22 @@ export const getClientPools = (clientId) =>
       //add pools, client info, and associated repairs to the store
       dispatch(setClientPools(pools.pools));
       dispatch(addCurrentClient(pools.pools[0].client));
+      let repairs = [];
+      let tasks = [];
       pools.pools.forEach((pool) => {
         if (pool.repairs.length) {
-          dispatch(setClientRepairs(pool.repairs));
           pool.repairs.forEach((repair) => {
+            repairs.push(repair);
             if (repair.tasks.length) {
-              dispatch(addClientTasks(repair.tasks));
+              tasks.push(...repair.tasks);
             }
           });
+        }
+        if (repairs.length) {
+          dispatch(setClientRepairs(repairs));
+        }
+        if (tasks.length) {
+          dispatch(addClientTasks(tasks));
         }
       });
     }

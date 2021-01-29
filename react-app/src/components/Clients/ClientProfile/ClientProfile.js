@@ -8,6 +8,8 @@ import { getClientPools } from "../../../store/pools";
 import LoadingPools from "./Pools/LoadingPools";
 import LoadingClient from "./LoadingClient";
 import { getClient } from "../../../store/clients";
+import { resetTasks } from "../../../store/tasks";
+import { resetRepairs } from "../../../store/repairs";
 
 export default function ClientProfile() {
   const [loaded, setLoaded] = useState(false);

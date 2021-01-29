@@ -148,7 +148,7 @@ const repairsReducer = (state = { repairs: [], clientRepairs: [] }, action) => {
           //spread new data into Repairs array
           return {
             ...state,
-            clientRepairs: [...state.clientRepairs, ...action.clientRepairs],
+            clientRepairs: [...action.clientRepairs],
           };
         }
         return {
