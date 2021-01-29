@@ -110,6 +110,8 @@ def search_query(query):
                 f'%{keyword}%'), Client.lastname.ilike(
                 f'%{keyword}%'), Client.street.ilike(
                 f'%{keyword}%'), Client.city.ilike(
+                f'%{keyword}%'), Pool.street.ilike(
+                f'%{keyword}%'), Pool.city.ilike(
                 f'%{keyword}%')) for keyword in keywords))
 
             # query repair and pool tables using modified filter clauses for multiple keywords
@@ -124,7 +126,7 @@ def search_query(query):
                 f"%{query}%")))).order_by(Repair.updated_at.desc()).all()
 
             pool_data = Pool.query.join(Pool.client).filter(and_((Client.user_id == user.id), or_(Client.firstname.ilike(f"%{query}%"), Client.lastname.ilike(
-                f"%{query}%"), Client.street.ilike(f"%{query}%"), Client.city.ilike(f"%{query}%")))).order_by(Pool.updated_at.desc()).all()
+                f"%{query}%"), Client.street.ilike(f"%{query}%"), Client.city.ilike(f"%{query}%"), Pool.street.ilike(f"%{query}%"), Pool.city.ilike(f"%{query}%")))).order_by(Pool.updated_at.desc()).all()
 
         data = {}
         if repair_data:
