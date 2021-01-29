@@ -144,10 +144,16 @@ const repairsReducer = (state = { repairs: [], clientRepairs: [] }, action) => {
       return { ...state, repairs: [] };
     case SET_CLIENT_REPAIRS:
       if (action.clientRepairs) {
-        //spread new data into repairs array
+        if (action.clientRepairs.length) {
+          //spread new data into Repairs array
+          return {
+            ...state,
+            clientRepairs: [...state.clientRepairs, ...action.clientRepairs],
+          };
+        }
         return {
           ...state,
-          clientRepairs: [...action.clientRepairs],
+          clientRepairs: [action.clientRepairs],
         };
       }
       return { ...state, clientRepairs: [] };

@@ -71,10 +71,14 @@ export const getClientPools = (clientId) =>
       dispatch(setClientPools(pools.pools));
       dispatch(addCurrentClient(pools.pools[0].client));
       pools.pools.forEach((pool) => {
-        dispatch(setClientRepairs(pool.repairs));
-        pool.repairs.forEach((repair) => {
-          dispatch(addClientTasks(repair.tasks));
-        });
+        if (pool.repairs.length) {
+          dispatch(setClientRepairs(pool.repairs));
+          pool.repairs.forEach((repair) => {
+            if (repair.tasks.length) {
+              dispatch(addClientTasks(repair.tasks));
+            }
+          });
+        }
       });
     }
     return pools;
