@@ -1,5 +1,6 @@
 const GET_ALL_TASKS = "tasks/get-all-tasks";
 const ADD_CLIENT_TASKS = "tasks/add-client-tasks";
+const SET_CLIENT_TASKS = "tasks/set-client-tasks";
 const EDIT_CLIENT_TASK = "tasks/edit-client-task";
 const DELETE_CLIENT_TASKS = "tasks/delete-client-tasks";
 const RESET_TASKS = "tasks/reset-tasks";
@@ -11,6 +12,12 @@ export const getAllTasks = (tasksDetail) => {
   };
 };
 
+export const setClientTasks = (taskData) => {
+  return {
+    type: SET_CLIENT_TASKS,
+    clientTasks: taskData,
+  };
+};
 export const addClientTasks = (taskData) => {
   return {
     type: ADD_CLIENT_TASKS,
@@ -136,6 +143,21 @@ const tasksReducer = (state = { tasks: [], clientTasks: [] }, action) => {
   switch (action.type) {
     case GET_ALL_TASKS:
       return { ...state, tasks: [...action.tasks] };
+    case SET_CLIENT_TASKS:
+      if (action.clientTasks) {
+        if (action.clientTasks.length) {
+          //spread new data into Tasks array
+          return {
+            ...state,
+            clientTasks: [...action.clientTasks],
+          };
+        }
+        return {
+          ...state,
+          clientTasks: [action.clientTasks],
+        };
+      }
+      return { ...state, clientPools: [] };
     case ADD_CLIENT_TASKS:
       //spread new data into tasks array
       return {

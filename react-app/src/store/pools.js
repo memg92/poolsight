@@ -1,6 +1,6 @@
 import { addCurrentClient } from "./clients";
 import { setClientRepairs, deleteClientRepair, resetRepairs } from "./repairs";
-import { addClientTasks } from "./tasks";
+import { setClientTasks } from "./tasks";
 
 const SET_ALL_POOLS = "pools/set-all-pools";
 const ADD_CLIENT_POOLS = "pools/add-client-pools";
@@ -81,13 +81,13 @@ export const getClientPools = (clientId) =>
             }
           });
         }
-        if (repairs.length) {
-          dispatch(setClientRepairs(repairs));
-        }
-        if (tasks.length) {
-          dispatch(addClientTasks(tasks));
-        }
       });
+      if (repairs.length) {
+        dispatch(setClientRepairs(repairs));
+      }
+      if (tasks.length) {
+        dispatch(setClientTasks(tasks));
+      }
     }
     return pools;
   };
