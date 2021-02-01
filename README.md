@@ -5,16 +5,18 @@
 
 **poolsight** is a client-management platform for business owners in the pool service industry
 
+<br>
+
 ### Languages and Technologies
 
 ---
 
 <h5>Font End</h5>
 <a href="#"><img alt="JavaScript" src="https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=black" /></a>
-<a href="#"><img alt="CSS" src="https://img.shields.io/badge/-CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=white" /></a>
-<a href="https://sass-lang.com/"><img alt="Sass" src="https://img.shields.io/badge/-Sass-CC6699?style=flat-square&logo=Sass&logoColor=white" /></a>
 <a href="https://reactjs.org/"><img alt="React" src="https://img.shields.io/badge/-React-61DAFB?style=flat-square&logo=React&logoColor=black" /></a>
 <a href="https://redux.js.org/"><img alt="Redux" src="https://img.shields.io/badge/-Redux-764ABC?style=flat-square&logo=Redux&logoColor=white" /></a>
+<a href="#"><img alt="CSS" src="https://img.shields.io/badge/-CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=white" /></a>
+<a href="https://tailwindcss.com/"><img alt="Tailwind-CSS" src="https://img.shields.io/badge/-Tailwind_CSS-38B2AC?style=flat-square&logo=Tailwind-CSS&logoColor=white" /></a>
 <h5>Back End</h5>
 <a href="#"><img alt="Python" src="https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=Python&logoColor=white" /></a>
 <a href="https://flask.palletsprojects.com/en/1.1.x/"><img alt="Flask" src="https://img.shields.io/badge/-Flask-000000?style=flat-square&logo=Flask&logoColor=white" /></a>
@@ -24,6 +26,9 @@
 <a href="https://docker.com/"><img alt="Docker" src="https://img.shields.io/badge/-Docker-2496ED?style=flat-square&logo=Docker&logoColor=white" /></a>
 <a href="#"><img alt="git" src="https://img.shields.io/badge/-Git-F05032?style=flat-square&logo=git&logoColor=white" /></a>
 <a href="https://www.npmjs.com/"><img alt="npm" src="https://img.shields.io/badge/-NPM-CB3837?style=flat-square&logo=npm&logoColor=white" /></a>
+
+<br>
+<br>
 
 ### MVP
 
@@ -40,21 +45,13 @@
 - Map and report visualization
 - Reminders -->
 
+<br>
+
 ### Database Schema
 
 ---
 
 <img src="./database_schema.png"/>
-
-### Technologies Used
-
----
-
-- React
-- Redux
-- Flask
-- SQLAlchemy
-- Tailwind CSS
 
 ### Routes
 
@@ -66,7 +63,7 @@
 
 | HTTP Verb | Route                     | Function                             |
 | :-------- | :------------------------ | :----------------------------------- |
-| GET       | `/api/users`              | user authentication                  |
+| GET       | `/api/users/`             | user authentication                  |
 | POST      | `/api/users/login`        | user log in                          |
 | GET       | `/api/users/logout`       | user log out                         |
 | POST      | `/api/users/signup`       | user signup / log in                 |
