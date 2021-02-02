@@ -4,7 +4,9 @@ Inspired by – and created for – my father, **<a href="https://poolsight.hero
 
 <br>
 
-## Table of Contents
+### Table of Contents
+
+---
 
 - [Languages and Technologies](#Languages-and-Technologies)
 - [Features](#Features)
@@ -15,7 +17,7 @@ Inspired by – and created for – my father, **<a href="https://poolsight.hero
 
 <br>
 
-## Languages and Technologies
+### Languages and Technologies
 
 ---
 
@@ -42,7 +44,7 @@ poolsight was proudly built using custom frontend components, including toggle a
 <br>
 <br>
 
-## Features
+### Features
 
 ---
 
@@ -67,7 +69,7 @@ As a poolsight user, you will be able to:
 
 <br>
 
-## Custom Components/Functionality
+### Custom Components/Functionality
 
 ---
 
@@ -147,7 +149,7 @@ useEffect(() => {
 
 <br>
 
-## Usage
+### Usage
 
 ---
 
