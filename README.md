@@ -50,15 +50,89 @@ As a poolsight user, you will be able to:
 
 <img src="./react-app/src/assets/search-feature.gif" style="border-radius: 10px"/>
 
-<!-- #### Bonus Features
-
-- Role-based accounts (owner vs technician)
-- Map and report visualization
-- Reminders -->
-
 <br>
 
+### Custom Components
+
+---
+
+Instead of using a component library, poolsight uses custom components for increased flexibility
+
+#### Modal component:
+
+```javascript
+export default function Modal(props) {
+  useEffect(() => {
+    //helper function to close modal
+    const closeModal = () => {
+      props.setShowModal(false);
+    };
+
+    //listen outside for clicks to close modal
+    document.addEventListener("click", closeModal);
+
+    //prevent modal from closing when user clicks inside modal elements
+    const modal = document.querySelector(".modal");
+    if (modal) {
+      modal.addEventListener("click", (e) => {
+        e.stopPropagation();
+      });
+    }
+
+    //cleanup func: remove event listeners
+    return () => document.removeEventListener("click", closeModal);
+  }, []);
+
+  return (
+    props.showModal && (
+      <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50">
+        <div className="mt-20 mx-auto max-w-xl shadow-lg">
+          <div className="modal animate-scale-in-center bg-ghost flex flex-col justify-center rounded-lg px-6 py-4 w-full">
+            {props.children}
+          </div>
+        </div>
+      </div>
+    )
+  );
+}
+```
+
+<img src="./react-app/src/assets/modal-sample.gif" style="border-radius: 10px"/>
+
+#### Toggle functionality:
+
+```javascript
+//handle change in showTable state and listen for clicks to close tbale
+useEffect(() => {
+  if (!showTable) return;
+
+  const closeTable = () => {
+    setShowTable(false);
+  };
+
+  //listen for click to close table
+  document.addEventListener("click", closeTable);
+
+  //stop propagation at the table level
+  const table = document.querySelector("table") || null;
+  if (table) {
+    table.addEventListener("click", (e) => {
+      e.stopPropagation();
+    });
+  }
+
+  //remove listener so that card can be reopened after
+  return () => {
+    document.removeEventListener("click", closeTable);
+  };
+}, [showTable]);
+```
+
+<img src="./react-app/src/assets/toggle-sample.gif" style="border-radius: 10px"/>
+
 ### Usage
+
+---
 
 1. Clone this repository (only this branch)
 
