@@ -52,11 +52,11 @@ As a poolsight user, you will be able to:
 
 <br>
 
-### Custom Components
+### Custom Components/Functionality
 
 ---
 
-Instead of using a component library, poolsight uses custom components for increased flexibility
+Instead of using an external component library, poolsight uses custom components/functionality for increased flexibility
 
 #### Modal component:
 
@@ -129,6 +129,8 @@ useEffect(() => {
 ```
 
 <img src="./react-app/src/assets/toggle-sample.gif" style="border-radius: 10px"/>
+
+<br>
 
 ### Usage
 
