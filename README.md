@@ -42,9 +42,18 @@ As a poolsight user, you will be able to:
 - View your routes organized by service day, including any pending tasks, in your Dashboard
 - Search for your clients, client pools, as well as repairs
 
-### Dashboard/Client View:
+<br>
+
+#### Dashboard/Client View:
 
 <img src="./react-app/src/assets/main-readme-gif.gif" style="border-radius: 10px"/>
+
+<br>
+<br>
+
+#### Search clients, client pools, repairs:
+
+<img src="./react-app/src/assets/search-feature.gif" style="border-radius: 10px"/>
 
 <!-- #### Bonus Features
 
@@ -127,16 +136,3 @@ As a poolsight user, you will be able to:
 | `/repair/:repairId`                | Renders repair details of a specific repair event        |
 | `/repair/create`                   | Create a repair event for a specific client              |
 | `/task/create`                     | Create a task event for a specific client                |
-
-### Component List
-
----
-
-- Navbar
-- Home/Dashboard
-- Login form
-- Signup form
-- Client cards
-- Client summary
-- Repair cards
-- Task cards
