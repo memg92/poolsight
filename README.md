@@ -4,9 +4,22 @@ Inspired by – and created for – my father, **<a href="https://poolsight.hero
 
 <br>
 
-### Languages and Technologies
+## Table of Contents
+
+- [Languages and Technologies](#Languages-and-Technologies)
+- [Features](#Features)
+- [Custom Components/Functionality](#Custom-Components/Functionality)
+  - [Modal Component](#Modal-Component)
+  - [Toggle Functionality](#Toggle-Functionality)
+- [Usage](#Usage)
+
+<br>
+
+## Languages and Technologies
 
 ---
+
+[(Back to top)](#table-of-contents)
 
 poolsight was proudly built using custom frontend components, including toggle and modal components
 
@@ -29,9 +42,11 @@ poolsight was proudly built using custom frontend components, including toggle a
 <br>
 <br>
 
-### Features
+## Features
 
 ---
+
+[(Back to top)](#table-of-contents)
 
 As a poolsight user, you will be able to:
 
@@ -52,7 +67,7 @@ As a poolsight user, you will be able to:
 
 <br>
 
-### Custom Components/Functionality
+## Custom Components/Functionality
 
 ---
 
@@ -132,9 +147,11 @@ useEffect(() => {
 
 <br>
 
-### Usage
+## Usage
 
 ---
+
+[(Back to top)](#table-of-contents)
 
 1. Clone this repository (only this branch)
 
