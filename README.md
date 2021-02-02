@@ -1,9 +1,8 @@
-# poolsight
+## <a href="https://poolsight.herokuapp.com/"><img src="./react-app/public/poolsight-logo-wide.jpg" style="border-radius: 10px" /></a>
 
-<img src="./react-app/public/poolsight-logo-wide.jpg"/>
 <br>
 
-**poolsight** is a client-management platform for business owners in the pool service industry
+**<a href="https://poolsight.herokuapp.com/">poolsight</a>** is a client-management platform for business owners in the pool service industry
 
 <br>
 
@@ -30,14 +29,22 @@
 <br>
 <br>
 
-### MVP
+### Features
 
 ---
 
-- Clients
-- Repairs
-- Search
-- Pending Tasks
+As a poolsight user, you will be able to:
+
+- Add clients to your account, including relevant pool details
+- Easily access relevant client information in a single client profile page
+- Create new repairs and keep track of all related tasks
+- Mark tasks complete as you progress through each repair
+- View your routes organized by service day, including any pending tasks, in your Dashboard
+- Search for your clients, client pools, as well as repairs
+
+### Dashboard/Client View:
+
+<img src="./react-app/src/assets/main-readme-gif.gif" style="border-radius: 10px"/>
 
 <!-- #### Bonus Features
 
@@ -45,6 +52,7 @@
 - Map and report visualization
 - Reminders -->
 
+<br>
 <br>
 
 ### Database Schema
