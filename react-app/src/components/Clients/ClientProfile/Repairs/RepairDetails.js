@@ -6,7 +6,7 @@ import EditTaskForm from "../Tasks/EditTaskForm";
 
 export default function RepairDetails({ repair, setShowDetails }) {
   const [formOpen, setFormOpen] = useState(false);
-  const [showTaskModal, setShowTaskModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const taskState = useSelector((state) => state.taskAPI.clientTasks);
   const tasks = taskState.filter((task) => task.repair_id === repair.id);
   const [editTaskId, setEditTaskId] = useState(null);
@@ -56,7 +56,7 @@ export default function RepairDetails({ repair, setShowDetails }) {
                       <TaskCard
                         key={task.id}
                         task={task}
-                        setShowTaskModal={setShowTaskModal}
+                        setShowModal={setShowModal}
                         setEditTaskId={setEditTaskId}
                       />
                     );
@@ -85,11 +85,11 @@ export default function RepairDetails({ repair, setShowDetails }) {
           )}
         </div>
       </div>
-      {showTaskModal && (
+      {showModal && (
         <EditTaskForm
           tasks={tasks}
-          showTaskModal={showTaskModal}
-          setShowTaskModal={setShowTaskModal}
+          showModal={showModal}
+          setShowModal={setShowModal}
           editTaskId={editTaskId}
         />
       )}

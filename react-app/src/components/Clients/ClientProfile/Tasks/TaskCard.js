@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteTask, editTask } from "../../../../store/tasks";
 
-export default function TaskCard({ task, setShowTaskModal, setEditTaskId }) {
+export default function TaskCard({ task, setShowModal, setEditTaskId }) {
   const [error, setError] = useState("");
   const dispatch = useDispatch();
 
@@ -24,7 +24,7 @@ export default function TaskCard({ task, setShowTaskModal, setEditTaskId }) {
   const handleEditClick = (e) => {
     e.preventDefault();
     setEditTaskId(task.id);
-    setShowTaskModal(true);
+    setShowModal(true);
   };
 
   const handleDelete = async (e) => {
@@ -33,7 +33,7 @@ export default function TaskCard({ task, setShowTaskModal, setEditTaskId }) {
       if (!res.ok && res.error) {
         return setError(res.error);
       }
-      return setShowTaskModal(false);
+      return setShowModal(false);
     });
   };
 

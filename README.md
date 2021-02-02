@@ -8,6 +8,8 @@
 
 ---
 
+poolsight was proudly built using custom frontend components, including toggle and modal components
+
 <h5>Fontend</h5>
 <a href="#"><img alt="JavaScript" src="https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=black" /></a>
 <a href="https://reactjs.org/"><img alt="React" src="https://img.shields.io/badge/-React-61DAFB?style=flat-square&logo=React&logoColor=black" /></a>

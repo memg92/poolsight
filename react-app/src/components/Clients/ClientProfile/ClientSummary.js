@@ -6,14 +6,14 @@ import EditClientForm from "./EditClientForm";
 
 export default function ClientSummary() {
   const [error, setError] = useState("");
-  const [showClientModal, setShowClientModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const history = useHistory();
   const client = useSelector((state) => state.clientAPI.client);
   const dispatch = useDispatch();
 
   const handleEditClick = (e) => {
     // e.stopPropagation();
-    setShowClientModal(true);
+    setShowModal(true);
   };
 
   const handleDelete = async (e) => {
@@ -81,11 +81,8 @@ export default function ClientSummary() {
             </div>
           </div>
         </div>
-        {showClientModal && (
-          <EditClientForm
-            showClientModal={showClientModal}
-            setShowClientModal={setShowClientModal}
-          />
+        {showModal && (
+          <EditClientForm showModal={showModal} setShowModal={setShowModal} />
         )}
       </div>
     )

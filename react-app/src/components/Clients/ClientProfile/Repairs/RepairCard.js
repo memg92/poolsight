@@ -7,7 +7,7 @@ import EditRepairForm from "./EditRepairForm";
 
 export default function RepairCard({ repair }) {
   const [showDetails, setShowDetails] = useState(false);
-  const [showRepairModal, setShowRepairModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -21,7 +21,7 @@ export default function RepairCard({ repair }) {
 
   const handleEditClick = (e) => {
     e.stopPropagation();
-    setShowRepairModal(true);
+    setShowModal(true);
   };
 
   const handleDelete = (e) => {
@@ -68,11 +68,11 @@ export default function RepairCard({ repair }) {
           <RepairDetails repair={repair} setShowDetails={setShowDetails} />
         )}
       </div>
-      {showRepairModal && (
+      {showModal && (
         <EditRepairForm
           repair={repair}
-          showRepairModal={showRepairModal}
-          setShowRepairModal={setShowRepairModal}
+          showModal={showModal}
+          setShowModal={setShowModal}
         />
       )}
     </>

@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { editTask } from "../../../../store/tasks";
 import { useDispatch } from "react-redux";
 import ErrorHandler from "../../../Errors/ErrorHandler";
+import Modal from "../../../Modal/Modal";
 
 export default function EditTaskForm({
   tasks,
-  showTaskModal,
-  setShowTaskModal,
+  showModal,
+  setShowModal,
   editTaskId,
 }) {
   const [task] = tasks.filter((task) => task.id === editTaskId);
@@ -21,32 +22,6 @@ export default function EditTaskForm({
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    //helper function to close modal
-    const closeModal = () => {
-      setShowTaskModal(false);
-    };
-
-    //listen outside for clicks to close modal
-    document.addEventListener("click", closeModal);
-
-    //prevent modal from closing when user clicks inside modal elements
-    const modal = document.querySelector(".modal");
-    if (modal) {
-      modal.addEventListener("click", (e) => {
-        e.stopPropagation();
-      });
-    }
-
-    //cleanup func: remove event listeners
-    return () => {
-      document.removeEventListener("click", (e) => {
-        e.stopPropagation();
-      });
-      document.removeEventListener("click", closeModal);
-    };
-  }, []);
-
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     //get check status from checkbox
@@ -59,82 +34,76 @@ export default function EditTaskForm({
       if (!res.ok && res.error) {
         return setError(res.error);
       }
-      return setShowTaskModal(false);
+      return setShowModal(false);
     });
   };
 
   return (
-    showTaskModal && (
-      <div className="fixed z-40 top-0 left-0 w-full h-full bg-black bg-opacity-50">
-        <div className="mt-20 mx-auto max-w-xl shadow-lg">
-          <div className="modal animate-scale-in-center bg-ghost flex flex-col justify-center rounded-lg px-6 py-4 w-full">
-            {error && <ErrorHandler error={error} />}
-            <form
-              className="flex flex-col w-full text-pnavy text-opacity-90"
-              onSubmit={handleEditSubmit}
-            >
-              <h1 className="text-xl font-bold pb-2 mb-2 border-b-2 border-pnavy border-opacity-40">
-                Edit Task
-              </h1>
-              <div className="flex mt-2">
-                <div className="flex flex-col w-full mr-1">
-                  <div className="">Title</div>
-                  <input
-                    className="form-input text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 "
-                    type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    required
-                  />
-                </div>
-              </div>
-              <div className="flex mt-2">
-                <div className="flex flex-col w-full mr-1">
-                  <div className="">Rate charged</div>
-                  <input
-                    className="form-input text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 "
-                    type="text"
-                    value={rate}
-                    onChange={(e) => setRate(e.target.value)}
-                  />
-                </div>
-                <div className="flex flex-col w-full ml-1">
-                  <div className="">Cost</div>
-                  <input
-                    className="form-input text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50"
-                    type="text"
-                    value={cost}
-                    onChange={(e) => setCost(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div className="flex flex-col w-full ml-1">
-                <div className="">Description</div>
-                <textarea
-                  className="form-textarea text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-              </div>
-              <div className="flex items-center w-full mb-4 ml-1">
-                <div className="mr-2">Completed</div>
-                <input
-                  type="checkbox"
-                  className="form-checkbox border-2 border-gray-200text-sm rounded"
-                  ref={completeField}
-                  defaultChecked={complete}
-                />
-              </div>
-              <button
-                className="m-1 max-w-sm self-center w-full bg-pnavy text-ghost py-1.5 rounded hover:opacity-90"
-                type="submit"
-              >
-                Submit
-              </button>
-            </form>
+    <Modal showModal={showModal} setShowModal={setShowModal}>
+      {error && <ErrorHandler error={error} />}
+      <form
+        className="flex flex-col w-full text-pnavy text-opacity-90"
+        onSubmit={handleEditSubmit}
+      >
+        <h1 className="text-xl font-bold pb-2 mb-2 border-b-2 border-pnavy border-opacity-40">
+          Edit Task
+        </h1>
+        <div className="flex mt-2">
+          <div className="flex flex-col w-full mr-1">
+            <div className="">Title</div>
+            <input
+              className="form-input text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 "
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
           </div>
         </div>
-      </div>
-    )
+        <div className="flex mt-2">
+          <div className="flex flex-col w-full mr-1">
+            <div className="">Rate charged</div>
+            <input
+              className="form-input text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50 "
+              type="text"
+              value={rate}
+              onChange={(e) => setRate(e.target.value)}
+            />
+          </div>
+          <div className="flex flex-col w-full ml-1">
+            <div className="">Cost</div>
+            <input
+              className="form-input text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50"
+              type="text"
+              value={cost}
+              onChange={(e) => setCost(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="flex flex-col w-full ml-1">
+          <div className="">Description</div>
+          <textarea
+            className="form-textarea text-sm mb-4 rounded border-gray-200 focus:border-pblue focus:bg-blue-50 border-2 border-opacity-50"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </div>
+        <div className="flex items-center w-full mb-4 ml-1">
+          <div className="mr-2">Completed</div>
+          <input
+            type="checkbox"
+            className="form-checkbox border-2 border-gray-200text-sm rounded"
+            ref={completeField}
+            defaultChecked={complete}
+          />
+        </div>
+        <button
+          className="m-1 max-w-sm self-center w-full bg-pnavy text-ghost py-1.5 rounded hover:opacity-90"
+          type="submit"
+        >
+          Submit
+        </button>
+      </form>
+    </Modal>
   );
 }
