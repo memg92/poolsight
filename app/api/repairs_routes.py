@@ -42,7 +42,7 @@ def get_all_repairs():
 @ login_required
 def create_repair():
     """
-    Creates a new repair
+    /api/repairs creates a new repair
     """
     form = NewRepairForm()
     form['csrf_token'].data = request.cookies['csrf_token']

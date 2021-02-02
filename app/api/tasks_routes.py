@@ -23,7 +23,7 @@ def validation_errors_to_error_messages(validation_errors):
 @ login_required
 def create_task():
     """
-    Creates a new task
+    /api/tasks creates a new task
     """
     form = NewTaskForm()
     form['csrf_token'].data = request.cookies['csrf_token']
