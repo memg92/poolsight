@@ -1,6 +1,4 @@
-<a href="https://poolsight.herokuapp.com/"><img src="./react-app/public/poolsight-logo-wide.jpg" style="border-radius: 10px" /></a>
-
-<br>
+<a href="https://poolsight.herokuapp.com/"><img src="./react-app/public/poolsight-logo-wide.png"/></a>
 
 **<a href="https://poolsight.herokuapp.com/">poolsight</a>** is a client-management platform for business owners in the pool service industry
 
@@ -45,8 +43,6 @@ As a poolsight user, you will be able to:
 #### Dashboard/Client View:
 
 <img src="./react-app/src/assets/main-readme-gif.gif" style="border-radius: 10px"/>
-
-<br>
 
 #### Search clients, client pools, repairs:
 
