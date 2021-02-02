@@ -1,6 +1,6 @@
 <a href="https://poolsight.herokuapp.com/"><img src="./react-app/public/poolsight-logo-wide.png"/></a>
 
-**<a href="https://poolsight.herokuapp.com/">poolsight</a>** is a client-management platform for business owners in the pool service industry
+Inspired by – and created for – my father, **<a href="https://poolsight.herokuapp.com/">poolsight</a>** is a client-management platform for business owners in the pool service industry
 
 <br>
 
