@@ -1,4 +1,4 @@
-## <a href="https://poolsight.herokuapp.com/"><img src="./react-app/public/poolsight-logo-wide.jpg" style="border-radius: 10px" /></a>
+<a href="https://poolsight.herokuapp.com/"><img src="./react-app/public/poolsight-logo-wide.jpg" style="border-radius: 10px" /></a>
 
 <br>
 
@@ -42,13 +42,10 @@ As a poolsight user, you will be able to:
 - View your routes organized by service day, including any pending tasks, in your Dashboard
 - Search for your clients, client pools, as well as repairs
 
-<br>
-
 #### Dashboard/Client View:
 
 <img src="./react-app/src/assets/main-readme-gif.gif" style="border-radius: 10px"/>
 
-<br>
 <br>
 
 #### Search clients, client pools, repairs:
@@ -61,7 +58,6 @@ As a poolsight user, you will be able to:
 - Map and report visualization
 - Reminders -->
 
-<br>
 <br>
 
 ### Database Schema
