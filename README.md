@@ -77,7 +77,7 @@ export default function Modal(props) {
       props.setShowModal(false);
     };
 
-    //listen outside for clicks to close modal
+    //listen for clicks to close modal
     document.addEventListener("click", closeModal);
 
     //prevent modal from closing when user clicks inside modal elements
