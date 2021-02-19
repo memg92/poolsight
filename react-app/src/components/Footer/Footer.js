@@ -15,7 +15,7 @@ export default function Footer() {
           <div className="flex flex-col px-10">
             <div className="font-bold text-lg">Useful Links</div>
             <a
-              href="https://github.com/memg92/poolsight"
+              href="https://github.com/memg92/poolsight/wiki"
               className="flex items-center mb-2"
             >
               <i className="fab fa-github p-1 mr-1 shadow-lg rounded-lg"></i>
