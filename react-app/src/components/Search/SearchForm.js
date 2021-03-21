@@ -21,7 +21,7 @@ export default function SearchForm({ searchOpen, setSearchOpen }) {
     }
   }, [dispatch]);
 
-  //helper function to deal with multiple keywords
+  //helper function to handle multiple keyword search
   const myIncludes = (target, keywords) => {
     let result = false;
     keywords.forEach((word) => {
@@ -32,18 +32,17 @@ export default function SearchForm({ searchOpen, setSearchOpen }) {
     return result;
   };
 
-  const handleSearchInput = (e) => {
-    setSearchInput(e.target.value);
-    if (e.target.value.length) {
+  useEffect(() => {
+    if (searchInput.length) {
       setSearching(true);
     } else {
       setSearching(false);
     }
 
     //if there spaces, split all key words
-    let searchInputs = e.target.value.includes(" ")
-      ? e.target.value.toLowerCase().split(" ")
-      : e.target.value.toLowerCase();
+    let searchInputs = searchInput.includes(" ")
+      ? searchInput.toLowerCase().split(" ")
+      : searchInput.toLowerCase();
 
     let results;
     //if search input is an array (multi-word), filter results using custom function
@@ -66,6 +65,10 @@ export default function SearchForm({ searchOpen, setSearchOpen }) {
     }
     // set the suggestions to the result array to pass to Suggestions component
     setSuggestions(results);
+  }, [searchInput]);
+
+  const handleSearchInput = (e) => {
+    setSearchInput(e.target.value);
   };
 
   const handleSubmit = async (e) => {
